@@ -1,10 +1,9 @@
 import React from 'react'
-import UtilityBar from './component/UtilityBar.jsx'
 const Home = () => {
   return (
-    <>
-      <UtilityBar />
-    </>
+    <div>
+      <h1>Hello World</h1>
+    </div>
   )
 }
 
