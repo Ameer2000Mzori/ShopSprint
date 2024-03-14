@@ -1,32 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-
+import { navObj } from '../hooks/navData.js'
+import activeateNav from '../hooks/ActiveNav.jsx'
 const NavLinks = () => {
-  const navObj = [
-    {
-      name: 'Home',
-      path: '/home',
-    },
-    {
-      name: 'About',
-      path: '/about',
-    },
-    {
-      name: 'Products',
-      path: '/products',
-    },
-    {
-      name: 'Cart',
-      path: '/cart',
-    },
-  ]
+  const [newNavData, setNewNavData] = useState(navObj)
 
   return (
     <ul className="w-[45%] flex flex-row text-center items-center justify-center gap-4 h-[100%]">
-      {navObj.map((nav) => {
+      {newNavData.map((nav) => {
         return (
-          <li>
-            <Link to={nav.path}>{nav.name}</Link>
+          <li
+            style={{
+              backgroundColor: nav.active ? 'black' : null,
+              color: nav.active ? 'white' : null,
+            }}
+            className="hover:bg-slate-400 hover:text-white  h-[100%] w-[100px] rounded-lg "
+            onClick={() => {
+              activeateNav(newNavData, setNewNavData)
+            }}
+          >
+            <Link
+              className="w-[100%] h-[100%] text-center items-center flex flex-col justify-center overflow-hidden"
+              to={nav.path}
+            >
+              {nav.name}
+            </Link>
           </li>
         )
       })}
