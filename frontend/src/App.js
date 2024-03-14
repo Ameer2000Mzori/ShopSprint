@@ -1,7 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Home from './components/pages/home/Home.jsx'
-import NotFoundPage from './components/pages/notfoundpage/NotFoundPage.jsx'
 import Navbar from './components/pages/navbar/Navbar.jsx'
+import NotFoundPage from './components/pages/notfoundpage/NotFoundPage.jsx'
+import Home from './components/pages/home/Home.jsx'
+import About from './components/pages/about/About.jsx'
+import Products from './components/pages/products/Products.jsx'
+import Cart from './components/pages/cart/Cart.jsx'
 import UtilityBar from './components/pages/home/component/UtilityBar.jsx'
 
 function App() {
@@ -13,6 +16,9 @@ function App() {
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </Router>
   )
