@@ -12,10 +12,14 @@ const NavLinks = () => {
 
   //changing the navigation class for our nav elements
   useEffect(() => {
+    console.log(location)
     const updatedNavData = newNavData.map((item) => ({
       ...item,
-      active: item.path === location.pathname,
+      active:
+        item.path === location.pathname ||
+        (item.path === '/home' && location.pathname === '/'),
     }))
+
     setNewNavData(updatedNavData)
   }, [location.pathname])
 
