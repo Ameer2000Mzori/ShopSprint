@@ -12,6 +12,7 @@ function App() {
       <Routes>
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
       </Routes>
     </Router>
   )
