@@ -14,9 +14,9 @@ const Navbar = () => {
           </Link>
         </div>
         <NavLinks />
-        <div className="w-[20%] text-[25px] ">
+        <div className="w-[20%] text-[25px] flex flex-col text-center items-end justify-center pr-8 ">
           <Link className=" relative w-[40px] h-[100%]" to="/cart">
-            <h1 className=" rounded-md w-[25px] h-[15px] bg-blue-600 text-white absolute top-[-3px] left-[15px] text-[10px]">
+            <h1 className=" rounded-md w-[25px] h-[15px] bg-blue-600 text-white absolute top-[-5px] left-[20px] text-[10px]">
               0
             </h1>
             <FontAwesomeIcon icon={faShoppingCart} />
