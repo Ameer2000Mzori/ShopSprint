@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './components/pages/home/Home.jsx'
 import NotFoundPage from './components/pages/notfoundpage/NotFoundPage.jsx'
-import Navbar from './components/Navbar.js'
+import Navbar from './components/pages/navbar/Navbar.jsx'
 import UtilityBar from './components/pages/home/component/UtilityBar.jsx'
 
 function App() {
