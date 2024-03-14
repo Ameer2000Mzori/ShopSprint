@@ -1,30 +1,23 @@
 import React, { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { navObj } from '../hooks/navData.js'
 
 const NavLinks = () => {
+  // using useState for nav data
   const [newNavData, setNewNavData] = useState(navObj)
-  const [currentPath, setCurrentPath] = useState(window.location.pathname)
 
-  useEffect(() => {
-    const handleLocationChange = () => {
-      setCurrentPath(window.location.pathname)
-    }
+  // getting the user navigation
+  const location = useLocation()
 
-    window.addEventListener('popstate', handleLocationChange)
-
-    return () => {
-      window.removeEventListener('popstate', handleLocationChange)
-    }
-  }, [])
-
+  //changing the navigation class for our nav elements
   useEffect(() => {
     const updatedNavData = newNavData.map((item) => ({
       ...item,
-      active: item.path === currentPath,
+      active: item.path === location.pathname,
     }))
     setNewNavData(updatedNavData)
-  }, [currentPath])
+  }, [location.pathname])
 
   return (
     <ul className="w-[45%] flex flex-row text-center items-center justify-center gap-4 h-[100%]">
