@@ -1,7 +1,11 @@
 import React from 'react'
-
+import UtilityBar from './component/UtilityBar.jsx'
 const Home = () => {
-  return <div>Home</div>
+  return (
+    <>
+      <UtilityBar />
+    </>
+  )
 }
 
 export default Home
