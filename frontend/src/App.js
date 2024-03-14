@@ -5,7 +5,7 @@ import Home from './components/pages/home/Home.jsx'
 import About from './components/pages/about/About.jsx'
 import Products from './components/pages/products/Products.jsx'
 import Cart from './components/pages/cart/Cart.jsx'
-import UtilityBar from './components/pages/home/component/UtilityBar.jsx'
+import UtilityBar from './components/pages/navbar/component/UtilityBar.jsx'
 
 function App() {
   return (
