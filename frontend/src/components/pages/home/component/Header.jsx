@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import imgOne from '../../../../assets/hero1.webp'
 import imgTwo from '../../../../assets/hero2.webp'
@@ -6,6 +6,8 @@ import imgThree from '../../../../assets/hero3.webp'
 import imgFour from '../../../../assets/hero4.webp'
 
 const Header = () => {
+  const [transformImg, setTransformImg] = useState(0)
+
   const imgData = [
     {
       id: 1,
@@ -24,6 +26,14 @@ const Header = () => {
       img: imgFour,
     },
   ]
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setTransformImg((prev) => (prev === imgData.length - 1 ? 0 : prev + 1))
+    }, 2500)
+
+    return () => clearInterval(intervalId)
+  }, [imgData.length])
 
   return (
     <div className="h-[75vh] w-[100%] flex flex-row text-center items-center justify-center">
@@ -44,8 +54,8 @@ const Header = () => {
       <div className="w-[50%] h-[100%] flex flex-col text-center items-center justify-center">
         <div className="w-[60%] h-[75%] flex flex-row justify-start items-center text-center overflow-hidden">
           <div
-            className="w-[100%] h-[100%] rounded-lg flex flex-row "
-            style={{ transform: 'translateX(-100%)' }}
+            className="w-[100%] h-[100%] rounded-lg flex flex-row transition-all duration-1000 "
+            style={{ transform: `translateX(-${transformImg * 100}%)` }}
           >
             {imgData.map((imgEl) => (
               <img
