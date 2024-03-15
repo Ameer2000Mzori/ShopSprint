@@ -1,4 +1,5 @@
 import React from 'react'
+import { StyledCardWrapper, StyledCard } from '../hooks/StyledComponent.jsx'
 
 const FeaturedProducts = () => {
   const FeaturedItems = [
@@ -35,7 +36,19 @@ const FeaturedProducts = () => {
     <div className="h-[40vh] w-[100%]">
       <h1 className="text-[30px] font-bold">FeaturedProducts</h1>
       <div className="w-[100%] h-[1px] rounded-md bg-gray-300"></div>
-      <div></div>
+      <StyledCardWrapper>
+        {FeaturedItems.map((item) => {
+          return (
+            <StyledCard className="p-8">
+              <div className="h-[100px] w-[80%] bg-white"></div>
+              <div className="flex flex-col text-center items-center justify-center gap-4">
+                <h1>{item.title}</h1>
+                <h1>{item.price}</h1>
+              </div>
+            </StyledCard>
+          )
+        })}
+      </StyledCardWrapper>
     </div>
   )
 }
