@@ -9,6 +9,7 @@ const FeaturedProducts = () => {
       category: 'Clothing',
       company: 'Company A',
       freeShipping: true,
+      colors: ['White', 'Black', 'Red'],
     },
     {
       id: 2,
@@ -17,6 +18,7 @@ const FeaturedProducts = () => {
       category: 'Accessories',
       company: 'Company B',
       freeShipping: false,
+      colors: ['Brown', 'Black'],
     },
     {
       id: 3,
@@ -25,6 +27,7 @@ const FeaturedProducts = () => {
       category: 'Clothing',
       company: 'Company C',
       freeShipping: true,
+      colors: ['Blue', 'Black'],
     },
   ]
 
