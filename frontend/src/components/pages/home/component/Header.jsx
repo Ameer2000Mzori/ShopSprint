@@ -5,26 +5,26 @@ import imgTwo from '../../../../assets/hero2.webp'
 import imgThree from '../../../../assets/hero3.webp'
 import imgFour from '../../../../assets/hero4.webp'
 
-const imgData = [
-  {
-    id: 1,
-    img: imgOne,
-  },
-  {
-    id: 2,
-    img: imgTwo,
-  },
-  {
-    id: 3,
-    img: imgThree,
-  },
-  {
-    id: 4,
-    img: imgFour,
-  },
-]
-
 const Header = () => {
+  const imgData = [
+    {
+      id: 1,
+      img: imgOne,
+    },
+    {
+      id: 2,
+      img: imgTwo,
+    },
+    {
+      id: 3,
+      img: imgThree,
+    },
+    {
+      id: 4,
+      img: imgFour,
+    },
+  ]
+
   return (
     <div className="h-[75vh] w-[100%] flex flex-row text-center items-center justify-center">
       <div className="w-[50%] h-[100%] flex flex-col text-start items-start justify-center p-8 gap-6 ">
@@ -41,14 +41,17 @@ const Header = () => {
           Products
         </Link>
       </div>
-      <div className="w-[50%] h-[100%] flex flex-col text-center items-center justify-center ">
-        <div className="w-[60%] h-[75%] flex flex-row  justify-start items-center  text-center overflow-hidden">
-          <div className=" w-[100%] h-[100%]  rounded-md overflow-hidden ">
+      <div className="w-[50%] h-[100%] flex flex-col text-center items-center justify-center">
+        <div className="w-[60%] h-[75%] flex flex-row justify-start items-center text-center overflow-hidden">
+          <div
+            className="w-[100%] h-[100%] rounded-lg flex flex-row "
+            style={{ transform: 'translateX(-100%)' }}
+          >
             {imgData.map((imgEl) => (
               <img
                 key={imgEl.id}
                 src={imgEl.img}
-                className=" w-[100%] h-[100%] object-cover "
+                className="w-[100%] h-auto object-cover rounded-lg"
                 alt="img"
               />
             ))}
