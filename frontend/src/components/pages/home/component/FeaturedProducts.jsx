@@ -39,11 +39,15 @@ const FeaturedProducts = () => {
       <StyledCardWrapper>
         {FeaturedItems.map((item) => {
           return (
-            <StyledCard className="p-8">
-              <div className="h-[100px] w-[80%] bg-white"></div>
+            <StyledCard className="p-4">
+              <img
+                className="h-[100px] w-[250px] bg-white rounded-lg object-cover"
+                src="https://via.placeholder.com/300x200"
+                alt=""
+              />
               <div className="flex flex-col text-center items-center justify-center gap-4">
                 <h1>{item.title}</h1>
-                <h1>{item.price}</h1>
+                <h1>${item.price}</h1>
               </div>
             </StyledCard>
           )
