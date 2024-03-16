@@ -272,14 +272,12 @@ export const getOneItem = (req, res) => {
 // filter items by company , name , price, free shipping and more.
 
 export const filterItems = (req, res) => {
-  const id = req.params.id
-  console.log('this is the id : ', id)
+  const { price, category, company, typeOfSorting, Shipping } = req.query
 
-  const item = data.find((item) => item.id === Number(id))
-
-  if (item) {
-    res.status(200).json({ item, message: 'Item found successfully' })
-  } else {
-    res.status(404).json({ message: 'Item not found' })
-  }
+  res.status(200).json({
+    item,
+    message: `Item found successfully ${
+      (price, category, company, typeOfSorting, Shipping)
+    }`,
+  })
 }
