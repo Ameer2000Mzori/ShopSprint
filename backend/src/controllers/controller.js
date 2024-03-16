@@ -250,3 +250,12 @@ export const homePage = (req, res) => {
 export const fetchData = (req, res) => {
   res.send(data)
 }
+
+export const getOneItem = (req, res) => {
+  const id = req.params.id
+  console.log('this is the id : ', id)
+  const item = data.filter((item) => item.id === Number(id))
+  console.log('found item : ', item)
+  res.send(item)
+  res.status(200).send('item found successfully')
+}
