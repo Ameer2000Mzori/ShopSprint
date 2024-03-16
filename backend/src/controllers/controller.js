@@ -1,3 +1,4 @@
+// our data
 const data = [
   {
     id: 1,
@@ -243,26 +244,42 @@ const data = [
     colors: ['Black', 'Navy'],
   },
 ]
+
+// home page of backend
 export const homePage = (req, res) => {
   res.send('Hello World')
 }
 
+// get all items
 export const fetchData = (req, res) => {
   res.send(data)
 }
 
+// get one item
 export const getOneItem = (req, res) => {
   const id = req.params.id
   console.log('this is the id : ', id)
 
-  // Find the item by ID
   const item = data.find((item) => item.id === Number(id))
 
   if (item) {
-    // If item is found, send it with success message
     res.status(200).json({ item, message: 'Item found successfully' })
   } else {
-    // If item is not found, send 404 status with error message
+    res.status(404).json({ message: 'Item not found' })
+  }
+}
+
+// filter items by company , name , price, free shipping and more.
+
+export const filterItems = (req, res) => {
+  const id = req.params.id
+  console.log('this is the id : ', id)
+
+  const item = data.find((item) => item.id === Number(id))
+
+  if (item) {
+    res.status(200).json({ item, message: 'Item found successfully' })
+  } else {
     res.status(404).json({ message: 'Item not found' })
   }
 }
