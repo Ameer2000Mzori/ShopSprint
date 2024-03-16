@@ -3,6 +3,7 @@ import GetProduct from './hooks/GetProduct.jsx'
 
 const SelectedProduct = () => {
   GetProduct()
+
   return <div>SelectedProduct</div>
 }
 

@@ -1,16 +1,16 @@
-import { useQueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
 const GetProduct = () => {
   const productId = 1
-  const result = useQueryClient({
+
+  const { data, isError, isLoading } = useQuery({
     queryKey: ['product'],
-    queryFn: axios.get(`/products/:${productId}`),
-    onsuccess: (result) => result.data,
-    onError: (err) => console.log(err.message),
+    queryFn: () => axios.get(`products/${productId}`).then((res) => res.data),
   })
 
-  console.log('the result is:', result)
+  console.log('the result is:', data, isError, isLoading)
+  //   return { data, isError, isLoading }
 }
 
 export default GetProduct
