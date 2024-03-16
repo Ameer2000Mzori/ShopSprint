@@ -299,10 +299,30 @@ export const filterItems = (req, res) => {
     filteredItems = filteredItems.filter((item) => item.company === company)
   }
 
-  if (Shipping !== undefined) {
-    filteredItems = filteredItems.filter(
-      (item) => item.freeShipping === (Shipping === 'true')
-    )
+  if (Shipping === undefined || Shipping === 'false' || Shipping === '') {
+    filteredItems = filteredItems
+  } else if (Shipping === 'true') {
+    filteredItems = filteredItems.filter((item) => item.freeShipping === true)
+  } else if (Shipping === 'false') {
+    filteredItems = filteredItems.filter((item) => item.freeShipping === false)
+  }
+
+  if (typeOfSorting !== undefined) {
+    if (typeOfSorting === 'a-z') {
+      filteredItems = filteredItems.sort((a, b) =>
+        a.title.localeCompare(b.title)
+      )
+    }
+    if (typeOfSorting === 'z-a') {
+      filteredItems = filteredItems.reverse()
+    }
+    if (typeOfSorting === 'low-high') {
+      filteredItems = filteredItems.sort((a, b) => a.price - b.price)
+    }
+
+    if (typeOfSorting === 'high-low') {
+      filteredItems = filteredItems.sort((a, b) => b.price - a.price)
+    }
   }
 
   res.status(200).json({ filteredItems, message: 'Item found successfully' })
