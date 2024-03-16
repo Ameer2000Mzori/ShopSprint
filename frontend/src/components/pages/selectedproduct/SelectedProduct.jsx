@@ -13,7 +13,7 @@ const SelectedProduct = () => {
     <>
       <ProductNav />
       <StyledPageWrapper>
-        <div className="h-[80%] w-[45%]">
+        <div className="h-[80%] w-[25%] flex flex-col text-center items-center justify-center">
           <img
             className="h-[100%] w-[100%] object-cover"
             src="https://via.placeholder.com/500x500"
