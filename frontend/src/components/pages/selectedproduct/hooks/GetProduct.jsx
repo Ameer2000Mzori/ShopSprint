@@ -9,8 +9,7 @@ const GetProduct = () => {
     queryFn: () => axios.get(`products/${productId}`).then((res) => res.data),
   })
 
-  console.log('the result is:', data, isError, isLoading)
-  //   return { data, isError, isLoading }
+  return { data, isError, isLoading }
 }
 
 export default GetProduct
