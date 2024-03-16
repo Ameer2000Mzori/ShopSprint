@@ -1,14 +1,22 @@
 import React from 'react'
-import GetProduct from './hooks/GetProduct.jsx'
+import { useParams } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
 import { StyledPageWrapper } from '../../shared/StyledComponents.jsx'
 import ProductNav from './component/ProductNav.jsx'
+import axios from 'axios'
+
 const SelectedProduct = () => {
-  const { data, isLoading, isError } = GetProduct()
+  const { id } = useParams()
+  const { data, isError, isLoading } = useQuery({
+    queryKey: ['product', id],
+    queryFn: () => axios.get(`/${id}`).then((res) => res.data),
+  })
 
   if (isLoading) return <div> loading....</div>
 
   if (isError) return <div> there is an error....</div>
 
+  console.log('data ', data)
   return (
     <>
       <ProductNav />
@@ -20,7 +28,7 @@ const SelectedProduct = () => {
             alt=""
           />
         </div>
-        <div className="h-[80%] w-[45%]"></div>
+        <div className="h-[80%] w-[35%]"></div>
       </StyledPageWrapper>
     </>
   )

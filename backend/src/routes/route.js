@@ -10,7 +10,7 @@ const Router = express.Router()
 
 Router.get('/', homePage)
 Router.get('/products', fetchData)
-Router.get('/products/:id', getOneItem)
+Router.get('/:id', getOneItem)
 Router.get('/products/filter/items', filterItems)
 
 export default Router

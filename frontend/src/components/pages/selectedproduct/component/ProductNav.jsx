@@ -4,12 +4,13 @@ const ProductNav = () => {
   return (
     <>
       <div className="h-[10vh] flex flex-col text-center items-start justify-center pl-[20rem] m-4">
-        <div className="w-[250px] h-[100%] flex flex-row text-center items-center justify-center ga-2">
+        <div className="w-[250px] h-[50%] flex flex-row text-center items-center justify-center ga-2">
           <p>
-            home / <Link to="/products">products</Link>
+            home <n> > </n>
+            <Link to="/products">products</Link>
           </p>
         </div>
-        <div className="h-[1px] bg-gray-400 w-[80%]"></div>
+        <div className="h-[1px] bg-gray-300 w-[80%]"></div>
       </div>
     </>
   )
