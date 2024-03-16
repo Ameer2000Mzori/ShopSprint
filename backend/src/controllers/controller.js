@@ -274,10 +274,36 @@ export const getOneItem = (req, res) => {
 export const filterItems = (req, res) => {
   const { price, category, company, typeOfSorting, Shipping } = req.query
 
-  res.status(200).json({
-    item,
-    message: `Item found successfully ${
-      (price, category, company, typeOfSorting, Shipping)
-    }`,
-  })
+  console.log(
+    'the data I got is : ',
+    price,
+    category,
+    company,
+    typeOfSorting,
+    Shipping
+  )
+
+  let filteredItems = data
+
+  if (price !== undefined) {
+    filteredItems = filteredItems.filter(
+      (item) => item.price <= parseFloat(price)
+    )
+  }
+
+  if (category !== undefined) {
+    filteredItems = filteredItems.filter((item) => item.category === category)
+  }
+
+  if (company !== undefined) {
+    filteredItems = filteredItems.filter((item) => item.company === company)
+  }
+
+  if (Shipping !== undefined) {
+    filteredItems = filteredItems.filter(
+      (item) => item.freeShipping === (Shipping === 'true')
+    )
+  }
+
+  res.status(200).json({ filteredItems, message: 'Item found successfully' })
 }
