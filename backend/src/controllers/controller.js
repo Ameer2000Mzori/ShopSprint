@@ -254,8 +254,15 @@ export const fetchData = (req, res) => {
 export const getOneItem = (req, res) => {
   const id = req.params.id
   console.log('this is the id : ', id)
-  const item = data.filter((item) => item.id === Number(id))
-  console.log('found item : ', item)
-  res.send(item)
-  res.status(200).send('item found successfully')
+
+  // Find the item by ID
+  const item = data.find((item) => item.id === Number(id))
+
+  if (item) {
+    // If item is found, send it with success message
+    res.status(200).json({ item, message: 'Item found successfully' })
+  } else {
+    // If item is not found, send 404 status with error message
+    res.status(404).json({ message: 'Item not found' })
+  }
 }
