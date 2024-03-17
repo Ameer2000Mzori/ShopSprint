@@ -20,7 +20,7 @@ const SelectedProduct = () => {
   return (
     <>
       <ProductNav />
-      <StyledPageWrapper>
+      <StyledPageWrapper className="gap-4">
         <div className="h-[80%] w-[25%] flex flex-col text-center items-center justify-center">
           <img
             className="h-[100%] w-[100%] object-cover"
@@ -28,16 +28,26 @@ const SelectedProduct = () => {
             alt=""
           />
         </div>
-        <div className="h-[80%] w-[35%]">
+        <div className="h-[80%] w-[35%] flex flex-col text-center items-center justify-center ga-4">
           <h1 className="text-[30px] font-bold">{data.item.title}</h1>
           <div className="w-[100%] h-[1px] rounded-md bg-gray-300"></div>
-          <div className="w-[100%] h-[100px] flex flex-col items-center justify-center">
-            <div className="w-[100%]  pb-4 flex flex-col items-center justify-center">
-              <h1>${data.item.price}</h1>
-              <h1>{data.item.category}</h1>
-              <h1>{data.item.company}</h1>
-              <h1> freeShipping :{data.item.freeShipping ? 'yes' : 'no'}</h1>
-              <h1>${data.item.category}</h1>
+          <div className="w-[100%] h-[500px] flex flex-col items-center justify-center">
+            <h1>for only ${data.item.price}</h1>
+            <h1>{data.item.category}</h1>
+            <h1>from {data.item.company}</h1>
+            <h1> freeShipping ? {data.item.freeShipping ? 'yes' : 'no'}</h1>
+            <h1>category : {data.item.category}</h1>
+            <div className="flex flex-row text-center items-center justify-center w-[250px] h-[100px] gap-3">
+              {data.item.colors.map((color) => {
+                return (
+                  <div
+                    style={{ backgroundColor: `${color}` }}
+                    className="w-[45px] h-[45px] rounded-[100%] flex flex-col items-center justify-center"
+                  >
+                    <h1 className="text-white">{color}</h1>
+                  </div>
+                )
+              })}
             </div>
           </div>
         </div>
