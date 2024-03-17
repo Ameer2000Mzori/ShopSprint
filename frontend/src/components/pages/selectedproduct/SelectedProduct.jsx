@@ -56,27 +56,25 @@ const SelectedProduct = () => {
               <div className=" bg-zinc-300  rounded-md flex flex-row text-center items-center justify-between p-2 w-[100%] h-[50px] ">
                 <div className="flex flex-raw gap-1 w-[25%]">
                   <p>color : </p>
-                  {data.item.colors.map((color, index) => {
-                    return (
-                      <div
-                        style={{ backgroundColor: color }}
-                        className="rounded-[15%]"
-                      >
-                        <input
-                          id={color}
-                          type="radio"
-                          name="nameOption"
-                          value={color}
-                          key={index}
-                          style={{
-                            backgroundColor: 'transparent',
-                            border: `1px solid ${color}`,
-                          }}
-                          className={`w-[25px] h-[25px] bg-${color} rounded-[100%] flex flex-col items-center justify-center`}
-                        />{' '}
-                      </div>
-                    )
-                  })}
+                  {data.item.colors.map((color, index) => (
+                    <div
+                      key={index}
+                      style={{ backgroundColor: color }}
+                      className="rounded-[15%]"
+                    >
+                      <input
+                        id={color}
+                        type="radio"
+                        name="nameOption"
+                        value={color}
+                        style={{
+                          backgroundColor: 'transparent',
+                          border: `1px solid ${color}`,
+                        }}
+                        className={`w-[25px] h-[25px] rounded-[100%] flex flex-col items-center justify-center bg-${color}`}
+                      />
+                    </div>
+                  ))}
                 </div>
 
                 <select>
