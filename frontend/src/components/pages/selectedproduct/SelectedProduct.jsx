@@ -4,10 +4,18 @@ import { useQuery } from '@tanstack/react-query'
 import { StyledPageWrapper } from '../../shared/StyledComponents.jsx'
 import ProductNav from './component/ProductNav.jsx'
 import axios from 'axios'
+import { useSelector, useDispatch } from 'react-redux'
+import { addToCart } from '../../features/cart/cartSlice.js'
 
 const SelectedProduct = () => {
   const [newColor, setNewColor] = useState('')
   const [amountItems, setAmountItems] = useState('')
+  const dispatch = useDispatch()
+  const items = useSelector((state) => state.cart.items)
+
+  useEffect(() => {
+    console.log('our items', items)
+  }, [items])
 
   const showItems = (item, amount, color) => {
     const newOrder = {
@@ -22,6 +30,7 @@ const SelectedProduct = () => {
     }
 
     console.log('order got :', newOrder)
+    dispatch(addToCart(newOrder))
   }
 
   // this function is called when an product is selected
