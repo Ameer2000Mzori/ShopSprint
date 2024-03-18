@@ -9,12 +9,6 @@ const SelectedProduct = () => {
   const [newColor, setNewColor] = useState('')
   const [amountItems, setAmountItems] = useState('')
 
-  const { id } = useParams()
-  const { data, isError, isLoading } = useQuery({
-    queryKey: ['product', id],
-    queryFn: () => axios.get(`/${id}`).then((res) => res.data),
-  })
-
   const showItems = (item, amount, color) => {
     const newOrder = {
       name: item.title,
@@ -30,9 +24,12 @@ const SelectedProduct = () => {
     console.log('order got :', newOrder)
   }
 
-  useEffect(() => {
-    console.log('selectedColor', newColor)
-  }, [newColor])
+  // this function is called when an product is selected
+  const { id } = useParams()
+  const { data, isError, isLoading } = useQuery({
+    queryKey: ['product', id],
+    queryFn: () => axios.get(`/${id}`).then((res) => res.data),
+  })
 
   if (isLoading) return <div> loading....</div>
 
@@ -142,12 +139,3 @@ const SelectedProduct = () => {
 }
 
 export default SelectedProduct
-
-// colors
-// Array(3)
-
-// "White"
-
-// "Black"
-
-// "Red"
