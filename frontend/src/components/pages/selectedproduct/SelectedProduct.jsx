@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { StyledPageWrapper } from '../../shared/StyledComponents.jsx'
@@ -6,11 +6,18 @@ import ProductNav from './component/ProductNav.jsx'
 import axios from 'axios'
 
 const SelectedProduct = () => {
+  const [color, setColor] = useState('')
+  const [amountItems, setAmountItems] = useState('')
+
   const { id } = useParams()
   const { data, isError, isLoading } = useQuery({
     queryKey: ['product', id],
     queryFn: () => axios.get(`/${id}`).then((res) => res.data),
   })
+
+  useEffect(() => {
+    console.log('selectedColor', color)
+  }, [color])
 
   if (isLoading) return <div> loading....</div>
 
@@ -72,6 +79,9 @@ const SelectedProduct = () => {
                           border: `1px solid ${color}`,
                         }}
                         className={`w-[25px] h-[25px] rounded-[100%] flex flex-col items-center justify-center bg-${color}`}
+                        onClick={() => {
+                          setColor(color)
+                        }}
                       />
                     </div>
                   ))}
