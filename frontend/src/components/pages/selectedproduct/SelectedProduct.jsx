@@ -23,12 +23,13 @@ const SelectedProduct = () => {
       const newOrder = {
         name: item.title,
         price: item.price,
-        amount: amount,
+        amount: Number(amount),
         category: item.category,
         company: item.company,
         freeShipping: item.freeShipping,
         color: color,
         id: uniqid(),
+        total: item.price * Number(amount),
       }
       console.log('order got :', newOrder)
       dispatch(addToCart(newOrder))
