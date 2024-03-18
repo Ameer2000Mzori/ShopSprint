@@ -6,7 +6,7 @@ import ProductNav from './component/ProductNav.jsx'
 import axios from 'axios'
 
 const SelectedProduct = () => {
-  const [color, setColor] = useState('')
+  const [newColor, setNewColor] = useState('')
   const [amountItems, setAmountItems] = useState('')
 
   const { id } = useParams()
@@ -15,9 +15,24 @@ const SelectedProduct = () => {
     queryFn: () => axios.get(`/${id}`).then((res) => res.data),
   })
 
+  const showItems = (item, amount, color) => {
+    const newOrder = {
+      name: item.title,
+      price: item.price,
+      amount: amount,
+      category: item.category,
+      company: item.company,
+      freeShipping: item.freeShipping,
+      color: color,
+      id: item.id,
+    }
+
+    console.log('order got :', newOrder)
+  }
+
   useEffect(() => {
-    console.log('selectedColor', color)
-  }, [color])
+    console.log('selectedColor', newColor)
+  }, [newColor])
 
   if (isLoading) return <div> loading....</div>
 
@@ -35,7 +50,7 @@ const SelectedProduct = () => {
             alt=""
           />
         </div>
-        <div className="h-[80%] w-[35%] flex flex-col text-start items-start justify-center ga-4">
+        <div className="h-[80%] w-[35%] flex flex-col text-start items-start justify-center ga-4 relative">
           <h1 className="text-[30px] font-bold text-gray-400">
             {data.item.title}
           </h1>
@@ -60,7 +75,7 @@ const SelectedProduct = () => {
                 voluptates animi a dolore molestiae?
               </p>
 
-              <div className=" bg-zinc-300  rounded-md flex flex-row text-center items-center justify-between p-2 w-[100%] h-[50px] ">
+              <div className=" bg-zinc-300  rounded-md flex flex-row text-center items-center justify-between p-2 w-[100%] h-[50px] absolute bottom-0 ">
                 <div className="flex flex-raw gap-1 w-[25%]">
                   <p>color : </p>
                   {data.item.colors.map((color, index) => (
@@ -80,25 +95,43 @@ const SelectedProduct = () => {
                         }}
                         className={`w-[25px] h-[25px] rounded-[100%] flex flex-col items-center justify-center bg-${color}`}
                         onClick={() => {
-                          setColor(color)
+                          setNewColor(color)
                         }}
                       />
                     </div>
                   ))}
                 </div>
 
-                <select>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                </select>
+                <div className="flex flex-row text-center items-center justify-center gap-3 w-[250px] ">
+                  <select
+                    value={amountItems}
+                    onChange={(e) => {
+                      setAmountItems(e.target.value)
+                    }}
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                  </select>
+
+                  <div>
+                    <button
+                      onClick={() => {
+                        showItems(data.item, amountItems, newColor)
+                      }}
+                      className="w-[150px] h-[40px] bg-slate-500 rounded-lg"
+                    >
+                      order
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
