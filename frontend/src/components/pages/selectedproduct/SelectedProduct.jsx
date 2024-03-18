@@ -6,6 +6,7 @@ import ProductNav from './component/ProductNav.jsx'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { addToCart } from '../../features/cart/cartSlice.js'
+import uniqid from 'uniqid'
 
 const SelectedProduct = () => {
   const [newColor, setNewColor] = useState('')
@@ -26,7 +27,7 @@ const SelectedProduct = () => {
       company: item.company,
       freeShipping: item.freeShipping,
       color: color,
-      id: item.id,
+      id: uniqid(),
     }
 
     console.log('order got :', newOrder)
