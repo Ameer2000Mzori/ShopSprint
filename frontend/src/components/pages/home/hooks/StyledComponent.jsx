@@ -21,10 +21,11 @@ export const StyledCard = styled.div`
   gap: 2rem;
   text-align: center;
   align-items: center;
-  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 303);
+
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 
   &:hover {
     cursor: pointer;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 15px 0px rgba(15 2, 1, 303);
   }
 `

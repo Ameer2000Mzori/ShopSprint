@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyledCardWrapper, StyledCard } from '../hooks/StyledComponent.jsx'
+import { Link } from 'react-router-dom'
 
 const FeaturedProducts = () => {
   const FeaturedItems = [
@@ -39,17 +40,19 @@ const FeaturedProducts = () => {
       <StyledCardWrapper>
         {FeaturedItems.map((item) => {
           return (
-            <StyledCard className="p-4">
-              <img
-                className="h-[100px] w-[250px] bg-white rounded-lg object-cover"
-                src="https://via.placeholder.com/300x200"
-                alt=""
-              />
-              <div className="flex flex-col text-center items-center justify-center gap-4">
-                <h1>{item.title}</h1>
-                <h1>${item.price}</h1>
-              </div>
-            </StyledCard>
+            <Link key={item.id} to={`/product/${item.id}`}>
+              <StyledCard className="p-4">
+                <img
+                  className="h-[200px] w-[350px] bg-white rounded-lg object-cover"
+                  src="https://via.placeholder.com/300x200"
+                  alt=""
+                />
+                <div className="flex flex-col text-center items-center justify-center gap-4">
+                  <h1>{item.title}</h1>
+                  <h1>${item.price}</h1>
+                </div>
+              </StyledCard>
+            </Link>
           )
         })}
       </StyledCardWrapper>

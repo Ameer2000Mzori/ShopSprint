@@ -47,7 +47,10 @@ const Header = () => {
           odit unde, repudiandae in saepe labore adipisci qui! Saepe cum quidem
           veritatis!
         </p>
-        <Link className="w-[130px] h-[40px] text-[15px] text-white font-bold rounded-md bg-blue-800 hover:bg-blue-700 flex flex-col text-center items-center justify-center ">
+        <Link
+          to="/products"
+          className="w-[130px] h-[40px] text-[15px] text-white font-bold rounded-md bg-blue-800 hover:bg-blue-700 flex flex-col text-center items-center justify-center "
+        >
           Products
         </Link>
       </div>

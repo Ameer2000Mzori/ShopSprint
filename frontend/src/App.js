@@ -6,6 +6,7 @@ import About from './components/pages/about/About.jsx'
 import Products from './components/pages/products/Products.jsx'
 import Cart from './components/pages/cart/Cart.jsx'
 import UtilityBar from './components/pages/navbar/component/UtilityBar.jsx'
+import SelectedProduct from './components/pages/selectedproduct/SelectedProduct.jsx'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/products" element={<Products />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/product/:id" element={<SelectedProduct />} />
       </Routes>
     </Router>
   )
