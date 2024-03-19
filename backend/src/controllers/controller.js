@@ -275,6 +275,10 @@ export const filterItems = (req, res) => {
   const { searchTerm, price, category, company, typeOfSorting, Shipping } =
     req.query
 
+  const datas = req.query
+
+  console.log('this is datas', datas)
+
   console.log(
     'the data I got is : ',
     searchTerm,
@@ -287,7 +291,7 @@ export const filterItems = (req, res) => {
 
   let filteredItems = data
 
-  if (searchTerm !== undefined) {
+  if (searchTerm) {
     filteredItems = filteredItems.filter((item) =>
       item.title.toLowerCase().startsWith(searchTerm.toLowerCase())
     )
@@ -307,13 +311,11 @@ export const filterItems = (req, res) => {
     filteredItems = filteredItems.filter((item) => item.company === company)
   }
 
-  if (Shipping === undefined || Shipping === 'false' || Shipping === '') {
-    filteredItems = filteredItems
-  } else if (Shipping === 'true') {
+  if (Shipping === undefined)
+    if (Shipping === false) filteredItems = filteredItems
+
+  if (Shipping === true)
     filteredItems = filteredItems.filter((item) => item.freeShipping === true)
-  } else if (Shipping === 'false') {
-    filteredItems = filteredItems.filter((item) => item.freeShipping === false)
-  }
 
   if (typeOfSorting !== undefined) {
     if (typeOfSorting === 'a-z') {

@@ -8,7 +8,7 @@ const FilteredProducts = (value) => {
     queryFn: () =>
       axios
         .get('/products/filter/items', {
-          params: { price: value.values.price },
+          params: value.values,
         })
         .then((res) => res.data),
   })
@@ -17,3 +17,10 @@ const FilteredProducts = (value) => {
 }
 
 export default FilteredProducts
+
+// searchTerm: '',
+// price: 90,
+// category: '',
+// company: '',
+// typeOfSorting: '',
+// Shipping: false,

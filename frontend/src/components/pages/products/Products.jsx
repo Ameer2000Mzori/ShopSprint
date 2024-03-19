@@ -5,32 +5,26 @@ import { useFormik } from 'formik'
 import validationSchema from '../../shared/validationSchema.js'
 
 const Products = () => {
-  const [newData, setNewData] = useState({}) // Corrected initialization
+  const [newData, setNewData] = useState({})
 
   const { data, isPending, isError } = FilteredProducts(newData)
 
   console.log(data, isPending, isError)
-  // const      values.searchTerm,
-  //   values.price,
-  //   values.category,
-  //   values.company,
-  //   values.typeOfSorting,
-  //   values.Shipping  = newData
 
   const formik = new useFormik({
     initialValues: {
       searchTerm: '',
-      price: 90,
+      price: '',
       category: '',
       company: '',
       typeOfSorting: '',
-      Shipping: '',
+      Shipping: false,
     },
     onSubmit: (values) => {
       console.log(values)
       setNewData({ values })
     },
-    validationSchema: validationSchema, // Place validationSchema here
+    validationSchema: validationSchema,
   })
 
   if (newData.isPending) return <div>is loading....</div>
@@ -58,36 +52,55 @@ const Products = () => {
 
         <label htmlFor="price">price</label>
         <input
-          type="range"
+          type="text"
           id="price"
           name="price"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.price}
-          min="0"
-          max="100"
-          step="10"
         />
 
-        <label htmlFor="Shipping">category</label>
-        <input
-          type="checkbox"
+        <label htmlFor="category">category</label>
+        <select
           id="category"
           name="category"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.category}
-        />
+        >
+          <option value="Clothing">Clothing</option>
+          <option value="Accessories">Accessories</option>
+          <option value="Footwear">Footwear</option>
+          <option value="high-low">High to Low</option>
+        </select>
 
-        <label htmlFor="Shipping">Type Of Sorting</label>
-        <input
-          type="checkbox"
+        <label htmlFor="company">company</label>
+        <select
+          id="company"
+          name="company"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.company}
+        >
+          <option value="Company A">Company A</option>
+          <option value="Company B">Company B</option>
+          <option value="Company C">Company C</option>
+          <option value="high-Company D">Company D</option>
+        </select>
+
+        <label htmlFor="typeOfSorting">Type Of Sorting</label>
+        <select
           id="typeOfSorting"
           name="typeOfSorting"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.typeOfSorting}
-        />
+        >
+          <option value="a-z">A-Z</option>
+          <option value="z-a">Z-A</option>
+          <option value="low-high">Low to High</option>
+          <option value="high-low">High to Low</option>
+        </select>
 
         <label htmlFor="Shipping">free shipping?</label>
         <input
