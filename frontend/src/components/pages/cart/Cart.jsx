@@ -1,26 +1,48 @@
+import { useState, useEffect } from 'react'
 import { StyledHeaderTitle } from '../../shared/StyledComponents.jsx'
 import { useSelector, useDispatch } from 'react-redux'
 import { removeFromCart } from '../../features/cart/cartSlice.js'
+
 const Cart = () => {
+  const [shippingAmount, setShippingAmount] = useState(0)
   const dispatch = useDispatch()
 
   const removeProduct = (item) => {
     console.log(item.id)
     dispatch(removeFromCart(item.id))
   }
+
   const items = useSelector((state) => state.cart.items)
+  const price = useSelector((state) => state.cart.price)
+
+  useEffect(() => {
+    // Calculate shipping amount when items change
+    let totalShippingAmount = 0
+    items.forEach((item) => {
+      if (!item.freeShipping) {
+        // Add shipping fee if freeShipping is false
+        totalShippingAmount += item.amount * 0.15
+      }
+    })
+    setShippingAmount(totalShippingAmount)
+  }, [items])
+
   return (
-    <div className="flex flex-col h-[80vh] text-center items-center justify-center ">
+    <div className="flex flex-col h-[80vh] text-center items-center justify-center">
       <StyledHeaderTitle>products in cart</StyledHeaderTitle>
 
       <div className="h-[90%] w-[90%] flex flex-row items-center justify-center gap-4">
-        <div className=" h-[80%] w-[45%] flex flex-col text-center items-center justify-start">
-          <ul className="w-[100%]  flex flex-col text-center items-center justify-start">
+        <div className="h-[80%] w-[45%] flex flex-col text-center items-center justify-start">
+          <ul className="w-[100%] flex flex-col text-center items-center justify-start">
             {items.map((item) => {
               return (
-                <div className="w-[100%] flex flex-row text-start items-center justify-start pl-2 gap-4 h-[50px] bg-zinc-300 m-1 relative text-black rounded-lg">
+                <div
+                  key={item.id}
+                  className="w-[100%] flex flex-row text-start items-center justify-start pl-2 gap-4 h-[50px] bg-zinc-300 m-1 relative text-black rounded-lg"
+                >
                   <p>{item.name}</p>
                   <p>${item.price}</p>
+                  <p>free ship..? {item.freeShipping ? 'yes' : 'no'}</p>
                   <p>quantity: {item.amount}</p>
                   <p>color:</p>
                   <p
@@ -28,9 +50,7 @@ const Cart = () => {
                     style={{ backgroundColor: item.color }}
                   ></p>
                   <button
-                    onClick={() => {
-                      removeProduct(item)
-                    }}
+                    onClick={() => removeProduct(item)}
                     className="w-[100px] h-[40px] bg-red-400 text-white rounded-lg absolute right-[5px]"
                   >
                     remove
@@ -40,32 +60,32 @@ const Cart = () => {
             })}
           </ul>
         </div>
-        <div className="w-[25%] h-[80%] flex flex-col text-start items-end justify-start ">
-          <div className="h-[250px] w-[100%] rounded-lg bg-zinc-200">
+        <div className="w-[25%] h-[80%] flex flex-col text-center items-center justify-start gap-4">
+          <div className="h-[200px] w-[100%] rounded-lg bg-zinc-200">
             <div>
               <ul>
                 <li className="h-[40px] w-[100%] flex flex-row text-center items-center justify-between pr-2 pl-2  border-b-2 border-gray-300">
-                  <p>tax</p>
-                  <p>${items.price ? `${items.price * 0.15}` : 0}</p>
+                  <p>subtotal </p>
+                  <p>${price}</p>
+                </li>
+                <li className="h-[40px] w-[100%] flex flex-row text-center items-center justify-between pr-2 pl-2  border-b-2 border-gray-300">
+                  <p>tax 15%</p>
+                  <p>${price ? `${price * 0.15}` : 0}</p>
                 </li>
                 <li className="h-[40px] w-[100%] flex flex-row text-center items-center justify-between pr-2 pl-2  border-b-2 border-gray-300">
                   <p>shipping fee</p>
-                  <p>$0</p>
+                  <p>${shippingAmount}</p>
                 </li>
-
-                <li className=" text-[20px] font-bold h-[40px] w-[100%] flex flex-row text-center items-center justify-between pr-2 pl-2  border-b-4 border-gray-300">
+                <li className="text-[20px] font-bold h-[40px] w-[100%] flex flex-row text-center items-center justify-between pr-2 pl-2  border-b-4 border-gray-300">
                   <p>total</p>
-                  <p>
-                    $
-                    {items.reduce(
-                      (acc, item) => acc + item.price * item.amount,
-                      0
-                    )}
-                  </p>
+                  <p>${(price ? price + price * 0.15 : 0) + shippingAmount}</p>
                 </li>
               </ul>
             </div>
           </div>
+          <button className="w-[150px] h-[40px] rounded-lg bg-blue-600 text-white font-bold">
+            PLEASE LOGIN
+          </button>
         </div>
       </div>
     </div>
