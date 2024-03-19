@@ -40,7 +40,7 @@ const FeaturedProducts = () => {
       <StyledCardWrapper>
         {FeaturedItems.map((item) => {
           return (
-            <Link to={`/product/${item.id}`}>
+            <Link key={item.id} to={`/product/${item.id}`}>
               <StyledCard className="p-4">
                 <img
                   className="h-[200px] w-[350px] bg-white rounded-lg object-cover"

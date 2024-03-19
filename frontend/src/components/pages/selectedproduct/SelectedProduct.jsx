@@ -6,10 +6,11 @@ import ProductNav from './component/ProductNav.jsx'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { addToCart } from '../../features/cart/cartSlice.js'
+import uniqid from 'uniqid'
 
 const SelectedProduct = () => {
   const [newColor, setNewColor] = useState('')
-  const [amountItems, setAmountItems] = useState('')
+  const [amountItems, setAmountItems] = useState(1)
   const dispatch = useDispatch()
   const items = useSelector((state) => state.cart.items)
 
@@ -18,19 +19,21 @@ const SelectedProduct = () => {
   }, [items])
 
   const showItems = (item, amount, color) => {
-    const newOrder = {
-      name: item.title,
-      price: item.price,
-      amount: amount,
-      category: item.category,
-      company: item.company,
-      freeShipping: item.freeShipping,
-      color: color,
-      id: item.id,
+    if (amount && color) {
+      const newOrder = {
+        name: item.title,
+        price: item.price,
+        amount: Number(amount),
+        category: item.category,
+        company: item.company,
+        freeShipping: item.freeShipping,
+        color: color,
+        id: uniqid(),
+        total: item.price * Number(amount),
+      }
+      console.log('order got :', newOrder)
+      dispatch(addToCart(newOrder))
     }
-
-    console.log('order got :', newOrder)
-    dispatch(addToCart(newOrder))
   }
 
   // this function is called when an product is selected
