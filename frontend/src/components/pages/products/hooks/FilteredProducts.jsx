@@ -1,27 +1,14 @@
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
-const FilteredProducts = (
-  searchTerm,
-  price,
-  category,
-  company,
-  typeOfSorting,
-  Shipping
-) => {
+const FilteredProducts = (value) => {
+  console.log('this si value', value.values)
   const { data, isPending, isError } = useQuery({
     queryKey: ['products'],
     queryFn: () =>
       axios
         .get('/products/filter/items', {
-          params: {
-            searchTerm,
-            price,
-            category,
-            company,
-            typeOfSorting,
-            Shipping,
-          },
+          params: { price: value.values.price },
         })
         .then((res) => res.data),
   })
@@ -30,9 +17,3 @@ const FilteredProducts = (
 }
 
 export default FilteredProducts
-// searchTerm,
-// price,
-// category,
-// company,
-// typeOfSorting,
-// Shipping
