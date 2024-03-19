@@ -14,7 +14,7 @@ const Products = () => {
   const formik = new useFormik({
     initialValues: {
       searchTerm: '',
-      price: '',
+      price: 0,
       category: '',
       company: '',
       typeOfSorting: '',
@@ -33,13 +33,7 @@ const Products = () => {
 
   return (
     <div className="h-[100vh] flex flex-col text-center items-start justify-normal">
-      <form
-        onSubmit={(e) => {
-          e.preventDefault()
-          formik.handleSubmit()
-        }}
-        className="h-[20vh]"
-      >
+      <form onSubmit={formik.handleSubmit} className="h-[20vh]">
         <label htmlFor="searchTerm">search</label>
         <input
           type="text"
@@ -71,7 +65,6 @@ const Products = () => {
           <option value="Clothing">Clothing</option>
           <option value="Accessories">Accessories</option>
           <option value="Footwear">Footwear</option>
-          <option value="high-low">High to Low</option>
         </select>
 
         <label htmlFor="company">company</label>
@@ -85,7 +78,6 @@ const Products = () => {
           <option value="Company A">Company A</option>
           <option value="Company B">Company B</option>
           <option value="Company C">Company C</option>
-          <option value="high-Company D">Company D</option>
         </select>
 
         <label htmlFor="typeOfSorting">Type Of Sorting</label>

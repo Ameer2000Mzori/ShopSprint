@@ -269,18 +269,15 @@ export const getOneItem = (req, res) => {
   }
 }
 
-// filter items by company , name , price, free shipping and more.
-
+/// filter items by company, name, price, free shipping, and more.
 export const filterItems = (req, res) => {
   const { searchTerm, price, category, company, typeOfSorting, Shipping } =
     req.query
 
-  const datas = req.query
-
-  console.log('this is datas', datas)
+  console.log('Received data:', req.query)
 
   console.log(
-    'the data I got is : ',
+    'data',
     searchTerm,
     price,
     category,
@@ -291,49 +288,49 @@ export const filterItems = (req, res) => {
 
   let filteredItems = data
 
-  if (searchTerm) {
+  if (searchTerm && searchTerm.trim() !== '') {
     filteredItems = filteredItems.filter((item) =>
       item.title.toLowerCase().startsWith(searchTerm.toLowerCase())
     )
   }
 
-  if (price !== undefined) {
+  if (price !== undefined && price !== '' && !isNaN(price)) {
     filteredItems = filteredItems.filter(
       (item) => item.price <= parseFloat(price)
     )
   }
 
-  if (category !== undefined) {
+  if (category && category.trim() !== '') {
     filteredItems = filteredItems.filter((item) => item.category === category)
   }
 
-  if (company !== undefined) {
+  if (company && company.trim() !== '') {
     filteredItems = filteredItems.filter((item) => item.company === company)
   }
 
-  if (Shipping === undefined)
-    if (Shipping === false) filteredItems = filteredItems
-
-  if (Shipping === true)
-    filteredItems = filteredItems.filter((item) => item.freeShipping === true)
+  if (Shipping !== undefined) {
+    if (Shipping === 'true') {
+      filteredItems = filteredItems.filter((item) => item.freeShipping === true)
+    } else if (Shipping === 'false') {
+      filteredItems = filteredItems.filter((item) => item.freeShipping !== true)
+    }
+  }
 
   if (typeOfSorting !== undefined) {
     if (typeOfSorting === 'a-z') {
       filteredItems = filteredItems.sort((a, b) =>
         a.title.localeCompare(b.title)
       )
-    }
-    if (typeOfSorting === 'z-a') {
-      filteredItems = filteredItems.reverse()
-    }
-    if (typeOfSorting === 'low-high') {
+    } else if (typeOfSorting === 'z-a') {
+      filteredItems = filteredItems.sort((a, b) =>
+        b.title.localeCompare(a.title)
+      )
+    } else if (typeOfSorting === 'low-high') {
       filteredItems = filteredItems.sort((a, b) => a.price - b.price)
-    }
-
-    if (typeOfSorting === 'high-low') {
+    } else if (typeOfSorting === 'high-low') {
       filteredItems = filteredItems.sort((a, b) => b.price - a.price)
     }
   }
 
-  res.status(200).json({ filteredItems, message: 'Item found successfully' })
+  res.status(200).json({ filteredItems, message: 'Items found successfully' })
 }
