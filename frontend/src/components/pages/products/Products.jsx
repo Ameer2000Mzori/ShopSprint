@@ -9,7 +9,7 @@ const Products = () => {
   const [newSorting, setNewSorting] = useState('')
   const [newFreeShipping, setNewFreeShipping] = useState(false)
 
-  const { data, isPending, isError } = FilteredProducts()
+  // const { data, isPending, isError } = FilteredProducts()
 
   const filterProducts = (
     searchTerm,
@@ -30,10 +30,10 @@ const Products = () => {
     )
   }
 
-  console.log('this is data : ', data)
-  if (isPending) return <div>is loading....</div>
+  // console.log('this is data : ', data)
+  // if (isPending) return <div>is loading....</div>
 
-  if (isError) return <div>there is an error....</div>
+  // if (isError) return <div>there is an error....</div>
 
   return (
     <div className="h-[100vh] flex flex-col text-center items-start justify-normal">
@@ -68,27 +68,25 @@ const Products = () => {
           <option value="Footwear">Footwear</option>
         </select>
 
-        <label
+        <label htmlFor="company">company</label>
+        <select
           value={newCompany}
           onChange={(e) => setNewCompany(e.target.value)}
-          htmlFor="company"
+          id="company"
+          name="company"
         >
-          company
-        </label>
-        <select id="company" name="company">
           <option value="Company A">Company A</option>
           <option value="Company B">Company B</option>
           <option value="Company C">Company C</option>
         </select>
 
-        <label
+        <label htmlFor="typeOfSorting">Type Of Sorting</label>
+        <select
           value={newSorting}
           onChange={(e) => setNewSorting(e.target.value)}
-          htmlFor="typeOfSorting"
+          id="typeOfSorting"
+          name="typeOfSorting"
         >
-          Type Of Sorting
-        </label>
-        <select id="typeOfSorting" name="typeOfSorting">
           <option value="a-z">A-Z</option>
           <option value="z-a">Z-A</option>
           <option value="low-high">Low to High</option>
@@ -104,8 +102,9 @@ const Products = () => {
           name="Shipping"
         />
         <button
-          type="submit"
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault()
+
             filterProducts(
               searchTerm,
               newPrice,
