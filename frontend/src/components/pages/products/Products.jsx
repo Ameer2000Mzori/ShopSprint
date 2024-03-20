@@ -19,7 +19,7 @@ const Products = () => {
     Shipping: newFreeShipping,
   })
 
-  const { data, isPending, isError } = FilteredProducts(newValue)
+  const { data, isLoading, isError } = FilteredProducts(newValue)
 
   useEffect(() => {
     console.log(newValue)
@@ -44,6 +44,9 @@ const Products = () => {
       Shipping: newFreeShipping,
     })
   }
+
+  if (isLoading) return <div>is loading....</div>
+  if (isError) return <div>there is an error....</div>
 
   return (
     <div className="h-[100vh] flex flex-col text-center items-start justify-normal">
@@ -131,10 +134,7 @@ const Products = () => {
           search
         </button>
       </form>
-      <div>
-        {isPending && <div>is loading....</div>}
-        {isError && <div>there is an error....</div>}
-      </div>
+      <div></div>
     </div>
   )
 }

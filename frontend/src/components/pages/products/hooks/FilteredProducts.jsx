@@ -4,7 +4,7 @@ import axios from 'axios'
 const FilteredProducts = (value) => {
   console.log('this is value', value)
 
-  const { data, isPending, isError } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ['products'],
     queryFn: () =>
       axios
@@ -14,7 +14,7 @@ const FilteredProducts = (value) => {
         .then((res) => res.data),
   })
 
-  return { data, isPending, isError }
+  return { data, isLoading, isError }
 }
 
 export default FilteredProducts
