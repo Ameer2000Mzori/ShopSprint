@@ -274,6 +274,8 @@ export const filterItems = (req, res) => {
   const { searchTerm, price, category, company, typeOfSorting, Shipping } =
     req.query
 
+  const newPrice = Number(price)
+
   console.log('Received data:', req.query)
 
   console.log(
@@ -294,7 +296,7 @@ export const filterItems = (req, res) => {
     )
   }
 
-  if (price !== undefined && price !== '' && !isNaN(price)) {
+  if (newPrice !== undefined && newPrice !== '' && !isNaN(newPrice)) {
     filteredItems = filteredItems.filter(
       (item) => item.price <= parseFloat(price)
     )

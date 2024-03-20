@@ -1,15 +1,23 @@
 import React, { useState } from 'react'
 import FilteredProducts from './hooks/FilteredProducts.jsx'
+import { useEffect } from 'react'
 
 const Products = () => {
   const [searchTerm, setSearchTerm] = useState('')
-  const [newPrice, setNewPrice] = useState(0)
-  const [newCategory, setNewCategory] = useState('')
-  const [newCompany, setNewCompany] = useState('')
-  const [newSorting, setNewSorting] = useState('')
+  const [newPrice, setNewPrice] = useState(90)
+  const [newCategory, setNewCategory] = useState('All')
+  const [newCompany, setNewCompany] = useState('All')
+  const [newSorting, setNewSorting] = useState('a-z')
+  const [newValue, setNewValue] = useState({})
   const [newFreeShipping, setNewFreeShipping] = useState(false)
 
-  // const { data, isPending, isError } = FilteredProducts()
+  const { data, isPending, isError } = FilteredProducts(newValue)
+
+  useEffect(() => {
+    console.log(newValue)
+
+    console.log('this is data : ', data)
+  }, [data])
 
   const filterProducts = (
     searchTerm,
@@ -19,21 +27,19 @@ const Products = () => {
     newSorting,
     newFreeShipping
   ) => {
-    console.log(
-      'data we got : ',
-      searchTerm,
-      newPrice,
-      newCategory,
-      newCompany,
-      newSorting,
-      newFreeShipping
-    )
+    setNewValue({
+      searchTerm: searchTerm,
+      price: Number(newPrice),
+      category: newCategory,
+      company: newCompany,
+      typeOfSorting: newSorting,
+      Shipping: newFreeShipping,
+    })
   }
 
-  // console.log('this is data : ', data)
-  // if (isPending) return <div>is loading....</div>
+  if (isPending) return <div>is loading....</div>
 
-  // if (isError) return <div>there is an error....</div>
+  if (isError) return <div>there is an error....</div>
 
   return (
     <div className="h-[100vh] flex flex-col text-center items-start justify-normal">
@@ -63,6 +69,7 @@ const Products = () => {
           id="category"
           name="category"
         >
+          <option value="All">All</option>
           <option value="Clothing">Clothing</option>
           <option value="Accessories">Accessories</option>
           <option value="Footwear">Footwear</option>
@@ -75,6 +82,7 @@ const Products = () => {
           id="company"
           name="company"
         >
+          <option value="All">All</option>
           <option value="Company A">Company A</option>
           <option value="Company B">Company B</option>
           <option value="Company C">Company C</option>
@@ -96,7 +104,7 @@ const Products = () => {
         <label htmlFor="Shipping">free shipping?</label>
         <input
           value={newFreeShipping}
-          onChange={(e) => setNewFreeShipping(e.target.value)}
+          onChange={(e) => setNewFreeShipping((prev) => !prev)}
           type="checkbox"
           id="Shipping"
           name="Shipping"
