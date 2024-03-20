@@ -2,71 +2,93 @@ import React, { useState } from 'react'
 import FilteredProducts from './hooks/FilteredProducts.jsx'
 
 const Products = () => {
-  const [newData, setNewData] = useState({})
+  const [searchTerm, setSearchTerm] = useState('')
+  const [newPrice, setNewPrice] = useState(0)
+  const [newCategory, setNewCategory] = useState('')
+  const [newCompany, setNewCompany] = useState('')
+  const [newSorting, setNewSorting] = useState('')
+  const [newFreeShipping, setNewFreeShipping] = useState(false)
 
-  const { data, isPending, isError } = FilteredProducts(newData)
+  const { data, isPending, isError } = FilteredProducts()
 
-  if (newData.isPending) return <div>is loading....</div>
+  const filterProducts = (
+    searchTerm,
+    newPrice,
+    newCategory,
+    newCompany,
+    newSorting,
+    newFreeShipping
+  ) => {
+    console.log(
+      'data we got : ',
+      searchTerm,
+      newPrice,
+      newCategory,
+      newCompany,
+      newSorting,
+      newFreeShipping
+    )
+  }
 
-  if (newData.isError) return <div>there is an error....</div>
+  console.log('this is data : ', data)
+  if (isPending) return <div>is loading....</div>
+
+  if (isError) return <div>there is an error....</div>
 
   return (
     <div className="h-[100vh] flex flex-col text-center items-start justify-normal">
-      <form onSubmit={formik.handleSubmit} className="h-[20vh]">
+      <form className="h-[20vh]">
         <label htmlFor="searchTerm">search</label>
         <input
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
           type="text"
           id="searchTerm"
           name="searchTerm"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.searchTerm}
         />
 
         <label htmlFor="price">price</label>
         <input
+          value={newPrice}
+          onChange={(e) => setNewPrice(e.target.value)}
           type="text"
           id="price"
           name="price"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.price}
         />
 
         <label htmlFor="category">category</label>
         <select
+          value={newCategory}
+          onChange={(e) => setNewCategory(e.target.value)}
           id="category"
           name="category"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.category}
         >
           <option value="Clothing">Clothing</option>
           <option value="Accessories">Accessories</option>
           <option value="Footwear">Footwear</option>
         </select>
 
-        <label htmlFor="company">company</label>
-        <select
-          id="company"
-          name="company"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.company}
+        <label
+          value={newCompany}
+          onChange={(e) => setNewCompany(e.target.value)}
+          htmlFor="company"
         >
+          company
+        </label>
+        <select id="company" name="company">
           <option value="Company A">Company A</option>
           <option value="Company B">Company B</option>
           <option value="Company C">Company C</option>
         </select>
 
-        <label htmlFor="typeOfSorting">Type Of Sorting</label>
-        <select
-          id="typeOfSorting"
-          name="typeOfSorting"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.typeOfSorting}
+        <label
+          value={newSorting}
+          onChange={(e) => setNewSorting(e.target.value)}
+          htmlFor="typeOfSorting"
         >
+          Type Of Sorting
+        </label>
+        <select id="typeOfSorting" name="typeOfSorting">
           <option value="a-z">A-Z</option>
           <option value="z-a">Z-A</option>
           <option value="low-high">Low to High</option>
@@ -75,14 +97,27 @@ const Products = () => {
 
         <label htmlFor="Shipping">free shipping?</label>
         <input
+          value={newFreeShipping}
+          onChange={(e) => setNewFreeShipping(e.target.value)}
           type="checkbox"
           id="Shipping"
           name="Shipping"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.Shipping}
         />
-        <button type="submit">search</button>
+        <button
+          type="submit"
+          onClick={() => {
+            filterProducts(
+              searchTerm,
+              newPrice,
+              newCategory,
+              newCompany,
+              newSorting,
+              newFreeShipping
+            )
+          }}
+        >
+          search
+        </button>
       </form>
       <div></div>
     </div>
