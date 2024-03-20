@@ -290,31 +290,35 @@ export const filterItems = (req, res) => {
 
   let filteredItems = data
 
-  if (searchTerm && searchTerm.trim() !== '') {
+  if (category && category !== 'All') {
+    filteredItems = filteredItems.filter((item) => item.category === category)
+  } else if (category === 'All') {
+    filteredItems = data
+  }
+
+  if (company && company !== 'All') {
+    filteredItems = filteredItems.filter((item) => item.company === company)
+  } else if (company === 'All' && category === 'All') {
+    filteredItems = data
+  } else if (company === 'All' && category !== 'All') {
+    filteredItems = filteredItems
+  }
+
+  if (searchTerm !== undefined && searchTerm !== '') {
     filteredItems = filteredItems.filter((item) =>
       item.title.toLowerCase().startsWith(searchTerm.toLowerCase())
     )
   }
 
-  if (newPrice !== undefined && newPrice !== '' && !isNaN(newPrice)) {
+  if (newPrice !== undefined && newPrice !== '') {
     filteredItems = filteredItems.filter(
       (item) => item.price <= parseFloat(price)
     )
   }
 
-  if (category && category.trim() !== '') {
-    filteredItems = filteredItems.filter((item) => item.category === category)
-  }
-
-  if (company && company.trim() !== '') {
-    filteredItems = filteredItems.filter((item) => item.company === company)
-  }
-
   if (Shipping !== undefined) {
     if (Shipping === 'true') {
       filteredItems = filteredItems.filter((item) => item.freeShipping === true)
-    } else if (Shipping === 'false') {
-      filteredItems = filteredItems.filter((item) => item.freeShipping !== true)
     }
   }
 

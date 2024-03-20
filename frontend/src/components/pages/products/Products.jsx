@@ -4,12 +4,20 @@ import { useEffect } from 'react'
 
 const Products = () => {
   const [searchTerm, setSearchTerm] = useState('')
-  const [newPrice, setNewPrice] = useState(90)
+  const [newPrice, setNewPrice] = useState('')
   const [newCategory, setNewCategory] = useState('All')
   const [newCompany, setNewCompany] = useState('All')
   const [newSorting, setNewSorting] = useState('a-z')
-  const [newValue, setNewValue] = useState({})
   const [newFreeShipping, setNewFreeShipping] = useState(false)
+
+  const [newValue, setNewValue] = useState({
+    searchTerm: searchTerm,
+    price: Number(150),
+    category: newCategory,
+    company: newCompany,
+    typeOfSorting: newSorting,
+    Shipping: newFreeShipping,
+  })
 
   const { data, isPending, isError } = FilteredProducts(newValue)
 
@@ -36,10 +44,6 @@ const Products = () => {
       Shipping: newFreeShipping,
     })
   }
-
-  if (isPending) return <div>is loading....</div>
-
-  if (isError) return <div>there is an error....</div>
 
   return (
     <div className="h-[100vh] flex flex-col text-center items-start justify-normal">
@@ -86,6 +90,7 @@ const Products = () => {
           <option value="Company A">Company A</option>
           <option value="Company B">Company B</option>
           <option value="Company C">Company C</option>
+          <option value="Company D">Company D</option>
         </select>
 
         <label htmlFor="typeOfSorting">Type Of Sorting</label>
@@ -126,7 +131,10 @@ const Products = () => {
           search
         </button>
       </form>
-      <div></div>
+      <div>
+        {isPending && <div>is loading....</div>}
+        {isError && <div>there is an error....</div>}
+      </div>
     </div>
   )
 }

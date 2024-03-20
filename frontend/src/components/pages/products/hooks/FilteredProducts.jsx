@@ -4,13 +4,6 @@ import axios from 'axios'
 const FilteredProducts = (value) => {
   console.log('this is value', value)
 
-  // searchTerm,
-  // price,
-  // category,
-  // company,
-  // typeOfSorting,
-  // Shipping
-
   const { data, isPending, isError } = useQuery({
     queryKey: ['products'],
     queryFn: () =>
