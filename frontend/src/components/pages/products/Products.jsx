@@ -1,31 +1,10 @@
 import React, { useState } from 'react'
 import FilteredProducts from './hooks/FilteredProducts.jsx'
-import { useFormik } from 'formik'
-
-import validationSchema from '../../shared/validationSchema.js'
 
 const Products = () => {
   const [newData, setNewData] = useState({})
 
   const { data, isPending, isError } = FilteredProducts(newData)
-
-  console.log(data, isPending, isError)
-
-  const formik = new useFormik({
-    initialValues: {
-      searchTerm: '',
-      price: 0,
-      category: '',
-      company: '',
-      typeOfSorting: '',
-      Shipping: false,
-    },
-    onSubmit: (values) => {
-      console.log(values)
-      setNewData({ values })
-    },
-    validationSchema: validationSchema,
-  })
 
   if (newData.isPending) return <div>is loading....</div>
 
