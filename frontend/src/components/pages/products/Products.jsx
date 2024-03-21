@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import FilteredProducts from './hooks/FilteredProducts.jsx'
-import { useEffect } from 'react'
 
 const Products = () => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -19,14 +18,6 @@ const Products = () => {
     Shipping: newFreeShipping,
   })
 
-  const { data, isLoading, isError } = FilteredProducts(newValue)
-
-  useEffect(() => {
-    console.log(newValue)
-
-    console.log('this is data : ', data)
-  }, [data])
-
   const filterProducts = (
     searchTerm,
     newPrice,
@@ -44,9 +35,6 @@ const Products = () => {
       Shipping: newFreeShipping,
     })
   }
-
-  if (isLoading) return <div>is loading....</div>
-  if (isError) return <div>there is an error....</div>
 
   return (
     <div className="h-[100vh] flex flex-col text-center items-start justify-normal">
@@ -112,7 +100,7 @@ const Products = () => {
         <label htmlFor="Shipping">free shipping?</label>
         <input
           value={newFreeShipping}
-          onChange={(e) => setNewFreeShipping((prev) => !prev)}
+          onChange={() => setNewFreeShipping((prev) => !prev)}
           type="checkbox"
           id="Shipping"
           name="Shipping"
@@ -134,7 +122,9 @@ const Products = () => {
           search
         </button>
       </form>
-      <div></div>
+      <div>
+        <FilteredProducts value={newValue}></FilteredProducts>
+      </div>
     </div>
   )
 }

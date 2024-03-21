@@ -338,5 +338,7 @@ export const filterItems = (req, res) => {
     }
   }
 
-  res.status(200).json({ filteredItems, message: 'Items found successfully' })
+  setTimeout(() => {
+    res.status(200).json({ filteredItems, message: 'Items found successfully' })
+  }, 1000)
 }
