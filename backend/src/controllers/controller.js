@@ -269,13 +269,18 @@ export const getOneItem = (req, res) => {
   }
 }
 
-// filter items by company , name , price, free shipping and more.
-
+/// filter items by company, name, price, free shipping, and more.
 export const filterItems = (req, res) => {
-  const { price, category, company, typeOfSorting, Shipping } = req.query
+  const { searchTerm, price, category, company, typeOfSorting, Shipping } =
+    req.query
+
+  const newPrice = Number(price)
+
+  console.log('Received data:', req.query)
 
   console.log(
-    'the data I got is : ',
+    'data',
+    searchTerm,
     price,
     category,
     company,
@@ -285,26 +290,36 @@ export const filterItems = (req, res) => {
 
   let filteredItems = data
 
-  if (price !== undefined) {
+  if (category && category !== 'All') {
+    filteredItems = filteredItems.filter((item) => item.category === category)
+  } else if (category === 'All') {
+    filteredItems = data
+  }
+
+  if (company && company !== 'All') {
+    filteredItems = filteredItems.filter((item) => item.company === company)
+  } else if (company === 'All' && category === 'All') {
+    filteredItems = data
+  } else if (company === 'All' && category !== 'All') {
+    filteredItems = filteredItems
+  }
+
+  if (searchTerm !== undefined && searchTerm !== '') {
+    filteredItems = filteredItems.filter((item) =>
+      item.title.toLowerCase().startsWith(searchTerm.toLowerCase())
+    )
+  }
+
+  if (newPrice !== undefined && newPrice !== '') {
     filteredItems = filteredItems.filter(
       (item) => item.price <= parseFloat(price)
     )
   }
 
-  if (category !== undefined) {
-    filteredItems = filteredItems.filter((item) => item.category === category)
-  }
-
-  if (company !== undefined) {
-    filteredItems = filteredItems.filter((item) => item.company === company)
-  }
-
-  if (Shipping === undefined || Shipping === 'false' || Shipping === '') {
-    filteredItems = filteredItems
-  } else if (Shipping === 'true') {
-    filteredItems = filteredItems.filter((item) => item.freeShipping === true)
-  } else if (Shipping === 'false') {
-    filteredItems = filteredItems.filter((item) => item.freeShipping === false)
+  if (Shipping !== undefined) {
+    if (Shipping === 'true') {
+      filteredItems = filteredItems.filter((item) => item.freeShipping === true)
+    }
   }
 
   if (typeOfSorting !== undefined) {
@@ -312,18 +327,18 @@ export const filterItems = (req, res) => {
       filteredItems = filteredItems.sort((a, b) =>
         a.title.localeCompare(b.title)
       )
-    }
-    if (typeOfSorting === 'z-a') {
-      filteredItems = filteredItems.reverse()
-    }
-    if (typeOfSorting === 'low-high') {
+    } else if (typeOfSorting === 'z-a') {
+      filteredItems = filteredItems.sort((a, b) =>
+        b.title.localeCompare(a.title)
+      )
+    } else if (typeOfSorting === 'low-high') {
       filteredItems = filteredItems.sort((a, b) => a.price - b.price)
-    }
-
-    if (typeOfSorting === 'high-low') {
+    } else if (typeOfSorting === 'high-low') {
       filteredItems = filteredItems.sort((a, b) => b.price - a.price)
     }
   }
 
-  res.status(200).json({ filteredItems, message: 'Item found successfully' })
+  setTimeout(() => {
+    res.status(200).json({ filteredItems, message: 'Items found successfully' })
+  }, 1000)
 }
