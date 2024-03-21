@@ -3,7 +3,6 @@ import {
   StyledInputWrap,
   StyledSelectWrap,
   StyledShippingWrap,
-  StyledCollectionWrap,
 } from './StyledForm.jsx'
 
 const FilterForm = ({
@@ -20,6 +19,7 @@ const FilterForm = ({
   newFreeShipping,
   setNewFreeShipping,
   filterProducts,
+  newData,
 }) => {
   return (
     <form className="h-[20vh] flex flex-col  text-center items-center justify-around gap-2  ">
@@ -131,6 +131,8 @@ const FilterForm = ({
             name="searchTerm"
           />
         </StyledInputWrap>
+
+        <p>items found : {newData ? newData.length : '0'}</p>
       </div>
     </form>
   )
