@@ -1,5 +1,6 @@
 import React from 'react'
-import { StyledCardWrapper, StyledCard } from '../hooks/StyledComponent.jsx'
+import { StyledCard } from '../../../shared/StyledComponents.jsx'
+import { StyledCardWrapper } from '../hooks/StyledComponent.jsx'
 import { Link } from 'react-router-dom'
 
 const FeaturedProducts = () => {
