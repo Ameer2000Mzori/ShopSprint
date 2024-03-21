@@ -2,13 +2,22 @@ import FetchProducts from './FetchProducts.jsx'
 import ProductCard from '../../../shared/ProductCard.jsx'
 import LoadingPage from '../../../shared/LoadingPage.jsx'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { updateProductsAmount } from '../../../features/products/productSlice.js'
 
 const FilteredProducts = (value) => {
   console.log('this is value', value)
 
+  const dispatch = useDispatch()
+
   const { data, isLoading, isError } = FetchProducts(value)
 
   console.log('this is data', data)
+
+  useEffect(() => {
+    dispatch(updateProductsAmount(data))
+  }, [data])
 
   if (isLoading) return <LoadingPage />
 

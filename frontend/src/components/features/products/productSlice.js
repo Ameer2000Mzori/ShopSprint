@@ -7,8 +7,8 @@ export const productCount = createSlice({
   },
   reducers: {
     updateProductsAmount: (state, action) => {
-      state.amount = action.payload.amount
-      console.log(state.amount)
+      state.amount = action.payload
+      console.log('this is from the slice of products', state.amount)
     },
   },
 })
