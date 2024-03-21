@@ -15,8 +15,8 @@ const FilteredProducts = (value) => {
   if (isError) return <div>There is an error...</div>
 
   return (
-    <div className="h-[100vh] w-[65vw] flex flex-col text-center items-start justify-normal">
-      <div className="w-[100%] h-[100%] flex flex-row flex-wrap gap-4 text-center items-center justify-center">
+    <div className="h-[100vh] w-[65vw] flex flex-col text-center items-start justify-center p-4">
+      <div className="w-[100%] h-[100%] flex flex-row flex-wrap gap-4 text-center items-start justify-center">
         {data.filteredItems ? (
           data.filteredItems.map((item) => (
             <Link key={item.id} to={`/product/${item.id}`}>
