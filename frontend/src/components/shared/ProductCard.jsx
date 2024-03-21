@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { styledCard } from '../shared/StyledComponents.jsx'
+import { StyledCard } from '../shared/StyledComponents.jsx'
 
-const ProductCard = () => {
+const ProductCard = ({ item }) => {
+  console.log(item)
   return (
     <>
       <Link key={item.id} to={`/product/${item.id}`}>

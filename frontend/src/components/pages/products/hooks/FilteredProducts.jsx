@@ -1,4 +1,6 @@
 import FetchProducts from './FetchProducts.jsx'
+import ProductCard from '../../../shared/ProductCard.jsx'
+import { Link } from 'react-router-dom'
 
 const FilteredProducts = (value) => {
   console.log('this is value', value)
@@ -16,17 +18,9 @@ const FilteredProducts = (value) => {
       <div className="w-[100%] h-[100%] flex flex-row flex-wrap gap-4 text-center items-center justify-center">
         {data.filteredItems ? (
           data.filteredItems.map((item) => (
-            <div className="w-[250px] h-[250px]" key={item.id}>
-              <img
-                className="h-[200px] w-[350px] bg-white rounded-lg object-cover"
-                src="https://via.placeholder.com/300x200"
-                alt=""
-              />
-              <h1>{item.title}</h1>
-              <h1>{item.company}</h1>
-              <p>{item.price}</p>
-              <p>{item.freeShipping ? 'yes' : 'no'}</p>
-            </div>
+            <Link key={item.id} to={`/product/${item.id}`}>
+              <ProductCard item={item} />
+            </Link>
           ))
         ) : (
           <div>There is no data</div>
