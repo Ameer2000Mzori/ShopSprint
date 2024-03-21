@@ -4,6 +4,7 @@ import {
   StyledSelectWrap,
   StyledShippingWrap,
 } from './StyledForm.jsx'
+import { useSelector } from 'react-redux'
 
 const FilterForm = ({
   searchTerm,
@@ -19,8 +20,9 @@ const FilterForm = ({
   newFreeShipping,
   setNewFreeShipping,
   filterProducts,
-  newData,
 }) => {
+  const newData = useSelector((state) => state.product.amount)
+
   return (
     <form className="h-[20vh] flex flex-col  text-center items-center justify-around gap-2  ">
       <div className="w-[90%] h-[70px] flex flex-row text-center items-center justify-evenly">
@@ -132,7 +134,7 @@ const FilterForm = ({
           />
         </StyledInputWrap>
 
-        <p>items found : {newData ? newData.length : '0'}</p>
+        <p>items found : {newData ? newData.filteredItems.length : '0'}</p>
       </div>
     </form>
   )
