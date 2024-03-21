@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import FilteredProducts from './hooks/FilteredProducts.jsx'
-
+import FilterForm from './component/FilterForm.jsx'
 const Products = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [newPrice, setNewPrice] = useState('')
@@ -38,7 +38,25 @@ const Products = () => {
 
   return (
     <div className="h-[100vh] flex flex-col text-center items-start justify-normal">
-      <form className="h-[20vh]">
+      <div className="h-[20vh]"></div>
+
+      <FilterForm
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        newPrice={newPrice}
+        setNewPrice={setNewPrice}
+        newCategory={newCategory}
+        setNewCategory={setNewCategory}
+        newCompany={newCompany}
+        setNewCompany={setNewCompany}
+        newSorting={newSorting}
+        setNewSorting={setNewSorting}
+        newFreeShipping={newFreeShipping}
+        setNewFreeShipping={setNewFreeShipping}
+        filterProducts={filterProducts}
+      ></FilterForm>
+
+      {/* <form className="h-[20vh]">
         <label htmlFor="searchTerm">search</label>
         <input
           value={searchTerm}
@@ -121,7 +139,7 @@ const Products = () => {
         >
           search
         </button>
-      </form>
+      </form> */}
       <div>
         <FilteredProducts value={newValue}></FilteredProducts>
       </div>
