@@ -29,8 +29,8 @@ export const StyledListsStyle = styled.li`
 `
 
 export const StyledCard = styled.div`
-  width: 250px;
-  height: 250px;
+  width: 300px;
+  height: 300px;
   display: flex;
   border-radius: 15px;
   flex-direction: column;

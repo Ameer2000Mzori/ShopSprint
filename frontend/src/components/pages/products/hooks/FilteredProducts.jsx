@@ -1,5 +1,6 @@
 import FetchProducts from './FetchProducts.jsx'
 import ProductCard from '../../../shared/ProductCard.jsx'
+import LoadingPage from '../../../shared/LoadingPage.jsx'
 import { Link } from 'react-router-dom'
 
 const FilteredProducts = (value) => {
@@ -9,7 +10,7 @@ const FilteredProducts = (value) => {
 
   console.log('this is data', data)
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <LoadingPage />
 
   if (isError) return <div>There is an error...</div>
 
