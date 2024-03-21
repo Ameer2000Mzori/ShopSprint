@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { StyledCard } from '../shared/StyledComponents.jsx'
 
 const ProductCard = ({ item }) => {
-  console.log(item)
   return (
     <>
       <Link key={item.id} to={`/product/${item.id}`}>
