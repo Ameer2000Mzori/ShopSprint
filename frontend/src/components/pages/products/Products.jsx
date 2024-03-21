@@ -26,6 +26,8 @@ const Products = () => {
     newSorting,
     newFreeShipping
   ) => {
+    newPrice >= 15 ? (newPrice = newPrice) : (newPrice = 150)
+
     setNewValue({
       searchTerm: searchTerm,
       price: Number(newPrice),
