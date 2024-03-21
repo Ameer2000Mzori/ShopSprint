@@ -12,7 +12,7 @@ const FilteredProducts = (value) => {
   if (isError) return <div>There is an error...</div>
 
   return (
-    <div className="h-[100vh] flex flex-col text-center items-start justify-normal">
+    <div className="h-[100vh] w-[65vw] flex flex-col text-center items-start justify-normal">
       {data.filteredItems ? (
         data.filteredItems.map((item) => (
           <div key={item.id}>
