@@ -259,9 +259,7 @@ export const fetchData = (req, res) => {
 export const getOneItem = (req, res) => {
   const id = req.params.id
   console.log('this is the id : ', id)
-
   const item = data.find((item) => item.id === Number(id))
-
   if (item) {
     res.status(200).json({ item, message: 'Item found successfully' })
   } else {
@@ -341,4 +339,27 @@ export const filterItems = (req, res) => {
   setTimeout(() => {
     res.status(200).json({ filteredItems, message: 'Items found successfully' })
   }, 1000)
+}
+
+// this is users list
+const users = [
+  {
+    id: 1,
+    name: '<NAME>',
+    email: '<EMAIL>',
+  },
+  {
+    id: 2,
+    name: '<NAME>',
+    email: '<EMAIL>',
+  },
+  {
+    id: 3,
+    name: '<NAME>',
+    email: '<EMAIL>',
+  },
+]
+
+export const usersList = (req, res) => {
+  res.send(users)
 }
