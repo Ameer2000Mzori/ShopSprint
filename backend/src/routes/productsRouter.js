@@ -11,7 +11,6 @@ const productsRouter = express.Router()
 // products routes
 productsRouter.get('/', homePage)
 productsRouter.get('/products', fetchData)
-
 productsRouter.get('/products/filter/items', filterItems)
 
 // product endpoints routes

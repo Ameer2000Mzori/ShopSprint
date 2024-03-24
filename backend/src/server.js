@@ -8,6 +8,7 @@ import 'dotenv/config'
 const app = express()
 app.use(morgan('dev'))
 
+// our routers
 app.use(productsRouter)
 app.use(userRouter)
 
