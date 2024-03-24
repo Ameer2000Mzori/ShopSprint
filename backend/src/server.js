@@ -9,10 +9,9 @@ const app = express()
 app.use(morgan('dev'))
 
 // our routers
-app.use(productsRouter)
-app.use(userRouter)
-
 app.use(express.json())
+app.use(userRouter)
+app.use(productsRouter)
 
 const PORT = process.env.PORT || 4000
 mongoConnect(() => {
