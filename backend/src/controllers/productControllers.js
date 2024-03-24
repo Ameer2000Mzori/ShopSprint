@@ -340,26 +340,3 @@ export const filterItems = (req, res) => {
     res.status(200).json({ filteredItems, message: 'Items found successfully' })
   }, 1000)
 }
-
-// this is users list
-const users = [
-  {
-    id: 1,
-    name: '<NAME>',
-    email: '<EMAIL>',
-  },
-  {
-    id: 2,
-    name: '<NAME>',
-    email: '<EMAIL>',
-  },
-  {
-    id: 3,
-    name: '<NAME>',
-    email: '<EMAIL>',
-  },
-]
-
-export const usersList = (req, res) => {
-  res.send(users)
-}

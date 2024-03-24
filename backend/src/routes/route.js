@@ -4,8 +4,7 @@ import {
   fetchData,
   getOneItem,
   filterItems,
-  usersList,
-} from '../controllers/controller.js'
+} from '../controllers/productControllers.js'
 
 const Router = express.Router()
 
@@ -14,9 +13,6 @@ Router.get('/', homePage)
 Router.get('/products', fetchData)
 
 Router.get('/products/filter/items', filterItems)
-
-// users routes
-Router.get('/userslist', usersList)
 
 export default Router
 
