@@ -6,7 +6,7 @@ import {
   filterItems,
 } from '../controllers/productControllers.js'
 
-const Router = express.Router()
+const productsRouter = express.Router()
 
 // products routes
 Router.get('/', homePage)
@@ -14,7 +14,7 @@ Router.get('/products', fetchData)
 
 Router.get('/products/filter/items', filterItems)
 
-export default Router
-
 // product endpoints routes
 Router.get('/:id', getOneItem)
+
+export default productsRouter

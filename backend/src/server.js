@@ -1,5 +1,6 @@
 import express from 'express'
-import Router from './routes/route.js'
+import productsRouter from './routes/route.js'
+import userRouter from './routes/userRoutes.js'
 import morgan from 'morgan'
 import mongoConnect from './db/db.js'
 import 'dotenv/config'
@@ -7,7 +8,8 @@ import 'dotenv/config'
 const app = express()
 app.use(morgan('dev'))
 
-app.use(Router)
+app.use(productsRouter)
+app.use(userRouter)
 
 app.use(express.json())
 
