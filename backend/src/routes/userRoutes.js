@@ -3,6 +3,6 @@ import { createUser } from '../controllers/userControllers.js'
 
 const userRouter = express.Router()
 
-Router.post('/createaccount', createUser)
+userRouter.post('/createuser', createUser)
 
 export default userRouter

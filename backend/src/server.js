@@ -1,5 +1,5 @@
 import express from 'express'
-import productsRouter from './routes/route.js'
+import productsRouter from './routes/productsRouter.js'
 import userRouter from './routes/userRoutes.js'
 import morgan from 'morgan'
 import mongoConnect from './db/db.js'

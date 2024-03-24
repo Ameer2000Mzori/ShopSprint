@@ -9,12 +9,12 @@ import {
 const productsRouter = express.Router()
 
 // products routes
-Router.get('/', homePage)
-Router.get('/products', fetchData)
+productsRouter.get('/', homePage)
+productsRouter.get('/products', fetchData)
 
-Router.get('/products/filter/items', filterItems)
+productsRouter.get('/products/filter/items', filterItems)
 
 // product endpoints routes
-Router.get('/:id', getOneItem)
+productsRouter.get('/:id', getOneItem)
 
 export default productsRouter
