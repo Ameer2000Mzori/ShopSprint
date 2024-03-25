@@ -7,6 +7,7 @@ import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { addToCart } from '../../features/cart/cartSlice.js'
 import uniqid from 'uniqid'
+import LoadingPage from '../../shared/LoadingPage.jsx'
 
 const SelectedProduct = () => {
   const [newColor, setNewColor] = useState('')
@@ -43,7 +44,13 @@ const SelectedProduct = () => {
     queryFn: () => axios.get(`/${id}`).then((res) => res.data),
   })
 
-  if (isLoading) return <div> loading....</div>
+  if (isLoading)
+    return (
+      <div>
+        {' '}
+        <LoadingPage />
+      </div>
+    )
 
   if (isError) return <div> there is an error....</div>
 
