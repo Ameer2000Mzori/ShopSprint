@@ -44,13 +44,7 @@ const SelectedProduct = () => {
     queryFn: () => axios.get(`/${id}`).then((res) => res.data),
   })
 
-  if (isLoading)
-    return (
-      <div>
-        {' '}
-        <LoadingPage />
-      </div>
-    )
+  if (isLoading) return <LoadingPage />
 
   if (isError) return <div> there is an error....</div>
 

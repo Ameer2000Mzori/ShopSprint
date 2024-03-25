@@ -1,4 +1,20 @@
-// import { User } from '../modules/userSchema.js'
+import { User } from '../modules/userSchema.js'
+
+export const getUsers = (req, res) => {
+  User.find()
+    .populate('articles')
+    .sort({
+      createdAt: -1,
+    })
+    .then((result) => {
+      console.log(result)
+      res.status(200).json(result)
+    })
+    .catch((err) => {
+      console.log(err)
+      res.status(500).json({ error: 'An error occurred' })
+    })
+}
 
 export const createUser = (req, res) => {
   const { username, email, password } = req.body
