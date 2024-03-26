@@ -1,4 +1,5 @@
 import express from 'express'
+import { guard } from '../utils/token.js'
 import {
   getOrders,
   getUserOrder,
@@ -8,6 +9,6 @@ import {
 const orderRouter = express.Router()
 
 orderRouter.get('/orders', getOrders)
-orderRouter.post('/addorder', addOrder)
+orderRouter.post('/addorder', guard, addOrder)
 
 orderRouter.get('/userorder/:id', getUserOrder)
