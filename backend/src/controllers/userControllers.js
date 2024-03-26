@@ -1,4 +1,5 @@
 import { User } from '../modules/userSchema.js'
+import { hashPassword } from '../utils/hashing.js'
 
 export const getUsers = (req, res) => {
   User.find()
@@ -31,11 +32,12 @@ export const createUser = async (req, res) => {
     }
 
     // Create a new user using the correct field names
+    let new_pwd = await hashPassword(password)
     const newAccount = new User({
       Name: name,
       userName: username,
       email,
-      password,
+      password: new_pwd,
     })
 
     // Save the new user to the database
