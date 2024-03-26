@@ -17,36 +17,42 @@ export const getUsers = (req, res) => {
 }
 
 export const createUser = async (req, res) => {
-  const { username, email, password } = req.body
+  const { name, username, email, password } = req.body
 
   try {
     const user = await User.findOne({
-      $or: [{ username }, { email }],
+      $or: [{ userName: username }, { email }],
     })
-    if (user)
+
+    if (user) {
       return res.status(400).json({
-        message: 'user already exist',
+        message: 'User already exists',
       })
-    // let new_pwd = await hashPassword(password)
-    newAccount = new User({
-      username,
+    }
+
+    // Create a new user using the correct field names
+    const newAccount = new User({
+      Name: name,
+      userName: username,
       email,
-      password: password,
+      password,
     })
+
+    // Save the new user to the database
     await newAccount.save()
+
     console.log(newAccount)
-    // const token = jwt.sign({ id: newAccount._id }, process.env.SECRET, {
-    //   expiresIn: 3600,
-    // }) // 1 hour
+
     res.status(200).json({
-      message: 'user created successfully',
+      message: 'User created successfully',
       User: newAccount,
-      // token,
     })
-  } catch {
-    // if (newAccount?._id) await newAccount.deleteOne({ _id: newAccount._id })
+  } catch (err) {
+    console.error(err)
+
     res.status(500).json({
       message: 'Server failed',
+      error: err.message, // Provide more specific error message
     })
   }
 }
