@@ -1,6 +1,7 @@
 import express from 'express'
 import productsRouter from './routes/productsRouter.js'
 import userRouter from './routes/userRoutes.js'
+import orderRouter from './routes/orderRouter.js'
 import morgan from 'morgan'
 import mongoConnect from './db/db.js'
 import 'dotenv/config'
@@ -11,6 +12,7 @@ app.use(morgan('dev'))
 // our routers
 app.use(express.json())
 app.use(userRouter)
+app.use(orderRouter)
 app.use(productsRouter)
 
 const PORT = process.env.PORT || 4000
