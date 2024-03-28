@@ -18,7 +18,7 @@ export const getOrders = (req, res) => {
 export const getUserOrder = async (req, res) => {}
 
 export const addOrder = async (req, res) => {
-  const { id, name, price } = req.body
+  const { , name, price } = req.body
   console.log(req.user)
 
   try {
@@ -28,8 +28,15 @@ export const addOrder = async (req, res) => {
     // Create a new article
     const newArticle = new Article({
       author: user.id,
-      title,
-      text,
+      id,
+      name,
+      price,
+      amount,
+      category,
+      company,
+      freeShipping,
+      color,
+      total,
     })
 
     // Save the new article
@@ -50,3 +57,46 @@ export const addOrder = async (req, res) => {
     res.status(500).json({ error: 'An error occurred' })
   }
 }
+
+// author: {
+//   type: Schema.Types.ObjectId,
+//   ref: 'User',
+//   required: true,
+// },
+// id: {
+//   type: Number,
+//   required: true,
+// },
+// name: {
+//   type: String,
+//   required: true,
+// },
+// price: {
+//   type: Number,
+//   required: true,
+// },
+// amount: {
+//   type: Number,
+//   required: true,
+// },
+// category: {
+//   type: String,
+//   required: true,
+// },
+// company: {
+//   type: String,
+//   required: true,
+// },
+// freeShipping: {
+//   type: Number,
+//   required: true,
+// },
+// color: {
+//   type: String,
+//   required: true,
+// },
+// total: {
+//   type: Number,
+//   required: true,
+// },
+// })
