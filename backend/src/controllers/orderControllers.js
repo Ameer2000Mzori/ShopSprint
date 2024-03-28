@@ -15,7 +15,17 @@ export const getOrders = (req, res) => {
     })
 }
 
-export const getUserOrder = async (req, res) => {}
+export const getUserOrder = async (req, res) => {
+  try {
+    const userOrders = await Order.find({ author: req.user.id }).populate(
+      'author'
+    )
+    res.status(200).json(userOrders)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ error: 'An error occurred' })
+  }
+}
 
 export const addOrder = async (req, res) => {
   const {
@@ -30,11 +40,23 @@ export const addOrder = async (req, res) => {
     total,
   } = req.body
 
+  console.log(
+    name,
+    price,
+    amount,
+    category,
+    company,
+    freeShipping,
+    color,
+    id,
+    total
+  )
+
   try {
     // finding user by id
     const user = await User.findById(req.user.id)
 
-    // Create a new article
+    // Create a new order
     const newOrder = new Order({
       author: user.id,
       name,
@@ -56,8 +78,8 @@ export const addOrder = async (req, res) => {
     await user.save()
 
     res.status(200).json({
-      message: 'Article created successfully',
-      article: newArticle,
+      message: 'Order created successfully',
+      order: newOrder,
     })
   } catch (err) {
     console.log(err)

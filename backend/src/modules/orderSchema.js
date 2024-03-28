@@ -36,7 +36,7 @@ const orderSchema = new Schema({
     required: true,
   },
   id: {
-    type: Number,
+    type: String,
     required: true,
   },
   total: {
