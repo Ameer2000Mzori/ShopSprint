@@ -35,7 +35,7 @@ export const addOrder = async (req, res) => {
     const user = await User.findById(req.user.id)
 
     // Create a new article
-    const newArticle = new Article({
+    const newOrder = new Order({
       author: user.id,
       name,
       price,
@@ -48,11 +48,9 @@ export const addOrder = async (req, res) => {
       total,
     })
 
-    // Save the new article
-    await newArticle.save()
+    await newOrder.save()
 
-    // Push the newly created article to the user's articles array
-    user.articles.push(newArticle)
+    user.orderList.push(newOrder)
 
     //  update the user
     await user.save()
@@ -66,46 +64,3 @@ export const addOrder = async (req, res) => {
     res.status(500).json({ error: 'An error occurred' })
   }
 }
-
-// author: {
-//   type: Schema.Types.ObjectId,
-//   ref: 'User',
-//   required: true,
-// },
-// id: {
-//   type: Number,
-//   required: true,
-// },
-// name: {
-//   type: String,
-//   required: true,
-// },
-// price: {
-//   type: Number,
-//   required: true,
-// },
-// amount: {
-//   type: Number,
-//   required: true,
-// },
-// category: {
-//   type: String,
-//   required: true,
-// },
-// company: {
-//   type: String,
-//   required: true,
-// },
-// freeShipping: {
-//   type: Number,
-//   required: true,
-// },
-// color: {
-//   type: String,
-//   required: true,
-// },
-// total: {
-//   type: Number,
-//   required: true,
-// },
-// })
