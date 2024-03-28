@@ -18,8 +18,17 @@ export const getOrders = (req, res) => {
 export const getUserOrder = async (req, res) => {}
 
 export const addOrder = async (req, res) => {
-  const { , name, price } = req.body
-  console.log(req.user)
+  const {
+    name,
+    price,
+    amount,
+    category,
+    company,
+    freeShipping,
+    color,
+    id,
+    total,
+  } = req.body
 
   try {
     // finding user by id
@@ -28,7 +37,6 @@ export const addOrder = async (req, res) => {
     // Create a new article
     const newArticle = new Article({
       author: user.id,
-      id,
       name,
       price,
       amount,
@@ -36,6 +44,7 @@ export const addOrder = async (req, res) => {
       company,
       freeShipping,
       color,
+      id,
       total,
     })
 

@@ -6,10 +6,7 @@ const orderSchema = new Schema({
     ref: 'User',
     required: true,
   },
-  id: {
-    type: Number,
-    required: true,
-  },
+
   name: {
     type: String,
     required: true,
@@ -36,6 +33,10 @@ const orderSchema = new Schema({
   },
   color: {
     type: String,
+    required: true,
+  },
+  id: {
+    type: Number,
     required: true,
   },
   total: {
