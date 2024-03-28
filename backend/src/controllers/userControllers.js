@@ -1,6 +1,6 @@
 import { User } from '../modules/userSchema.js'
 import jwt from 'jsonwebtoken'
-import { hashPassword } from '../utils/hashing.js'
+import { hashPassword, checkPwd } from '../utils/hashing.js'
 import 'dotenv/config'
 
 export const getUsers = (req, res) => {
@@ -75,4 +75,20 @@ export const createUser = async (req, res) => {
       message: 'Server failed',
     })
   }
+}
+
+// user login
+
+export const login = async (req, res) => {
+  const { email, password } = req.body
+  const user = await User.findOne({ email })
+  console.log(user)
+  if (user == null || !(await checkPwd(password, user.password)))
+    return res.status(400).json({ message: 'Username or Password is wrong ' })
+  const token = jwt.sign({ id: user._id }, process.env.SECRET, {
+    expiresIn: 3600,
+  })
+  return res
+    .status(200)
+    .json({ message: 'logged in successfully ', data: user, token })
 }
