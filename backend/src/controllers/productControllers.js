@@ -259,9 +259,7 @@ export const fetchData = (req, res) => {
 export const getOneItem = (req, res) => {
   const id = req.params.id
   console.log('this is the id : ', id)
-
   const item = data.find((item) => item.id === Number(id))
-
   if (item) {
     res.status(200).json({ item, message: 'Item found successfully' })
   } else {
