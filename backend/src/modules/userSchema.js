@@ -7,7 +7,8 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   orderList: [
     {
-      product: { type: Schema.Types.ObjectId, ref: 'Order' },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Order',
     },
   ],
 })
