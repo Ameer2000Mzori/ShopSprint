@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+  StyledButton,
   StyledForm,
   StyledFormWrap,
   StyledLabelInput,
@@ -34,9 +35,9 @@ const LoginPage = () => {
             id="exampleInputPassword1"
           />
         </StyledLabelInputWrap>
-        <button type="submit" className="btn btn-primary">
+        <StyledButton type="submit" className="btn btn-primary">
           Submit
-        </button>
+        </StyledButton>
       </StyledForm>
     </StyledFormWrap>
   )

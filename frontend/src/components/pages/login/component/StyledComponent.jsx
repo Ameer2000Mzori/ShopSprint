@@ -19,6 +19,7 @@ export const StyledForm = styled.form`
   align-items: center;
   justify-content: center;
   gap: 10px;
+  border-radius: 15px;
 `
 
 export const StyledLabelInputWrap = styled.form`
@@ -32,4 +33,18 @@ export const StyledLabelInputWrap = styled.form`
 export const StyledLabelInput = styled.label`
   color: #fff;
   font-size: 20px;
+`
+
+export const StyledButton = styled.button`
+  width: 150px;
+  height: 35px;
+  border-radius: 5px;
+  background-color: #821431;
+  color: #fff;
+  transition: all 500ms ease-in-out;
+
+  &:hover {
+    background-color: #fff;
+    color: #021431;
+  }
 `
