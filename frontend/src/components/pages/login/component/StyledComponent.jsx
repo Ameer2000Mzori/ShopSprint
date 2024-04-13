@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const StyledFormWrap = styled.form`
+export const StyledFormWrap = styled.div`
   height: 500px;
   display: flex;
   flex-direction: column;
@@ -22,7 +22,7 @@ export const StyledForm = styled.form`
   border-radius: 15px;
 `
 
-export const StyledLabelInputWrap = styled.form`
+export const StyledLabelInputWrap = styled.div`
   display: flex;
   flex-direction: column;
   text-align: start;
