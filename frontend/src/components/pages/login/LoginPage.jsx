@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import LoginLogic from './component/LoginLogic.jsx'
 import {
   StyledButton,
@@ -7,44 +7,25 @@ import {
   StyledLabelInput,
   StyledLabelInputWrap,
 } from './component/StyledComponent.jsx'
-import { useFormik } from 'formik'
-import { validationSchemaLogin } from '../../shared/validationSchema.js'
 
 const LoginPage = () => {
-  LoginLogic({
-    email: 'thisIsTestAmeen',
-    password: 'thisIsTestPass',
-  })
-
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-    onSubmit: (values, { resetForm }) => {
-      console.log('this is the values', values)
-
-      resetForm()
-    },
-    validationSchema: validationSchemaLogin,
-  })
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const handleLogin = () => {
+    const result = LoginLogic(email, password)
+    console.log('this is result return ', result)
+  }
 
   return (
     <StyledFormWrap>
-      <StyledForm
-        onSubmit={(e) => {
-          e.preventDefault()
-          formik.handleSubmit()
-        }}
-      >
+      <StyledForm onClick={(e) => e.preventDefault()}>
         <StyledLabelInputWrap>
           <StyledLabelInput htmlFor="email">Email address</StyledLabelInput>
           <input
             type="text"
             id="email"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.email}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </StyledLabelInputWrap>
         <StyledLabelInputWrap>
@@ -52,12 +33,16 @@ const LoginPage = () => {
           <input
             type="password"
             id="password"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.password}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </StyledLabelInputWrap>
-        <StyledButton type="submit">Submit</StyledButton>
+        <StyledButton
+          type="submit"
+          onClick={(e) => handleLogin(email, password)}
+        >
+          Submit
+        </StyledButton>
       </StyledForm>
     </StyledFormWrap>
   )

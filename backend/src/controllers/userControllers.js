@@ -83,7 +83,7 @@ export const userLogin = async (req, res) => {
   const { email, password } = req.body
   console.log('User login:', email, password)
 
-  const user = await User.findOne({ email })
+  const user = await User.findOne({ email }).populate('orderList')
   console.log(user)
   if (user == null || !(await checkPwd(password, user.password)))
     return res.status(400).json({ message: 'Username or Password is wrong ' })

@@ -7,7 +7,7 @@ const LoginLogic = (value) => {
     queryFn: () => axios.post('/login', value).then((res) => res.data),
   })
 
-  console.log('result: ', result)
+  return result
 }
 
 export default LoginLogic
