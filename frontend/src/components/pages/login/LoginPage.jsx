@@ -1,4 +1,5 @@
 import React from 'react'
+import LoginLogic from './component/LoginLogic.jsx'
 import {
   StyledButton,
   StyledForm,
@@ -10,6 +11,11 @@ import { useFormik } from 'formik'
 import { validationSchemaLogin } from '../../shared/validationSchema.js'
 
 const LoginPage = () => {
+  LoginLogic({
+    email: 'thisIsTestAmeen',
+    password: 'thisIsTestPass',
+  })
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -17,10 +23,12 @@ const LoginPage = () => {
     },
     onSubmit: (values, { resetForm }) => {
       console.log('this is the values', values)
+
       resetForm()
     },
     validationSchema: validationSchemaLogin,
   })
+
   return (
     <StyledFormWrap>
       <StyledForm

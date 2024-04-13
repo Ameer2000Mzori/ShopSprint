@@ -81,6 +81,8 @@ export const createUser = async (req, res) => {
 
 export const userLogin = async (req, res) => {
   const { email, password } = req.body
+  console.log('User login:', email, password)
+
   const user = await User.findOne({ email })
   console.log(user)
   if (user == null || !(await checkPwd(password, user.password)))
