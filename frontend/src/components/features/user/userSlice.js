@@ -12,6 +12,7 @@ export const userInfo = createSlice({
   reducers: {
     updateUser: (state, action) => {
       state.user = action.payload
+      // console.log(` this is it => ${state}`)
     },
   },
 })
