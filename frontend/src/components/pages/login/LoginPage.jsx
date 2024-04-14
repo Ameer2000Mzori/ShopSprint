@@ -1,3 +1,4 @@
+// LoginPage.jsx
 import React, { useState } from 'react'
 import LoginLogic from './component/LoginLogic.jsx'
 import {
@@ -11,14 +12,19 @@ import {
 const LoginPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const handleLogin = () => {
-    const result = LoginLogic(email, password)
-    console.log('this is result return ', result)
+  const [result, setResult] = useState({})
+
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    const loginResult = await LoginLogic(email, password)
+    setResult(loginResult)
   }
+
+  console.log('this is result ', result)
 
   return (
     <StyledFormWrap>
-      <StyledForm onClick={(e) => e.preventDefault()}>
+      <StyledForm onSubmit={handleLogin}>
         <StyledLabelInputWrap>
           <StyledLabelInput htmlFor="email">Email address</StyledLabelInput>
           <input
@@ -37,12 +43,7 @@ const LoginPage = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </StyledLabelInputWrap>
-        <StyledButton
-          type="submit"
-          onClick={(e) => handleLogin(email, password)}
-        >
-          Submit
-        </StyledButton>
+        <StyledButton type="submit">Submit</StyledButton>
       </StyledForm>
     </StyledFormWrap>
   )
