@@ -1,7 +1,6 @@
-import * as Yup from 'yup'
+// import * as Yup from 'yup'
 
-const validationSchema = Yup.object().shape({
-  searchTerm: Yup.string(),
-})
-
-export default validationSchema
+// export const validationSchemaLogin = Yup.object().shape({
+//   email: Yup.string().required('Email is required'),
+//   password: Yup.string().required('Password is required'),
+// })

@@ -6,7 +6,7 @@ const ProductNav = () => {
       <div className="h-[10vh] flex flex-col text-center items-start justify-center pl-[20rem] m-4">
         <div className="w-[250px] h-[50%] flex flex-row text-center items-center justify-center ga-2">
           <p>
-            home <n> > </n>
+            home
             <Link to="/products">products</Link>
           </p>
         </div>
