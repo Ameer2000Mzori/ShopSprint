@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const StyledFormWrap = styled.div`
-  height: 500px;
+  min-height: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,7 +11,8 @@ export const StyledFormWrap = styled.div`
 `
 export const StyledForm = styled.form`
   background-color: #021431;
-  height: 175px;
+  min-height: 275px;
+  max-height: 450px;
   width: 500px;
   display: flex;
   flex-direction: column;
