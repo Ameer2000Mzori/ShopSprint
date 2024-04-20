@@ -6,14 +6,25 @@ import {
   StyledLabelInput,
   StyledLabelInputWrap,
 } from '../login/component/StyledComponent'
+import RegisterLogic from './hooks/RegisterLogic'
 
 const Register = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  const { mutate, result } = RegisterLogic()
+
+  const handleSubmit = (e, name, password, email) => {
+    e.preventDefault()
+    console.log('this data got', name, password, email)
+    mutate({ name, password, email })
+  }
+
+  console.log(result)
   return (
     <StyledFormWrap>
-      <StyledForm>
+      <StyledForm onSubmit={(e) => handleSubmit(e, name, password, email)}>
         <StyledLabelInputWrap>
           <StyledLabelInput
             htmlFor="name"
