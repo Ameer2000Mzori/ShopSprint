@@ -15,45 +15,46 @@ const Register = () => {
 
   const { mutate, result } = RegisterLogic()
 
-  const handleSubmit = (e, name, password, email) => {
-    e.preventDefault()
-    console.log('this data got', name, password, email)
-    mutate({ name, password, email })
+  const handleSubmit = () => {
+    console.log('this data got', name, email, password)
+    if (name && email && password) mutate({ name, password, email })
   }
 
   console.log(result)
   return (
     <StyledFormWrap>
-      <StyledForm onSubmit={(e) => handleSubmit(e, name, password, email)}>
+      <StyledForm
+        onSubmit={(e) => {
+          e.preventDefault()
+          handleSubmit(name, email, password)
+        }}
+      >
         <StyledLabelInputWrap>
-          <StyledLabelInput
-            htmlFor="name"
+          <StyledLabelInput htmlFor="name">Name</StyledLabelInput>
+          <input
+            type="text"
+            id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-          >
-            Name
-          </StyledLabelInput>
-          <input type="text" id="name" />
+          />
         </StyledLabelInputWrap>
         <StyledLabelInputWrap>
-          <StyledLabelInput
-            htmlFor="email"
+          <StyledLabelInput htmlFor="email">Email address</StyledLabelInput>
+          <input
+            type="text"
+            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-          >
-            Email address
-          </StyledLabelInput>
-          <input type="text" id="email" />
+          />
         </StyledLabelInputWrap>
         <StyledLabelInputWrap>
-          <StyledLabelInput
-            htmlFor="password"
+          <StyledLabelInput htmlFor="password">Password</StyledLabelInput>
+          <input
+            type="password"
+            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          >
-            Password
-          </StyledLabelInput>
-          <input type="password" id="password" />
+          />
         </StyledLabelInputWrap>
         <StyledButton type="submit">Submit</StyledButton>
       </StyledForm>
