@@ -12,15 +12,15 @@ import {
 const LoginPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [result, setResult] = useState({})
 
-  const handleLogin = async (e) => {
+  const { mutate, isPending, isError, data } = LoginLogic()
+
+  const handleLogin = (e) => {
     e.preventDefault()
-    const loginResult = await LoginLogic(email, password)
-    setResult(loginResult)
+    mutate(email, password)
   }
 
-  console.log('this is result ', result)
+  console.log('this is result ', isPending, isError, data)
 
   return (
     <StyledFormWrap>
