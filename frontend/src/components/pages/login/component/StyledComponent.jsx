@@ -12,15 +12,16 @@ export const StyledFormWrap = styled.div`
 export const StyledForm = styled.form`
   background-color: #021431;
   min-height: 275px;
-  max-height: 450px;
+  max-height: 850px;
   width: 500px;
   display: flex;
   flex-direction: column;
   text-align: center;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
   border-radius: 15px;
+  padding: 15px;
 `
 
 export const StyledLabelInputWrap = styled.div`

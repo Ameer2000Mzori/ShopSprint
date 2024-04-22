@@ -21,11 +21,11 @@ const Register = () => {
     mutate({ name, username: userName, email, password })
   }
 
-  console.log('this is result', isPending, isError, data)
+  if (isPending) return <div>isPending...</div>
 
   if (isError) return <div>error...</div>
 
-  if (isPending) return <div>isPending...</div>
+  console.log('data', data)
 
   return (
     <StyledFormWrap>
