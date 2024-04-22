@@ -1,13 +1,12 @@
 import { useMutation } from '@tanstack/react-query'
-import axios from 'axios'
+// import axios from 'axios'
 
-const useRegister = () => {
-  const { mutate, ...result } = useMutation(({ name, password, email }) => {
-    return axios.post('/register', {
-      name,
-      password,
-      email,
-    })
+const useRegister = (data) => {
+  console.log('this is data', data)
+
+  const { mutate, ...result } = useMutation((Input) => {
+    console.log(' info we got ', Input)
+    // axios.post('/register', { name, password, email })
   })
 
   return { mutate, ...result }

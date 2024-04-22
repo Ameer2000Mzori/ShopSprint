@@ -17,10 +17,11 @@ const Register = () => {
 
   const handleSubmit = () => {
     console.log('this data got', name, email, password)
-    if (name && email && password) mutate({ name, password, email })
+
+    mutate('hey')
   }
 
-  console.log(result)
+  console.log('this is result', result)
   return (
     <StyledFormWrap>
       <StyledForm
