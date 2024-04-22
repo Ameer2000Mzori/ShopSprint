@@ -23,6 +23,8 @@ const Register = () => {
 
   if (isPending) return <div>isPending...</div>
 
+  if (isError) console.log('there is a error ')
+
   console.log('after everything', isPending, isError, data)
 
   return (
@@ -72,6 +74,7 @@ const Register = () => {
         {isError?.response?.data?.message && (
           <div className="text-white">{isError?.response?.data?.message}</div>
         )}
+        {data?.message && <div className="text-white">{data?.message}</div>}
         <StyledButton type="submit">Submit</StyledButton>
       </StyledForm>
     </StyledFormWrap>
