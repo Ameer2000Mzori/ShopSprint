@@ -23,9 +23,7 @@ const Register = () => {
 
   if (isPending) return <div>isPending...</div>
 
-  if (isError) return <div>error...</div>
-
-  console.log('data', data)
+  console.log('after everything', isPending, isError, data)
 
   return (
     <StyledFormWrap>
@@ -71,6 +69,9 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </StyledLabelInputWrap>
+        {isError?.response?.data?.message && (
+          <div className="text-white">{isError?.response?.data?.message}</div>
+        )}
         <StyledButton type="submit">Submit</StyledButton>
       </StyledForm>
     </StyledFormWrap>
