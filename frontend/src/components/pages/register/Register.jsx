@@ -10,18 +10,23 @@ import RegisterLogic from './hooks/RegisterLogic'
 
 const Register = () => {
   const [name, setName] = useState('')
+  const [userName, setUserName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const { mutate, result } = RegisterLogic()
+  const { mutate, isPending, isError, data } = RegisterLogic()
 
   const handleSubmit = () => {
     console.log('this data got', name, email, password)
-
-    mutate('hey')
+    mutate({ name, userName, email, password })
   }
 
-  console.log('this is result', result)
+  console.log('this is result', isPending, isError, data)
+
+  if (isError) return <div>error...</div>
+
+  if (isPending) return <div>isPending...</div>
+
   return (
     <StyledFormWrap>
       <StyledForm
@@ -37,6 +42,15 @@ const Register = () => {
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+          />
+        </StyledLabelInputWrap>
+        <StyledLabelInputWrap>
+          <StyledLabelInput htmlFor="username">User Name</StyledLabelInput>
+          <input
+            type="text"
+            id="username"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
           />
         </StyledLabelInputWrap>
         <StyledLabelInputWrap>

@@ -1,15 +1,18 @@
 import { useMutation } from '@tanstack/react-query'
-// import axios from 'axios'
+import axios from 'axios'
 
-const useRegister = (data) => {
-  console.log('this is data', data)
-
-  const { mutate, ...result } = useMutation((Input) => {
-    console.log(' info we got ', Input)
-    // axios.post('/register', { name, password, email })
+const useRegister = () => {
+  const { mutate, isPending, isError, data } = useMutation({
+    mutationFn: (name, userName, email, password) => {
+      console.log(' info we got ', name, password, email)
+      axios
+        .post('/register', { name, username: userName, password, email })
+        .then((result) => result.data)
+        .catch((error) => console.error(error))
+    },
   })
 
-  return { mutate, ...result }
+  return { mutate, isPending, isError, data }
 }
 
 export default useRegister
