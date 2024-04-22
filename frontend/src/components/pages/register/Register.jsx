@@ -18,7 +18,7 @@ const Register = () => {
 
   const handleSubmit = () => {
     console.log('this data got', name, email, password)
-    mutate({ name, userName, email, password })
+    mutate({ name, username: userName, email, password })
   }
 
   console.log('this is result', isPending, isError, data)

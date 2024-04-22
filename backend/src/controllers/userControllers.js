@@ -22,7 +22,7 @@ export const getUsers = (req, res) => {
 export const createUser = async (req, res) => {
   const { name, username, email, password } = req.body
 
-  console.log('info got from frontend ; ', name, username, email, password)
+  console.log('info got from frontend ', name, username, email, password)
 
   let newAccount // Define newAccount using let for better error handling
 

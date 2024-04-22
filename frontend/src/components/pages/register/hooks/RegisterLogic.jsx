@@ -3,10 +3,10 @@ import axios from 'axios'
 
 const useRegister = () => {
   const { mutate, isPending, isError, data } = useMutation({
-    mutationFn: (name, userName, email, password) => {
+    mutationFn: ({ name, username, email, password }) => {
       console.log(' info we got ', name, password, email)
       axios
-        .post('/register', { name, username: userName, password, email })
+        .post('/register', { name, username, password, email })
         .then((result) => result.data)
         .catch((error) => console.error(error))
     },
