@@ -6,7 +6,7 @@ const LoginLogic = () => {
     mutationFn: ({ email, password }) => {
       console.log(' info we got ', email, password)
       return axios
-        .post('/register', { email, password })
+        .post('/login', { email, password })
         .then((result) => result.data)
         .catch((error) => {
           console.log(' error we got ', error)
