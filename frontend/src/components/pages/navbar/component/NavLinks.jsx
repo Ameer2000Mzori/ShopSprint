@@ -51,7 +51,6 @@ const NavLinks = () => {
             className="w-[100%] h-[100%] text-center items-center flex flex-col justify-center overflow-hidden"
             to="/profile"
           >
-            {' '}
             profile
           </Link>
         </li>
