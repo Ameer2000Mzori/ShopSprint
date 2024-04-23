@@ -8,11 +8,12 @@ import {
   StyledLabelInput,
   StyledLabelInputWrap,
 } from './component/StyledComponent.jsx'
+import useStoreToken from '../../shared/useStoreToken.jsx'
 
 const LoginPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
+  const saveData = useStoreToken()
   const { mutate, isPending, isError, data } = LoginLogic()
 
   const handleLogin = (e) => {
@@ -21,6 +22,10 @@ const LoginPage = () => {
   }
 
   console.log('this is result ', isPending, isError, data)
+
+  if (data && !isError) {
+    saveData({ ...data.data, token: data.token })
+  }
 
   return (
     <StyledFormWrap>
