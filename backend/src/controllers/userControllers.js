@@ -15,7 +15,9 @@ export const getUsers = (req, res) => {
     })
     .catch((err) => {
       console.log(err)
-      res.status(500).json({ error: 'An error occurred' })
+      res.status(500).json({
+        error: 'An error occurred',
+      })
     })
 }
 
@@ -29,11 +31,20 @@ export const createUser = async (req, res) => {
   try {
     // Check if user with the same username or email already exists
     const user = await User.findOne({
-      $or: [{ userName: username }, { email }],
+      $or: [
+        {
+          userName: username,
+        },
+        {
+          email,
+        },
+      ],
     })
 
     if (user) {
-      return res.status(400).json({ message: 'User already exists' })
+      return res.status(400).json({
+        message: 'User already exists',
+      })
     }
 
     // Hash the password
@@ -51,9 +62,15 @@ export const createUser = async (req, res) => {
     await newAccount.save()
 
     // Generate JWT token for the new user
-    const token = jwt.sign({ id: newAccount._id }, process.env.SECRET, {
-      expiresIn: 3600, // 1 hour
-    })
+    const token = jwt.sign(
+      {
+        id: newAccount._id,
+      },
+      process.env.SECRET,
+      {
+        expiresIn: 3600, // 1 hour
+      }
+    )
 
     console.log('User created successfully:', newAccount)
 
@@ -68,7 +85,10 @@ export const createUser = async (req, res) => {
   } catch (error) {
     console.error('Error creating user:', error)
 
-    if (newAccount?._id) await newAccount.deleteOne({ _id: newAccount._id })
+    if (newAccount?._id)
+      await newAccount.deleteOne({
+        _id: newAccount._id,
+      })
 
     // Respond with error message
     res.status(500).json({
@@ -86,11 +106,15 @@ export const userLogin = async (req, res) => {
   const user = await User.findOne({ email }).populate('orderList')
   console.log(user)
   if (user == null || !(await checkPwd(password, user.password)))
-    return res.status(400).json({ message: 'Username or Password is wrong ' })
+    return res.status(400).json({
+      message: 'Username or Password is wrong ',
+    })
   const token = jwt.sign({ id: user._id }, process.env.SECRET, {
     expiresIn: 3600,
   })
-  return res
-    .status(200)
-    .json({ message: 'logged in successfully ', data: user, token })
+  return res.status(200).json({
+    message: 'logged in successfully ',
+    data: user,
+    token,
+  })
 }
