@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { updateUser } from '../features/user/userSlice'
+import { loginUser } from '../features/user/userSlice'
 import { useNavigate } from 'react-router-dom'
 
 const useStoreToken = () => {
@@ -7,7 +7,7 @@ const useStoreToken = () => {
   const navigate = useNavigate()
   const saveData = (data) => {
     console.log('data in token file: ', data)
-    dispatch(updateUser(data))
+    dispatch(loginUser(data))
 
     if (data) navigate('/home')
   }

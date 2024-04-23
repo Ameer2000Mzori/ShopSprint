@@ -14,7 +14,7 @@ export const userInfo = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    updateUser: (state, action) => {
+    loginUser: (state, action) => {
       const user = {
         name: action.payload.name,
         username: action.payload.userName,
@@ -25,9 +25,19 @@ export const userInfo = createSlice({
       localStorage.setItem('user', JSON.stringify(user))
       // return user
     },
+
+    logOutUser: () => {
+      localStorage.removeItem('user')
+      return {
+        name: null,
+        username: null,
+        email: null,
+        token: null,
+      }
+    },
   },
 })
 
-export const { updateUser } = userInfo.actions
+export const { loginUser } = userInfo.actions
 
 export default userInfo.reducer
