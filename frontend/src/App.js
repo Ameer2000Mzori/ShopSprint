@@ -9,6 +9,7 @@ import UtilityBar from './components/pages/navbar/component/UtilityBar.jsx'
 import SelectedProduct from './components/pages/selectedproduct/SelectedProduct.jsx'
 import LoginPage from './components/pages/login/LoginPage.jsx'
 import Register from './components/pages/register/Register.jsx'
+import ProfilePage from './components/pages/profilePage/ProfilePage.jsx'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/product/:id" element={<SelectedProduct />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </Router>
   )

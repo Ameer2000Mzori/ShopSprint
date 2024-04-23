@@ -1,5 +1,5 @@
 // LoginPage.jsx
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import LoginLogic from './component/LoginLogic.jsx'
 import {
   StyledButton,
@@ -9,12 +9,21 @@ import {
   StyledLabelInputWrap,
 } from './component/StyledComponent.jsx'
 import useStoreToken from '../../shared/useStoreToken.jsx'
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const LoginPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const saveData = useStoreToken()
   const { mutate, isPending, isError, data } = LoginLogic()
+  const navigate = useNavigate()
+
+  const token = useSelector((state) => state.user.token)
+
+  useEffect(() => {
+    if (token) navigate('/')
+  }, [token])
 
   const handleLogin = (e) => {
     e.preventDefault()
