@@ -16,12 +16,16 @@ export const userInfo = createSlice({
   reducers: {
     loginUser: (state, action) => {
       const user = {
-        name: action.payload.name,
+        name: action.payload.Name,
         username: action.payload.userName,
-
         email: action.payload.email,
         token: action.payload.token,
       }
+      state.name = user.name
+      state.username = user.username
+      state.email = user.email
+      state.token = user.token
+
       localStorage.setItem('user', JSON.stringify(user))
       // return user
     },
@@ -38,6 +42,6 @@ export const userInfo = createSlice({
   },
 })
 
-export const { loginUser } = userInfo.actions
+export const { loginUser, logOutUser } = userInfo.actions
 
 export default userInfo.reducer

@@ -9,7 +9,11 @@ const useStoreToken = () => {
     console.log('data in token file: ', data)
     dispatch(loginUser(data))
 
-    if (data) navigate('/home')
+    if (data) {
+      setTimeout(() => {
+        navigate('/')
+      }, 1000)
+    }
   }
   console.log('data saved')
   const userData = useSelector((state) => state.user)
