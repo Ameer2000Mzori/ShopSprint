@@ -19,7 +19,7 @@ const Register = () => {
     console.log('this data got', name, email, password)
     mutate([
       {
-        method: 'register',
+        url: 'register',
         name: name,
         username: userName,
         email: email,

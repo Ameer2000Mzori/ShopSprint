@@ -26,7 +26,7 @@ const LoginPage = () => {
 
   const handleLogin = (e) => {
     e.preventDefault()
-    mutate([{ method: 'login', email: email, password: password }])
+    mutate([{ url: 'login', email: email, password: password }])
   }
 
   console.log('this is result ', isPending, isError, data)
