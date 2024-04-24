@@ -6,7 +6,7 @@ import {
   StyledLabelInput,
   StyledLabelInputWrap,
 } from '../login/component/StyledComponent'
-import RegisterLogic from './hooks/RegisterLogic'
+import AuthOperations from '../../shared/AuthOperations'
 
 const Register = () => {
   const [name, setName] = useState('')
@@ -14,11 +14,18 @@ const Register = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const { mutate, isPending, isError, data } = RegisterLogic()
-
+  const { mutate, isPending, isError, data } = AuthOperations()
   const handleSubmit = () => {
     console.log('this data got', name, email, password)
-    mutate({ name, username: userName, email, password })
+    mutate([
+      {
+        method: 'register',
+        name: name,
+        username: userName,
+        email: email,
+        password: password,
+      },
+    ])
   }
 
   if (isPending) return <div>isPending...</div>

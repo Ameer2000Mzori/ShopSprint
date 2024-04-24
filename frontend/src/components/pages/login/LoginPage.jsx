@@ -1,6 +1,4 @@
-// LoginPage.jsx
 import React, { useEffect, useState } from 'react'
-import LoginLogic from './component/LoginLogic.jsx'
 import {
   StyledButton,
   StyledForm,
@@ -11,12 +9,13 @@ import {
 import useStoreToken from '../../shared/useStoreToken.jsx'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import AuthOperations from '../../shared/AuthOperations.jsx'
 
 const LoginPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const saveData = useStoreToken()
-  const { mutate, isPending, isError, data } = LoginLogic()
+  const { mutate, isPending, isError, data } = AuthOperations()
   const navigate = useNavigate()
 
   const token = useSelector((state) => state.user.token)
@@ -27,7 +26,7 @@ const LoginPage = () => {
 
   const handleLogin = (e) => {
     e.preventDefault()
-    mutate({ email, password })
+    mutate([{ method: 'login', email: email, password: password }])
   }
 
   console.log('this is result ', isPending, isError, data)
