@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const StyledFormWrap = styled.div`
-  height: 500px;
+  min-height: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,15 +11,17 @@ export const StyledFormWrap = styled.div`
 `
 export const StyledForm = styled.form`
   background-color: #021431;
-  height: 175px;
+  min-height: 275px;
+  max-height: 850px;
   width: 500px;
   display: flex;
   flex-direction: column;
   text-align: center;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
   border-radius: 15px;
+  padding: 15px;
 `
 
 export const StyledLabelInputWrap = styled.div`
