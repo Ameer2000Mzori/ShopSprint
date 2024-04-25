@@ -9,6 +9,6 @@ const userRouter = express.Router()
 
 userRouter.get('/users', getUsers)
 userRouter.post('/login', userLogin)
-userRouter.post('/createuser', createUser)
+userRouter.post('/register', createUser)
 
 export default userRouter

@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose'
+import { Order } from './orderSchema.js'
 
 const userSchema = new Schema({
   userName: { type: String, required: true },
@@ -11,6 +12,12 @@ const userSchema = new Schema({
       ref: 'Order',
     },
   ],
+})
+
+userSchema.post('findOneAndDelete', async function (doc) {
+  if (doc) {
+    await Order.deleteMany({ author: doc._id })
+  }
 })
 
 const User = mongoose.model('User', userSchema)
