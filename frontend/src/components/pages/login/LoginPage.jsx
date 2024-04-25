@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useFormik } from 'formik'
 import {
   StyledButton,
   StyledForm,
@@ -10,6 +11,7 @@ import useStoreToken from '../../shared/useStoreToken.jsx'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import AuthOperations from '../../shared/AuthOperations.jsx'
+import { validationSchemaLogin } from '../../shared/validationSchema.js'
 
 const LoginPage = () => {
   const [email, setEmail] = useState('')
@@ -17,6 +19,26 @@ const LoginPage = () => {
   const saveData = useStoreToken()
   const { mutate, isPending, isSuccess, isError, data } = AuthOperations()
   const navigate = useNavigate()
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    onSubmit: (values) => {
+      console.log('values onsubmit login', values)
+
+      mutate([
+        {
+          method: 'POST',
+          url: 'login',
+          email: values.email,
+          password: values.password,
+        },
+      ])
+    },
+    validationSchema: validationSchemaLogin,
+  })
 
   const token = useSelector((state) => state.user.token)
 
@@ -37,14 +59,15 @@ const LoginPage = () => {
 
   return (
     <StyledFormWrap>
-      <StyledForm onSubmit={handleLogin}>
+      <StyledForm onSubmit={formik.handleSubmit}>
         <StyledLabelInputWrap>
           <StyledLabelInput htmlFor="email">Email address</StyledLabelInput>
           <input
             type="text"
             id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={formik.handleChange}
+            value={formik.values.email}
+            onBlur={formik.handleBlur}
           />
         </StyledLabelInputWrap>
         <StyledLabelInputWrap>
@@ -52,8 +75,9 @@ const LoginPage = () => {
           <input
             type="password"
             id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={formik.handleChange}
+            value={formik.values.Password}
+            onBlur={formik.handleBlur}
           />
         </StyledLabelInputWrap>
         <StyledButton type="submit">Submit</StyledButton>
