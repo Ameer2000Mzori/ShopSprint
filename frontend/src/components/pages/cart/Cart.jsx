@@ -3,11 +3,13 @@ import { StyledHeaderTitle } from '../../shared/StyledComponents.jsx'
 import { useSelector, useDispatch } from 'react-redux'
 import { removeFromCart } from '../../features/cart/cartSlice.js'
 import { Link, useNavigate } from 'react-router-dom'
+import { addRedirectRoute } from '../../features/routeRedirect/routeRedirectSlice.js'
 
 const Cart = () => {
   const [shippingAmount, setShippingAmount] = useState(0)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
   const token = useSelector((state) => state.user.token)
   const items = useSelector((state) => state.cart.items)
   const price = useSelector((state) => state.cart.price)
@@ -29,6 +31,7 @@ const Cart = () => {
 
   const handleLogin = () => {
     navigate('/login')
+    dispatch(addRedirectRoute('/cart'))
   }
 
   return (
