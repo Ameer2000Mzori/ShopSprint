@@ -8,6 +8,7 @@ const initialState = () =>
         username: null,
         email: null,
         token: null,
+        id: null,
       }
 
 export const userInfo = createSlice({
@@ -20,11 +21,13 @@ export const userInfo = createSlice({
         username: action.payload.userName,
         email: action.payload.email,
         token: action.payload.token,
+        id: action.payload._id,
       }
       state.name = user.name
       state.username = user.username
       state.email = user.email
       state.token = user.token
+      state.id = user.id
 
       localStorage.setItem('user', JSON.stringify(user))
       // return user
