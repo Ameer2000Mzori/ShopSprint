@@ -7,18 +7,22 @@ import {
   StyledLabelInputWrap,
 } from '../login/component/StyledComponent'
 import AuthOperations from '../../shared/AuthOperations'
+import useStoreToken from '../../shared/useStoreToken'
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
   const [name, setName] = useState('')
   const [userName, setUserName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
-  const { mutate, isPending, isError, data } = AuthOperations()
+  const saveData = useStoreToken()
+  const navigate = useNavigate()
+  const { mutate, isPending, isSuccess, isError, data } = AuthOperations()
   const handleSubmit = () => {
     console.log('this data got', name, email, password)
     mutate([
       {
+        method: 'POST',
         url: 'register',
         name: name,
         username: userName,
@@ -31,6 +35,10 @@ const Register = () => {
   if (isPending) return <div>isPending...</div>
 
   if (isError) console.log('there is a error ')
+
+  if (isSuccess) {
+    saveData({ ...data.data, token: data.token })
+  }
 
   console.log('after everything', isPending, isError, data)
 

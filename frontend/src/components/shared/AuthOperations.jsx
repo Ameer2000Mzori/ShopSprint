@@ -2,20 +2,33 @@ import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 
 const AuthOperations = () => {
-  const { mutate, isPending, isError, data } = useMutation({
-    mutationFn: ([{ url, ...arg }]) => {
+  const { mutate, isPending, isSuccess, isError, data } = useMutation({
+    mutationFn: ([{ token, method, url, ...arg }]) => {
       console.log(' info we got ', url, arg)
-      return axios
-        .post(`/${url}`, { ...arg })
-        .then((result) => result.data)
-        .catch((error) => {
-          console.log(' error we got ', error)
-          throw error
-        })
+      return (
+        axios
+          .request({
+            method: `${method}`,
+            url: `/${url}`,
+            data: {
+              ...arg,
+            },
+            headers: {
+              //  here goes the headers
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          // .post(`/${url}`, { ...arg })
+          .then((result) => result.data)
+          .catch((error) => {
+            console.log(' error we got ', error)
+            throw error
+          })
+      )
     },
   })
 
-  return { mutate, isPending, isError, data }
+  return { mutate, isPending, isSuccess, isError, data }
 }
 
 export default AuthOperations

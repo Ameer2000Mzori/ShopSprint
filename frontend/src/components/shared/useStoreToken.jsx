@@ -12,7 +12,7 @@ const useStoreToken = () => {
     if (data) {
       setTimeout(() => {
         navigate('/')
-      }, 1000)
+      }, 500)
     }
   }
   console.log('data saved')

@@ -15,7 +15,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const saveData = useStoreToken()
-  const { mutate, isPending, isError, data } = AuthOperations()
+  const { mutate, isPending, isSuccess, isError, data } = AuthOperations()
   const navigate = useNavigate()
 
   const token = useSelector((state) => state.user.token)
@@ -26,12 +26,12 @@ const LoginPage = () => {
 
   const handleLogin = (e) => {
     e.preventDefault()
-    mutate([{ url: 'login', email: email, password: password }])
+    mutate([{ method: 'POST', url: 'login', email: email, password: password }])
   }
 
-  console.log('this is result ', isPending, isError, data)
+  console.log('this is result ', isPending, isSuccess, isError, data)
 
-  if (data && !isError) {
+  if (isSuccess) {
     saveData({ ...data.data, token: data.token })
   }
 
