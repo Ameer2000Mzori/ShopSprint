@@ -15,8 +15,14 @@ import { validationSchemaRegister } from '../../shared/validationSchema'
 
 const Register = () => {
   const saveData = useStoreToken()
+  const navigate = useNavigate()
+
   const token = useSelector((state) => state.user.token)
   const { mutate, isPending, isSuccess, isError, data } = AuthOperations()
+
+  useEffect(() => {
+    if (token) navigate('/')
+  }, [token])
 
   const formik = useFormik({
     initialValues: {
@@ -43,15 +49,7 @@ const Register = () => {
     validationSchema: validationSchemaRegister,
   })
 
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    if (token) navigate('/')
-  }, [token])
-
   if (isPending) return <div>isPending...</div>
-
-  if (isError) console.log('there is a error ')
 
   if (isSuccess) {
     saveData({ ...data.data, token: data.token })

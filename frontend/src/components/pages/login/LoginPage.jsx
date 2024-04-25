@@ -14,11 +14,14 @@ import AuthOperations from '../../shared/AuthOperations.jsx'
 import { validationSchemaLogin } from '../../shared/validationSchema.js'
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
   const saveData = useStoreToken()
-  const { mutate, isPending, isSuccess, isError, data } = AuthOperations()
   const navigate = useNavigate()
+  const { mutate, isPending, isSuccess, isError, data } = AuthOperations()
+  const token = useSelector((state) => state.user.token)
+
+  useEffect(() => {
+    if (token) navigate('/')
+  }, [token])
 
   const formik = useFormik({
     initialValues: {
@@ -39,17 +42,6 @@ const LoginPage = () => {
     },
     validationSchema: validationSchemaLogin,
   })
-
-  const token = useSelector((state) => state.user.token)
-
-  useEffect(() => {
-    if (token) navigate('/')
-  }, [token])
-
-  const handleLogin = (e) => {
-    e.preventDefault()
-    mutate([{ method: 'POST', url: 'login', email: email, password: password }])
-  }
 
   console.log('this is result ', isPending, isSuccess, isError, data)
 
