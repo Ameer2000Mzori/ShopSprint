@@ -9,7 +9,6 @@ const Cart = () => {
   const [shippingAmount, setShippingAmount] = useState(0)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
   const token = useSelector((state) => state.user.token)
   const items = useSelector((state) => state.cart.items)
   const price = useSelector((state) => state.cart.price)
