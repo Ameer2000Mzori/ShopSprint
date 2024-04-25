@@ -1,12 +1,13 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-// import FetchOperations from '../shared/FetchOperations'
 import AuthOperations from '../shared/AuthOperations'
+import { useNavigate } from 'react-router-dom'
 
 const AddOrder = () => {
-  const { mutate, isLoading, isError, data } = AuthOperations()
+  const { mutate, isLoading, isSuccess, isError, data } = AuthOperations()
   const items = useSelector((state) => state.cart.items)
   const user = useSelector((state) => state.user)
+  const navigate = useNavigate()
 
   const addItems = () => {
     console.log(items)
@@ -21,6 +22,12 @@ const AddOrder = () => {
         item,
       ])
     }
+  }
+
+  if (isSuccess) {
+    setTimeout(() => {
+      navigate('/profile')
+    }, 5000)
   }
 
   return (
