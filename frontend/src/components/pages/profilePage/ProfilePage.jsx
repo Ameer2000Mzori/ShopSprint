@@ -23,10 +23,30 @@ const ProfilePage = () => {
 
   if (isError) return <div>There is an error...</div>
 
+  console.log('data', data)
+
   return (
-    <div>
-      <h1>ProfilePage</h1>
-    </div>
+    <>
+      <div className="h-[20vh] flex flex-col text-center items-center justify-center">
+        <h1 className="text-[20px] font-bold text-gray-400 w-[750px]">
+          name: {data?.Name}
+        </h1>
+
+        <h1 className="text-[20px] font-bold text-gray-400 w-[750px]">
+          user name : {data?.userName}
+        </h1>
+        <h1 className="text-[20px] font-bold text-gray-400 w-[750px]">
+          email : {data?.email}
+        </h1>
+      </div>
+      <div className="h-[20vh] flex flex-col text-center items-center justify-center">
+        {data?.orderList.length > 0 ? (
+          <div> </div>
+        ) : (
+          <div> there is no orders </div>
+        )}
+      </div>
+    </>
   )
 }
 
