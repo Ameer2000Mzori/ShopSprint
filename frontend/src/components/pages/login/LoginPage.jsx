@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useFormik } from 'formik'
 import {
   StyledButton,
@@ -8,7 +8,7 @@ import {
   StyledLabelInputWrap,
 } from './component/StyledComponent.jsx'
 import useStoreToken from '../../shared/useStoreToken.jsx'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import AuthOperations from '../../shared/AuthOperations.jsx'
 import { validationSchemaLogin } from '../../shared/validationSchema.js'
@@ -77,6 +77,9 @@ const LoginPage = () => {
         )}
         <StyledButton type="submit">Submit</StyledButton>
       </StyledForm>
+      <p>
+        no account ? <Link to="/register">please make one</Link>
+      </p>
     </StyledFormWrap>
   )
 }

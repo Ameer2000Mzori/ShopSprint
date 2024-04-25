@@ -9,7 +9,7 @@ import {
 } from '../login/component/StyledComponent'
 import AuthOperations from '../../shared/AuthOperations'
 import useStoreToken from '../../shared/useStoreToken'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { validationSchemaRegister } from '../../shared/validationSchema'
 
@@ -130,6 +130,9 @@ const Register = () => {
         {data?.message && <div className="text-white">{data?.message}</div>}
         <StyledButton type="submit">Submit</StyledButton>
       </StyledForm>
+      <p>
+        have account ? <Link to="/login">please login</Link>
+      </p>
     </StyledFormWrap>
   )
 }

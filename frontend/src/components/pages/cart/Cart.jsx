@@ -2,30 +2,29 @@ import { useState, useEffect } from 'react'
 import { StyledHeaderTitle } from '../../shared/StyledComponents.jsx'
 import { useSelector, useDispatch } from 'react-redux'
 import { removeFromCart } from '../../features/cart/cartSlice.js'
+import { Link } from 'react-router-dom'
 
 const Cart = () => {
   const [shippingAmount, setShippingAmount] = useState(0)
   const dispatch = useDispatch()
-
-  const removeProduct = (item) => {
-    console.log(item.id)
-    dispatch(removeFromCart(item.id))
-  }
-
+  const token = useSelector((state) => state.user.token)
   const items = useSelector((state) => state.cart.items)
   const price = useSelector((state) => state.cart.price)
 
   useEffect(() => {
-    // Calculate shipping amount when items change
     let totalShippingAmount = 0
     items.forEach((item) => {
       if (!item.freeShipping) {
-        // Add shipping fee if freeShipping is false
         totalShippingAmount += item.amount * 0.15
       }
     })
     setShippingAmount(totalShippingAmount)
   }, [items])
+
+  const removeProduct = (item) => {
+    console.log(item.id)
+    dispatch(removeFromCart(item.id))
+  }
 
   return (
     <div className="flex flex-col h-[80vh] text-center items-center justify-center">
@@ -83,9 +82,18 @@ const Cart = () => {
               </ul>
             </div>
           </div>
-          <button className="w-[150px] h-[40px] rounded-lg bg-blue-600 text-white font-bold">
-            PLEASE LOGIN
-          </button>
+          {token ? (
+            <button className="w-[150px] h-[40px] rounded-lg bg-blue-600 text-white font-bold">
+              ADD ORDER
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className="flex flex-col text-center items-center justify-center w-[150px] h-[40px] rounded-lg bg-blue-600 text-white font-bold"
+            >
+              PLEASE LOGIN
+            </Link>
+          )}
         </div>
       </div>
     </div>
