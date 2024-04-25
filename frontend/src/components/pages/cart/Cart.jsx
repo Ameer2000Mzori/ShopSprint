@@ -2,14 +2,17 @@ import { useState, useEffect } from 'react'
 import { StyledHeaderTitle } from '../../shared/StyledComponents.jsx'
 import { useSelector, useDispatch } from 'react-redux'
 import { removeFromCart } from '../../features/cart/cartSlice.js'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { RedirectRoute } from '../../shared/RedirectRoute.jsx'
 
 const Cart = () => {
   const [shippingAmount, setShippingAmount] = useState(0)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const token = useSelector((state) => state.user.token)
   const items = useSelector((state) => state.cart.items)
   const price = useSelector((state) => state.cart.price)
+  const { addNewRoute } = RedirectRoute()
 
   useEffect(() => {
     let totalShippingAmount = 0
@@ -24,6 +27,11 @@ const Cart = () => {
   const removeProduct = (item) => {
     console.log(item.id)
     dispatch(removeFromCart(item.id))
+  }
+
+  const handleLogin = () => {
+    addNewRoute('/login')
+    navigate('/login')
   }
 
   return (
@@ -83,11 +91,15 @@ const Cart = () => {
             </div>
           </div>
           {token ? (
-            <button className="w-[150px] h-[40px] rounded-lg bg-blue-600 text-white font-bold">
+            <Link
+              to="/addorder"
+              className="flex flex-col text-center items-center justify-center w-[150px] h-[40px] rounded-lg bg-blue-600 text-white font-bold"
+            >
               ADD ORDER
-            </button>
+            </Link>
           ) : (
             <Link
+              onClick={handleLogin}
               to="/login"
               className="flex flex-col text-center items-center justify-center w-[150px] h-[40px] rounded-lg bg-blue-600 text-white font-bold"
             >
