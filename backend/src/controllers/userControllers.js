@@ -21,6 +21,21 @@ export const getUsers = (req, res) => {
     })
 }
 
+export const getUser = (req, res) => {
+  User.findById(req.params.id)
+    .populate('orderList')
+    .then((result) => {
+      console.log(result)
+      res.status(200).json(result)
+    })
+    .catch((err) => {
+      console.log(err)
+      res.status(500).json({
+        error: 'An error occurred',
+      })
+    })
+}
+
 export const createUser = async (req, res) => {
   const { name, username, email, password } = req.body
 
