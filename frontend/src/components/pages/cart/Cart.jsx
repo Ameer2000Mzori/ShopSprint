@@ -3,7 +3,6 @@ import { StyledHeaderTitle } from '../../shared/StyledComponents.jsx'
 import { useSelector, useDispatch } from 'react-redux'
 import { removeFromCart } from '../../features/cart/cartSlice.js'
 import { Link, useNavigate } from 'react-router-dom'
-import { RedirectRoute } from '../../shared/RedirectRoute.jsx'
 
 const Cart = () => {
   const [shippingAmount, setShippingAmount] = useState(0)
@@ -12,7 +11,6 @@ const Cart = () => {
   const token = useSelector((state) => state.user.token)
   const items = useSelector((state) => state.cart.items)
   const price = useSelector((state) => state.cart.price)
-  const { addNewRoute } = RedirectRoute()
 
   useEffect(() => {
     let totalShippingAmount = 0
@@ -30,7 +28,6 @@ const Cart = () => {
   }
 
   const handleLogin = () => {
-    addNewRoute('/login')
     navigate('/login')
   }
 
