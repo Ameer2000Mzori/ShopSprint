@@ -41,7 +41,7 @@ const ProfilePage = () => {
       </div>
       <div className="h-[20vh] flex flex-col text-center items-center justify-center">
         {data?.orderList.length > 0 ? (
-          <div> </div>
+          <div></div>
         ) : (
           <div> there is no orders </div>
         )}

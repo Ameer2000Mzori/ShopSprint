@@ -2,8 +2,8 @@ import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 const FetchOperations = () => {
   const { mutate, isLoading, isError, data } = useMutation({
-    mutationFn: ([{ method, url, id, token }]) => {
-      console.log('data got from profile', method, url, id, token)
+    mutationFn: ([{ method, url, id, token, item }]) => {
+      console.log('data got from profile', method, url, id, token, item)
       return axios
         .request({
           method: `${method}`,
