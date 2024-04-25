@@ -17,8 +17,8 @@ const AddOrder = () => {
           method: 'POST',
           url: 'addorder',
           token: user.token,
-          item,
         },
+        item,
       ])
     }
   }

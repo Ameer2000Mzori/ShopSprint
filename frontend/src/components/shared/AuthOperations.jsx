@@ -3,8 +3,11 @@ import axios from 'axios'
 
 const AuthOperations = () => {
   const { mutate, isPending, isSuccess, isError, data } = useMutation({
-    mutationFn: ([{ token, method, url, ...arg }]) => {
-      console.log(' info we got ', url, arg)
+    mutationFn: ([{ token, method, url, ...arg }, item]) => {
+      console.log(' info we got ', url, method, token, arg, item)
+
+      if (item) arg = item
+
       return axios
         .request({
           method: `${method}`,
