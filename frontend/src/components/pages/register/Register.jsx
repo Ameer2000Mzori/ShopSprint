@@ -51,11 +51,11 @@ const Register = () => {
 
   if (isPending) return <div>isPending...</div>
 
-  if (isSuccess) {
-    saveData({ ...data.data, token: data.token })
-  }
+  console.log('this is result ', isPending, isSuccess, isError, data)
 
-  console.log('after everything', isPending, isError, data)
+  if (isSuccess && data.code !== 'ERR_BAD_REQUEST') {
+    saveData({ ...data?.data, token: data?.token })
+  }
 
   return (
     <StyledFormWrap>
@@ -127,9 +127,6 @@ const Register = () => {
             <p className="text-white">{formik.errors.confirmPassword}</p>
           )}
         </StyledLabelInputWrap>
-        {isError?.response?.data?.message && (
-          <div className="text-white">{isError?.response?.data?.message}</div>
-        )}
         {data?.message && <div className="text-white">{data?.message}</div>}
         <StyledButton type="submit">Submit</StyledButton>
       </StyledForm>

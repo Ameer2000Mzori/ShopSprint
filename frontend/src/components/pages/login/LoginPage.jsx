@@ -45,8 +45,8 @@ const LoginPage = () => {
 
   console.log('this is result ', isPending, isSuccess, isError, data)
 
-  if (isSuccess) {
-    saveData({ ...data.data, token: data.token })
+  if (isSuccess && data.code !== 'ERR_BAD_REQUEST') {
+    saveData({ ...data?.data, token: data?.token })
   }
 
   return (
@@ -72,6 +72,9 @@ const LoginPage = () => {
             onBlur={formik.handleBlur}
           />
         </StyledLabelInputWrap>
+        {data?.message && (
+          <div className="text-white">{data?.response?.data?.message}</div>
+        )}
         <StyledButton type="submit">Submit</StyledButton>
       </StyledForm>
     </StyledFormWrap>

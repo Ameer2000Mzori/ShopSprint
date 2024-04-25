@@ -22,7 +22,7 @@ const AuthOperations = () => {
           .then((result) => result.data)
           .catch((error) => {
             console.log(' error we got ', error)
-            throw error
+            return error
           })
       )
     },
