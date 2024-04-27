@@ -39,9 +39,24 @@ const ProfilePage = () => {
           email : {data?.email}
         </h1>
       </div>
-      <div className="h-[20vh] flex flex-col text-center items-center justify-center">
+      <div className="h-[40vh] text-[12px] text-black  flex flex-col text-center items-center justify-center">
+        <h1>HISTORY ORDERS</h1>
         {data?.orderList.length > 0 ? (
-          <div></div>
+          <div>
+            {data?.orderList.map((order) => {
+              return (
+                <div className="w-[500px] flex flex-row text-start items-start justify-between pl-2 pr-2 gap-8">
+                  <p>{order.name}</p>
+                  <p>{order.id}</p>
+                  <p>{order.price}</p>
+                  <p>{order.freeShipping ? 'yes' : 'no'}</p>
+                  <p>{order.amount}</p>
+                  <p>{order.color}</p>
+                  <p>${order.total}</p>
+                </div>
+              )
+            })}
+          </div>
         ) : (
           <div> there is no orders </div>
         )}
