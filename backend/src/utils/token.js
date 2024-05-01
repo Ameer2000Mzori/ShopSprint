@@ -4,6 +4,7 @@ import 'dotenv/config'
 export const guard = (req, res, next) => {
   try {
     const authHeader = req.headers.authorization
+    console.log('this is id auth', authHeader)
     if (!authHeader) {
       return res.status(401).json({ message: 'Unauthorized' })
     }
