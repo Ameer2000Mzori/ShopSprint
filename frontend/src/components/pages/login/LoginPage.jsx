@@ -12,11 +12,18 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import AuthOperations from '../../shared/AuthOperations.jsx'
 import { validationSchemaLogin } from '../../shared/validationSchema.js'
+// import { combineSlices } from '@reduxjs/toolkit'
 
 const LoginPage = () => {
   const saveData = useStoreToken()
   const navigate = useNavigate()
-  const { mutate, isPending, isSuccess, isError, data } = AuthOperations()
+  const { mutate, isPending, isError } = AuthOperations({
+    onSuccess: (newData) => {
+      console.log('newData', newData)
+      saveData({ ...newData?.data, token: newData?.token })
+    },
+  })
+
   const token = useSelector((state) => state.user.token)
 
   useEffect(() => {
@@ -43,11 +50,7 @@ const LoginPage = () => {
     validationSchema: validationSchemaLogin,
   })
 
-  console.log('this is result ', isPending, isSuccess, isError, data)
-
-  if (isSuccess && data.code !== 'ERR_BAD_REQUEST') {
-    saveData({ ...data?.data, token: data?.token })
-  }
+  console.log('this is isError', isError)
 
   return (
     <StyledFormWrap>
@@ -72,10 +75,16 @@ const LoginPage = () => {
             onBlur={formik.handleBlur}
           />
         </StyledLabelInputWrap>
-        {data?.message && (
-          <div className="text-white">{data?.response?.data?.message}</div>
+
+        {isError && (
+          <p className="text-red-500">
+            Error: {isError?.response?.data?.message || 'Login failed'}
+          </p>
         )}
-        <StyledButton type="submit">Submit</StyledButton>
+
+        <StyledButton type="submit">
+          {isPending ? 'loading...' : 'Submit'}
+        </StyledButton>
       </StyledForm>
       <p>
         no account ? <Link to="/register">please make one</Link>
