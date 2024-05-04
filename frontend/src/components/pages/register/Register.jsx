@@ -18,7 +18,11 @@ const Register = () => {
   const navigate = useNavigate()
 
   const token = useSelector((state) => state.user.token)
-  const { mutate, isPending, isSuccess, isError, data } = AuthOperations()
+  const { mutate, isPending, isError } = AuthOperations({
+    onSuccess: (newData) => {
+      saveData({ ...newData?.data, token: newData?.token })
+    },
+  })
 
   useEffect(() => {
     if (token) navigate('/')
@@ -51,11 +55,7 @@ const Register = () => {
 
   if (isPending) return <div>isPending...</div>
 
-  console.log('this is result ', isPending, isSuccess, isError, data)
-
-  if (isSuccess && data.code !== 'ERR_BAD_REQUEST') {
-    saveData({ ...data?.data, token: data?.token })
-  }
+  console.log('this is result ', isPending, isError)
 
   return (
     <StyledFormWrap>
@@ -127,8 +127,14 @@ const Register = () => {
             <p className="text-white">{formik.errors.confirmPassword}</p>
           )}
         </StyledLabelInputWrap>
-        {data?.message && <div className="text-white">{data?.message}</div>}
-        <StyledButton type="submit">Submit</StyledButton>
+        {isError && (
+          <p className="text-red-500">
+            Error: {isError?.response?.data?.message || 'Login failed'}
+          </p>
+        )}
+        <StyledButton type="submit">
+          {isPending ? 'Loading' : 'Submit'}
+        </StyledButton>
       </StyledForm>
       <p>
         have account ? <Link to="/login">please login</Link>
