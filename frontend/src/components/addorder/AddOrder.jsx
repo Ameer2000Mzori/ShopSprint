@@ -11,9 +11,8 @@ const AddOrder = () => {
     onSuccess: () => {
       setTimeout(() => {
         navigate('/profile')
-      }, 2000)
-
-      toast.success('order added successfully')
+        toast.success('order added successfully')
+      }, 3000)
     },
   })
   const items = useSelector((state) => state.cart.items)
