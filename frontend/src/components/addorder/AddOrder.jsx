@@ -4,10 +4,17 @@ import AuthOperations from '../shared/AuthOperations'
 import { useNavigate } from 'react-router-dom'
 
 const AddOrder = () => {
-  const { mutate, isLoading, isSuccess, isError, data } = AuthOperations()
+  const navigate = useNavigate()
+
+  const { mutate, isPending, isError } = AuthOperations({
+    onSuccess: () => {
+      setTimeout(() => {
+        navigate('/profile')
+      }, 5000)
+    },
+  })
   const items = useSelector((state) => state.cart.items)
   const user = useSelector((state) => state.user)
-  const navigate = useNavigate()
 
   const addItems = () => {
     console.log(items)
@@ -16,7 +23,7 @@ const AddOrder = () => {
       mutate([
         {
           method: 'POST',
-          url: 'addorder',
+          url: '/addorder',
           token: user.token,
         },
         item,
@@ -24,16 +31,13 @@ const AddOrder = () => {
     }
   }
 
-  if (isSuccess) {
-    setTimeout(() => {
-      navigate('/profile')
-    }, 5000)
-  }
-
   return (
     <>
       <div className="flex flex-col text-center items-center justify-center">
         <p>do you confirm ordering the items ? {items.length}</p>
+        {isPending && <div>loading...</div>}
+        {isError && <div>There is an error...</div>}
+
         <button onClick={addItems}>confirm</button>
       </div>
     </>

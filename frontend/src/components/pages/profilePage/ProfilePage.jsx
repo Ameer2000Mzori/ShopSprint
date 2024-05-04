@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import FetchOperations from '../../shared/FetchOperations'
+import AuthOperations from '../../shared/AuthOperations'
 
 const ProfilePage = () => {
   const user = useSelector((state) => state.user)
-  const { mutate, isLoading, isError, data } = FetchOperations()
+  const { mutate, isPending, isError, data } = AuthOperations({})
 
   console.log(user)
   const navigate = useNavigate()
@@ -13,15 +13,9 @@ const ProfilePage = () => {
     if (!user.token) navigate('/')
 
     if (user.token) {
-      mutate([
-        { method: 'GET', url: 'user', id: `${user.id}`, token: user.token },
-      ])
+      mutate([{ method: 'GET', url: `/user/${user.id}`, token: user.token }])
     }
   }, [user.token])
-
-  if (isLoading) return <div>is loading....</div>
-
-  if (isError) return <div>There is an error...</div>
 
   console.log('data', data)
 
@@ -45,7 +39,10 @@ const ProfilePage = () => {
           <div>
             {data?.orderList.map((order) => {
               return (
-                <div className="w-[500px] flex flex-row text-start items-start justify-between pl-2 pr-2 gap-8">
+                <div
+                  key={order.id}
+                  className="w-[500px] flex flex-row text-start items-start justify-between pl-2 pr-2 gap-8"
+                >
                   <p>{order.name}</p>
                   <p>{order.id}</p>
                   <p>{order.price}</p>
@@ -60,6 +57,8 @@ const ProfilePage = () => {
         ) : (
           <div> there is no orders </div>
         )}
+        {isError && <div>there is error....</div>}
+        {isPending && <div> isLoading....</div>}
       </div>
     </>
   )

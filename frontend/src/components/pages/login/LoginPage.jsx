@@ -41,7 +41,7 @@ const LoginPage = () => {
       mutate([
         {
           method: 'POST',
-          url: 'login',
+          url: '/login',
           email: values.email,
           password: values.password,
         },

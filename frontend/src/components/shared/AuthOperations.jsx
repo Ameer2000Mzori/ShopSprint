@@ -11,7 +11,7 @@ const AuthOperations = ({ onSuccess, onError }) => {
       return axios
         .request({
           method: `${method}`,
-          url: `/${url}`,
+          url: `${url}`,
           data: {
             ...arg,
           },
