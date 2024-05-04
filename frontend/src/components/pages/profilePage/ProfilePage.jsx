@@ -37,10 +37,10 @@ const ProfilePage = () => {
         <h1>HISTORY ORDERS</h1>
         {data?.orderList.length > 0 ? (
           <div>
-            {data?.orderList.map((order) => {
+            {data?.orderList.map((order, index) => {
               return (
                 <div
-                  key={order.id}
+                  key={index}
                   className="w-[500px] flex flex-row text-start items-start justify-between pl-2 pr-2 gap-8"
                 >
                   <p>{order.name}</p>
