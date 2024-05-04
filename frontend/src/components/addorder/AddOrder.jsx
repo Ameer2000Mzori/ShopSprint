@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import AuthOperations from '../shared/AuthOperations'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const AddOrder = () => {
   const navigate = useNavigate()
@@ -10,7 +11,9 @@ const AddOrder = () => {
     onSuccess: () => {
       setTimeout(() => {
         navigate('/profile')
-      }, 5000)
+      }, 2000)
+
+      toast.success('order added successfully')
     },
   })
   const items = useSelector((state) => state.cart.items)
@@ -26,6 +29,7 @@ const AddOrder = () => {
           url: '/addorder',
           token: user.token,
         },
+
         item,
       ])
     }
