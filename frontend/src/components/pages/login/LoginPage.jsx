@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux'
 import AuthOperations from '../../shared/AuthOperations.jsx'
 import { validationSchemaLogin } from '../../shared/validationSchema.js'
 // import { combineSlices } from '@reduxjs/toolkit'
+import { toast } from 'react-toastify'
 
 const LoginPage = () => {
   const saveData = useStoreToken()
@@ -21,6 +22,11 @@ const LoginPage = () => {
     onSuccess: (newData) => {
       console.log('newData', newData)
       saveData({ ...newData?.data, token: newData?.token })
+      toast.success(`${newData.message || 'Login Success'}`)
+    },
+    onError: (error) => {
+      console.log('error', error)
+      toast.error(`${error?.response?.data?.message || 'Login failed'}`)
     },
   })
 

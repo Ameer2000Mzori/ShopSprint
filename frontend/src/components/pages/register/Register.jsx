@@ -12,6 +12,7 @@ import useStoreToken from '../../shared/useStoreToken'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { validationSchemaRegister } from '../../shared/validationSchema'
+import { toast } from 'react-toastify'
 
 const Register = () => {
   const saveData = useStoreToken()
@@ -21,6 +22,7 @@ const Register = () => {
   const { mutate, isPending, isError } = AuthOperations({
     onSuccess: (newData) => {
       saveData({ ...newData?.data, token: newData?.token })
+      toast.success(`${newData.message || 'created account successfully'}`)
     },
   })
 

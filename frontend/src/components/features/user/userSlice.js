@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { toast } from 'react-toastify'
 
 const initialState = () =>
   localStorage.getItem('user')
@@ -35,6 +36,8 @@ export const userInfo = createSlice({
 
     logOutUser: () => {
       localStorage.removeItem('user')
+      toast.success(`${'logout successfully'}`)
+
       return {
         name: null,
         username: null,

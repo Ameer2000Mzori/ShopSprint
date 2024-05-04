@@ -76,7 +76,7 @@ const Cart = () => {
                 </li>
                 <li className="h-[40px] w-[100%] flex flex-row text-center items-center justify-between pr-2 pl-2  border-b-2 border-gray-300">
                   <p>tax 15%</p>
-                  <p>${price ? `${price * 0.15}` : 0}</p>
+                  <p>${price ? `${(price * 0.15).toFixed(2)}` : 0}</p>
                 </li>
                 <li className="h-[40px] w-[100%] flex flex-row text-center items-center justify-between pr-2 pl-2  border-b-2 border-gray-300">
                   <p>shipping fee</p>

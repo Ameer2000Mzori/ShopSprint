@@ -1,4 +1,8 @@
+import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 import Navbar from './components/pages/navbar/Navbar.jsx'
 import NotFoundPage from './components/pages/notfoundpage/NotFoundPage.jsx'
 import Home from './components/pages/home/Home.jsx'
@@ -15,6 +19,7 @@ import AddOrder from './components/addorder/AddOrder.jsx'
 function App() {
   return (
     <Router>
+      <ToastContainer />
       <UtilityBar />
       <Navbar />
       <Routes>
