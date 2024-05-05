@@ -12,7 +12,7 @@ import useStoreToken from '../../shared/useStoreToken'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { validationSchemaRegister } from '../../shared/validationSchema'
-import { toast } from 'react-toastify'
+import NotificationCard from '../../shared/NotificationCard'
 
 const Register = () => {
   const saveData = useStoreToken()

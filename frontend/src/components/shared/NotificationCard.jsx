@@ -1,4 +1,3 @@
-import React from 'react'
 import { toast } from 'react-toastify'
 const NotificationCard = ({ option, message }) => {
   switch (option) {
