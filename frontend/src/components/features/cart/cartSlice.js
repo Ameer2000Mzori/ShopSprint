@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { toast } from 'react-toastify'
 import NotificationCard from '../../shared/NotificationCard'
 
 export const cartSlice = createSlice({

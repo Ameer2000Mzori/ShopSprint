@@ -22,7 +22,12 @@ const Register = () => {
   const { mutate, isPending, isError } = AuthOperations({
     onSuccess: (newData) => {
       saveData({ ...newData?.data, token: newData?.token })
-      toast.success(`${newData.message || 'created account successfully'}`)
+      NotificationCard({
+        option: 'success',
+        message: `${
+          newData?.response?.data?.message || 'account created successfully'
+        }`,
+      })
     },
   })
 
