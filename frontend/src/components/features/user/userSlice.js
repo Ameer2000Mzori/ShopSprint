@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
+import NotificationCard from '../../shared/NotificationCard'
 
 const initialState = () =>
   localStorage.getItem('user')
@@ -36,7 +37,10 @@ export const userInfo = createSlice({
 
     logOutUser: () => {
       localStorage.removeItem('user')
-      toast.success(`${'logout successfully'}`)
+      NotificationCard({
+        option: 'warning',
+        message: `logged out successfully`,
+      })
 
       return {
         name: null,

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import AuthOperations from '../shared/AuthOperations'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import NotificationCard from '../shared/NotificationCard'
 
 const AddOrder = () => {
   const navigate = useNavigate()
@@ -11,7 +12,10 @@ const AddOrder = () => {
     onSuccess: () => {
       setTimeout(() => {
         navigate('/profile')
-        toast.success('order added successfully')
+        NotificationCard({
+          option: 'success',
+          message: `${'items purchased successfully!'}`,
+        })
       }, 3000)
     },
   })

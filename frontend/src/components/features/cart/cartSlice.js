@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
+import NotificationCard from '../../shared/NotificationCard'
 
 export const cartSlice = createSlice({
   name: 'cart',
@@ -12,7 +13,10 @@ export const cartSlice = createSlice({
       state.items.push(action.payload)
       state.price += action.payload.total
       console.log(state.price)
-      toast.success('item added successfully')
+      NotificationCard({
+        option: 'success',
+        message: `item added successfully`,
+      })
     },
     removeFromCart: (state, action) => {
       state.price = 0
@@ -20,13 +24,21 @@ export const cartSlice = createSlice({
       for (const item of state.items) {
         state.price += item.price * item.amount
       }
+
+      NotificationCard({
+        option: 'warning',
+        message: `item removed successfully`,
+      })
+
       console.log(state.items)
-      toast.error('item removed successfully')
       console.log(state.price)
     },
     clearCart: (state) => {
       state.items = []
-      toast.warn('items removed successfully')
+      NotificationCard({
+        option: 'warning',
+        message: `items removed successfully`,
+      })
     },
   },
 })
