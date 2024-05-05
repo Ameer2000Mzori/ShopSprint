@@ -29,6 +29,12 @@ const Register = () => {
         }`,
       })
     },
+    onError: (error) => {
+      NotificationCard({
+        option: 'error',
+        message: `${error?.response?.data?.message || 'there was an error'}`,
+      })
+    },
   })
 
   useEffect(() => {
