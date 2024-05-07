@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logOutUser } from '../../../features/user/userSlice'
 import { LogIn } from 'lucide-react'
-import { LogOut } from 'lucide-react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDoorOpen, faPlusSquare } from '@fortawesome/free-solid-svg-icons'
 
 const UtilityBar = () => {
   const dispatch = useDispatch()
@@ -14,25 +15,37 @@ const UtilityBar = () => {
   }
 
   return (
-    <div className="h-[40px] w-[100%] flex flex-col text-center items-center justify-center bg-[#021431] text-white">
+    <div className="h-[50px] w-[100%] flex flex-col text-center items-center justify-center bg-[#575757] text-[#FFFFFF]">
       <div className="w-[65%] flex flex-row text-center items-end justify-end gap-4 pr-8">
         {token ? (
-          <p
-            className="hover:underline cursor-pointer flex flex-row gap-1 text-center items-center justify-center"
+          <div
+            className="hover:underline cursor-pointer flex flex-col  text-center items-center justify-center"
             onClick={handleLogout}
           >
-            <LogOut />
-          </p>
+            <FontAwesomeIcon
+              className="text-[25px] p-0 m-0 "
+              icon={faDoorOpen}
+            />
+            <p className="text-[10px] p-0 m-0"> logout</p>
+          </div>
         ) : (
           <>
             <Link
               to="/login"
-              className="hover:underline flex flex-row gap-1 text-center items-center justify-center"
+              className="hover:underline flex flex-col text-center items-center justify-center"
             >
-              <LogIn />
+              <LogIn className="text-[10px] p-0 m-0" />
+              <p className="text-[10px] p-0 m-0"> login</p>
             </Link>
-            <Link to="/register" className="hover:underline">
-              register
+            <Link
+              to="/register"
+              className="hover:underline hover:underline flex flex-col text-center items-center justify-center"
+            >
+              <FontAwesomeIcon
+                className="text-[25px] p-0 m-0"
+                icon={faPlusSquare}
+              />
+              <p className="text-[10px] p-0 m-0">register</p>
             </Link>
           </>
         )}

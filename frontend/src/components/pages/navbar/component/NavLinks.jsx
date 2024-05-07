@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { navObj } from '../hooks/navData.js'
 import { useSelector } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const NavLinks = () => {
   // using useState for nav data
@@ -32,8 +33,8 @@ const NavLinks = () => {
         <li
           key={nav.path}
           style={{
-            backgroundColor: nav.active ? 'black' : null,
-            color: nav.active ? 'white' : null,
+            backgroundColor: nav.active ? '#3498DB' : null,
+            color: nav.active ? '#DDE6ED' : null,
           }}
           className="hover:bg-slate-400 hover:text-white h-[100%] w-[100px] rounded-lg"
         >
