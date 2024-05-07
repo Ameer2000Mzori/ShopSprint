@@ -19,11 +19,6 @@ const Home = () => {
       }}
       className="w-[100%] p-12 overflow-hidden flex flex-col items-center justify-center "
     >
-      <Heading size="lg">Welcome to Chakra UI!</Heading>
-      <Text fontSize="xl">
-        Start building your awesome app with Chakra components.
-      </Text>
-      <Button colorScheme="blue">Get Started</Button>
       <div className="w-[65%] h-auto pb-4 flex flex-col items-center justify-center">
         <Header />
         <FeaturedProducts />

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { StyledCard } from '../shared/StyledComponents.jsx'
+
 import {
   Card,
   Text,
@@ -48,13 +48,7 @@ const ProductCard = ({ item }) => {
             </Stack>
           </CardBody>
           <Divider />
-          <CardFooter>
-            <ButtonGroup spacing="2">
-              <Button variant="solid" colorScheme="blue">
-                Add to cart
-              </Button>
-            </ButtonGroup>
-          </CardFooter>
+          <CardFooter></CardFooter>
         </Card>
       </Link>
     </>
