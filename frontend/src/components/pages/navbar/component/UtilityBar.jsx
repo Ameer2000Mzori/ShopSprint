@@ -15,7 +15,7 @@ const UtilityBar = () => {
   }
 
   return (
-    <div className="h-[50px] w-[100%] flex flex-col text-center items-center justify-center bg-[#575757] text-[#FFFFFF]">
+    <div className="h-[50px] w-[100%] flex flex-col text-center items-center justify-center bg-[rgb(61,61,61)] text-[#FFFFFF]">
       <div className="w-[65%] flex flex-row text-center items-end justify-end gap-4 pr-8">
         {token ? (
           <div

@@ -2,8 +2,9 @@ import styled from 'styled-components'
 
 export const StyledInputWrap = styled.div`
   color: black;
-  background-color: #021431;
+  background-color: #1115;
   color: #fff;
+  border-radius: 10px;
   width: 200px;
   height: 60px;
   display: flex;
@@ -13,7 +14,6 @@ export const StyledInputWrap = styled.div`
 `
 
 export const StyledSelectWrap = styled(StyledInputWrap)`
-  background-color: gray;
   flex-direction: row;
   width: 200px;
   height: 40px;

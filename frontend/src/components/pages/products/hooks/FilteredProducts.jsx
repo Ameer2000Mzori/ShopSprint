@@ -26,7 +26,7 @@ const FilteredProducts = (value) => {
   if (data.filteredItems.length <= 0) return <div>THERE IS NO ITEMS</div>
 
   return (
-    <div className="h-[100vh] w-[65vw] flex flex-col text-center items-start justify-center p-4">
+    <div className="h-auto w-[65vw] flex flex-col text-center items-start justify-center p-4">
       <div className="w-[100%] h-[100%] flex flex-row flex-wrap gap-4 text-center items-start justify-center">
         {data.filteredItems ? (
           data.filteredItems.map((item) => (

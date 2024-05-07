@@ -122,10 +122,11 @@ const FilterForm = ({
           search
         </button>
 
-        <StyledInputWrap className=" w-[200px] flex flex-col text-start items-start justify-center">
-          <label htmlFor="searchTerm">search</label>
+        <StyledInputWrap className=" w-[200px]  flex flex-col text-start items-start justify-center">
+          {/* <label htmlFor="searchTerm">search</label> */}
           <input
-            className="text-black"
+            placeholder="search"
+            className="text-white p-1 bg-transparent active:outline-none focus:outline-none  border-[1px] border-gray-400 rounded-md"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             type="text"

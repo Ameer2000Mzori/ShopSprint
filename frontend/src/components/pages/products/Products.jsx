@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import FilteredProducts from './hooks/FilteredProducts.jsx'
 import FilterForm from './component/FilterForm.jsx'
+import productsImage from '../../../assets/products-img.jpg'
 const Products = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [newPrice, setNewPrice] = useState('')
@@ -39,7 +40,20 @@ const Products = () => {
   }
 
   return (
-    <div className="h-[100vh] flex flex-col text-center items-center justify-start">
+    <div
+      style={{
+        backgroundImage: `url(${productsImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        width: '100%',
+        height: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+      className=" flex flex-col text-center items-center justify-start"
+    >
       <div className="h-[20vh] w-[65vw]">
         <FilterForm
           searchTerm={searchTerm}
