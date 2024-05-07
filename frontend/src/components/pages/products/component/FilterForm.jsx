@@ -105,7 +105,7 @@ const FilterForm = ({
 
       <div className="w-[90%] h-[70px] flex flex-row text-center items-center justify-evenly">
         <button
-          className=" w-[150px] h-[40px] bg-zinc-400 text-white rounded-lg text-[18px]"
+          className=" w-[150px] h-[40px] bg-zinc-400 text-white rounded-lg text-[18px] hover:bg-white hover:text-black hover:scale-105 active:scale-90 transition-all duration-500  	"
           onClick={(e) => {
             e.preventDefault()
 

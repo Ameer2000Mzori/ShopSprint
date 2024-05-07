@@ -47,12 +47,13 @@ const Products = () => {
         backgroundPosition: 'center',
         width: '100%',
         height: 'auto',
+        minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'start',
       }}
-      className=" flex flex-col text-center items-center justify-start"
+      className="flex flex-col text-center items-center justify-start"
     >
       <div className="h-[20vh] w-[65vw]">
         <FilterForm
