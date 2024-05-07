@@ -2,6 +2,8 @@ import React from 'react'
 import Header from './component/Header.jsx'
 import FeaturedProducts from './component/FeaturedProducts.jsx'
 import backgroundImage from '../../../assets/bg-img.jpg'
+import { Button, Heading, Text } from '@chakra-ui/react'
+
 const Home = () => {
   return (
     <div
@@ -17,6 +19,11 @@ const Home = () => {
       }}
       className="w-[100%] p-12 overflow-hidden flex flex-col items-center justify-center "
     >
+      <Heading size="lg">Welcome to Chakra UI!</Heading>
+      <Text fontSize="xl">
+        Start building your awesome app with Chakra components.
+      </Text>
+      <Button colorScheme="blue">Get Started</Button>
       <div className="w-[65%] h-auto pb-4 flex flex-col items-center justify-center">
         <Header />
         <FeaturedProducts />
