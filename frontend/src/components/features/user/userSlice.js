@@ -31,7 +31,6 @@ export const userInfo = createSlice({
       state.id = user.id
 
       localStorage.setItem('user', JSON.stringify(user))
-      // return user
     },
 
     logOutUser: () => {
