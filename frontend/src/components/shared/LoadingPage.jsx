@@ -1,10 +1,11 @@
 import React from 'react'
-import loadingSvg from '../../assets/loading.svg'
+import { Spinner, Stack } from '@chakra-ui/react'
+
 const LoadingPage = () => {
   return (
-    <div>
-      <img src={loadingSvg} alt="loading animation" />
-    </div>
+    <Stack direction="row" spacing={4}>
+      <Spinner size="xl" />
+    </Stack>
   )
 }
 

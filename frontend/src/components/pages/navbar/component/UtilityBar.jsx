@@ -4,9 +4,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logOutUser } from '../../../features/user/userSlice'
 import { LogIn } from 'lucide-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDoorOpen, faPlusSquare } from '@fortawesome/free-solid-svg-icons'
+import {
+  faDoorOpen,
+  faPlusSquare,
+  faQuestion,
+} from '@fortawesome/free-solid-svg-icons'
+import About from '../../about/About.jsx'
+import { useDisclosure, Button } from '@chakra-ui/react'
 
 const UtilityBar = () => {
+  const { isOpen, onToggle } = useDisclosure()
   const dispatch = useDispatch()
   const token = useSelector((state) => state.user.token)
 
@@ -39,7 +46,7 @@ const UtilityBar = () => {
             </Link>
             <Link
               to="/register"
-              className="hover:underline hover:underline flex flex-col text-center items-center justify-center"
+              className="hover:underline  flex flex-col text-center items-center justify-center"
             >
               <FontAwesomeIcon
                 className="text-[25px] p-0 m-0"
@@ -49,6 +56,15 @@ const UtilityBar = () => {
             </Link>
           </>
         )}
+
+        <div
+          onClick={onToggle}
+          className="hover:underline flex flex-col text-center items-center justify-center cursor-pointer"
+        >
+          <FontAwesomeIcon className="text-[25px] p-0 m-0" icon={faQuestion} />
+          <p className="text-[10px] p-0 m-0"> about</p>
+          <About isOpen={isOpen} />
+        </div>
       </div>
     </div>
   )
