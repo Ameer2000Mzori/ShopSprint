@@ -84,24 +84,22 @@ const ProfilePage = () => {
               <Tbody alignItems="center">
                 {data?.orderList.map((order, index) => {
                   return (
-                    <>
-                      <Tr
-                        textAlign={['left', 'center']}
-                        align="center"
-                        justify="center"
-                        key={index}
-                      >
-                        <Td textAlign={['left', 'center']}>{order.name}</Td>
-                        <Td textAlign={['left', 'center']}>{order.id}</Td>
-                        <Td textAlign={['left', 'center']}>{order.price}</Td>
-                        <Td textAlign={['left', 'center']}>
-                          {order.freeShipping ? 'yes' : 'no'}
-                        </Td>
-                        <Td textAlign={['left', 'center']}>{order.amount}</Td>
-                        <Td textAlign={['left', 'center']}>{order.color}</Td>
-                        <Td textAlign={['left', 'center']}>{order.total}</Td>
-                      </Tr>
-                    </>
+                    <Tr
+                      textAlign={['left', 'center']}
+                      align="center"
+                      justify="center"
+                      key={index}
+                    >
+                      <Td textAlign={['left', 'center']}>{order.name}</Td>
+                      <Td textAlign={['left', 'center']}>{order.id}</Td>
+                      <Td textAlign={['left', 'center']}>{order.price}</Td>
+                      <Td textAlign={['left', 'center']}>
+                        {order.freeShipping ? 'yes' : 'no'}
+                      </Td>
+                      <Td textAlign={['left', 'center']}>{order.amount}</Td>
+                      <Td textAlign={['left', 'center']}>{order.color}</Td>
+                      <Td textAlign={['left', 'center']}>{order.total}</Td>
+                    </Tr>
                   )
                 })}
               </Tbody>

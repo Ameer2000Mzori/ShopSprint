@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logOutUser } from '../../../features/user/userSlice'
 import { LogIn } from 'lucide-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import LoginPage from '../../login/LoginPage.jsx'
 import {
   faDoorOpen,
   faPlusSquare,
@@ -14,6 +15,7 @@ import { useDisclosure } from '@chakra-ui/react'
 
 const UtilityBar = () => {
   const { isOpen, onToggle } = useDisclosure()
+  const { isOpen: loginHandler, onOpen, onClose } = useDisclosure()
   const dispatch = useDispatch()
   const token = useSelector((state) => state.user.token)
 
@@ -37,13 +39,14 @@ const UtilityBar = () => {
           </div>
         ) : (
           <>
-            <Link
-              to="/login"
+            <div
+              onClick={onOpen}
               className="hover:underline flex flex-col text-center items-center justify-center"
             >
               <LogIn className="text-[10px] p-0 m-0" />
               <p className="text-[10px] p-0 m-0"> login</p>
-            </Link>
+              <LoginPage loginHandler={loginHandler} onClose={onClose} />
+            </div>
             <Link
               to="/register"
               className="hover:underline  flex flex-col text-center items-center justify-center"
