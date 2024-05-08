@@ -10,7 +10,7 @@ import {
   faQuestion,
 } from '@fortawesome/free-solid-svg-icons'
 import About from '../../about/About.jsx'
-import { useDisclosure, Button } from '@chakra-ui/react'
+import { useDisclosure } from '@chakra-ui/react'
 
 const UtilityBar = () => {
   const { isOpen, onToggle } = useDisclosure()
