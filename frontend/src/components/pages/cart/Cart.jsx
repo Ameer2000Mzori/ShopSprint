@@ -5,6 +5,7 @@ import { removeFromCart } from '../../features/cart/cartSlice.js'
 import { Link, useNavigate } from 'react-router-dom'
 import { addRedirectRoute } from '../../features/routeRedirect/routeRedirectSlice.js'
 import LoginPage from '../login/LoginPage.jsx'
+import { useDisclosure } from '@chakra-ui/react'
 const Cart = () => {
   const [shippingAmount, setShippingAmount] = useState(0)
   const dispatch = useDispatch()
@@ -12,7 +13,7 @@ const Cart = () => {
   const token = useSelector((state) => state.user.token)
   const items = useSelector((state) => state.cart.items)
   const price = useSelector((state) => state.cart.price)
-
+  const { isOpen, onOpen, onClose } = useDisclosure()
   useEffect(() => {
     let totalShippingAmount = 0
     items.forEach((item) => {
@@ -29,7 +30,6 @@ const Cart = () => {
   }
 
   const handleLogin = () => {
-    navigate('/login')
     dispatch(addRedirectRoute('/cart'))
   }
 
@@ -97,14 +97,16 @@ const Cart = () => {
               ADD ORDER
             </Link>
           ) : (
-            <Link
-              onClick={handleLogin}
-              to="/login"
+            <div
+              onClick={() => {
+                handleLogin()
+                onOpen()
+              }}
               className="flex flex-col text-center items-center justify-center w-[150px] h-[40px] rounded-lg bg-blue-600 text-white font-bold"
             >
               PLEASE LOGIN
-              <LoginPage />
-            </Link>
+              <LoginPage loginHandler={isOpen} onClose={onClose} />
+            </div>
           )}
         </div>
       </div>

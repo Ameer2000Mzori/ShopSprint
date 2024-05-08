@@ -34,6 +34,7 @@ const LoginPage = ({ loginHandler: isOpen, onClose }) => {
         option: 'success',
         message: `login successfully`,
       })
+      onClose()
     },
     onError: (error) => {
       NotificationCard({
