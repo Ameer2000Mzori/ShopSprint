@@ -102,7 +102,7 @@ const Register = ({
     >
       <ModalOverlay />
       <ModalContent as="form" onSubmit={formik.handleSubmit}>
-        <ModalHeader>Create your account</ModalHeader>
+        <ModalHeader>create account</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
           <FormControl>

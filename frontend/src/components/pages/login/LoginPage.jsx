@@ -81,7 +81,7 @@ const LoginPage = ({ loginIsOpen: isOpen, loginOnClose: onClose }) => {
     >
       <ModalOverlay />
       <ModalContent as="form" onSubmit={formik.handleSubmit}>
-        <ModalHeader>Create your account</ModalHeader>
+        <ModalHeader>login</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
           <FormControl>
