@@ -18,9 +18,11 @@ import {
   Button,
   Modal,
   ModalFooter,
+  Text,
+  useDisclosure,
 } from '@chakra-ui/react'
 
-const LoginPage = ({ loginIsOpen: isOpen, loginOnClose: onClose }) => {
+const LoginPage = ({ loginIsOpen, loginOnClose }) => {
   const initialRef = useRef(null)
   const finalRef = useRef(null)
   const saveData = useStoreToken()
@@ -34,7 +36,7 @@ const LoginPage = ({ loginIsOpen: isOpen, loginOnClose: onClose }) => {
         option: 'success',
         message: `login successfully`,
       })
-      onClose()
+      loginOnClose()
     },
     onError: (error) => {
       NotificationCard({
@@ -76,8 +78,8 @@ const LoginPage = ({ loginIsOpen: isOpen, loginOnClose: onClose }) => {
     <Modal
       initialFocusRef={initialRef}
       finalFocusRef={finalRef}
-      isOpen={isOpen}
-      onClose={onClose}
+      isOpen={loginIsOpen}
+      onClose={loginOnClose}
     >
       <ModalOverlay />
       <ModalContent as="form" onSubmit={formik.handleSubmit}>
@@ -106,19 +108,20 @@ const LoginPage = ({ loginIsOpen: isOpen, loginOnClose: onClose }) => {
               value={formik.values.password}
               onBlur={formik.handleBlur}
             />
+            {isError && (
+              <p className="text-red-500 text-center">
+                Error: {isError?.response?.data?.message || 'Login failed'}
+              </p>
+            )}
           </FormControl>
         </ModalBody>
-        {isError && (
-          <p className="text-red-500 text-center">
-            Error: {isError?.response?.data?.message || 'Login failed'}
-          </p>
-        )}
+
         <ModalFooter>
           <Button type="submit" colorScheme="blue" mr={3}>
             {isPending ? 'loading...' : 'Submit'}
           </Button>
 
-          <Button onClick={onClose}>Cancel</Button>
+          <Button onClick={loginOnClose}>Cancel</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
