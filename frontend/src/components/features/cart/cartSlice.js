@@ -9,6 +9,8 @@ export const cartSlice = createSlice({
   },
   reducers: {
     addToCart: (state, action) => {
+      console.log('before adding ', state, action)
+
       state.items.push(action.payload)
       state.price += action.payload.total
       console.log(state.price)
