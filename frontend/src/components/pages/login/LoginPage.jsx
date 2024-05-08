@@ -19,7 +19,6 @@ import {
   Modal,
   ModalFooter,
   Text,
-  useDisclosure,
 } from '@chakra-ui/react'
 
 const LoginPage = ({ loginIsOpen, loginOnClose }) => {

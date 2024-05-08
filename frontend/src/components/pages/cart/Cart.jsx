@@ -13,7 +13,8 @@ const Cart = () => {
   const token = useSelector((state) => state.user.token)
   const items = useSelector((state) => state.cart.items)
   const price = useSelector((state) => state.cart.price)
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen: loginIsOpen, onOpen, onClose: loginOnClose } = useDisclosure()
+
   useEffect(() => {
     let totalShippingAmount = 0
     items.forEach((item) => {
@@ -105,7 +106,10 @@ const Cart = () => {
               className="flex flex-col text-center items-center justify-center w-[150px] h-[40px] rounded-lg bg-blue-600 text-white font-bold"
             >
               PLEASE LOGIN
-              <LoginPage loginHandler={isOpen} onClose={onClose} />
+              <LoginPage
+                loginIsOpen={loginIsOpen}
+                loginOnClose={loginOnClose}
+              />
             </div>
           )}
         </div>
