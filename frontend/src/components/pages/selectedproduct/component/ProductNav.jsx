@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react'
 
-const ProductNav = () => {
+const ProductNav = ({ data }) => {
   return (
     <div className="w-[100%] pl-[15rem] mt-5 h-[40px]">
       <Breadcrumb separator="/">
@@ -13,7 +13,7 @@ const ProductNav = () => {
         </BreadcrumbItem>
 
         <BreadcrumbItem isCurrentPage>
-          <BreadcrumbLink>product</BreadcrumbLink>
+          <BreadcrumbLink>{data.item.title}</BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
     </div>

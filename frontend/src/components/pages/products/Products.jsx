@@ -2,7 +2,13 @@ import React, { useState } from 'react'
 import FilteredProducts from './hooks/FilteredProducts.jsx'
 import FilterForm from './component/FilterForm.jsx'
 import productsImage from '../../../assets/products-img.jpg'
-import { useDisclosure } from '@chakra-ui/react'
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  useDisclosure,
+} from '@chakra-ui/react'
 
 const Products = () => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -17,6 +23,7 @@ const Products = () => {
     onOpen: filterOnOpen,
     onClose: filterOnClose,
   } = useDisclosure()
+  const btnRef = React.useRef()
 
   const [newValue, setNewValue] = useState({
     searchTerm: searchTerm,
@@ -63,23 +70,47 @@ const Products = () => {
       }}
       className="flex flex-col text-center items-center justify-start"
     >
-      <div className="h-[20vh] w-[65vw]">
-        <FilterForm
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          newPrice={newPrice}
-          setNewPrice={setNewPrice}
-          newCategory={newCategory}
-          setNewCategory={setNewCategory}
-          newCompany={newCompany}
-          setNewCompany={setNewCompany}
-          newSorting={newSorting}
-          setNewSorting={setNewSorting}
-          newFreeShipping={newFreeShipping}
-          setNewFreeShipping={setNewFreeShipping}
-          filterProducts={filterProducts}
-        ></FilterForm>
-      </div>
+      <FormControl
+        width={'80%'}
+        height={'10vh'}
+        display={'flex'}
+        flexDirection={'row'}
+        textAlign={'center'}
+        alignItems={'center'}
+        justifyContent={'center'}
+        gap={'1rem'}
+        isRequired
+      >
+        <Input width={'350px'} placeholder="search" />
+        <Button width={'130px'}>Search</Button>
+        <Button
+          ref={btnRef}
+          width={'130px'}
+          colorScheme="teal"
+          onClick={filterOnOpen}
+        >
+          Filter
+        </Button>
+      </FormControl>
+
+      <FilterForm
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        newPrice={newPrice}
+        setNewPrice={setNewPrice}
+        newCategory={newCategory}
+        setNewCategory={setNewCategory}
+        newCompany={newCompany}
+        setNewCompany={setNewCompany}
+        newSorting={newSorting}
+        setNewSorting={setNewSorting}
+        newFreeShipping={newFreeShipping}
+        setNewFreeShipping={setNewFreeShipping}
+        filterProducts={filterProducts}
+        filterIsOpen={filterIsOpen}
+        filterOnOpen={filterOnOpen}
+        filterOnClose={filterOnClose}
+      ></FilterForm>
 
       <div>
         <FilteredProducts value={newValue}></FilteredProducts>

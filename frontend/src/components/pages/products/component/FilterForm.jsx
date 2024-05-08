@@ -4,6 +4,18 @@ import {
   StyledSelectWrap,
   StyledShippingWrap,
 } from './StyledForm.jsx'
+import {
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  Button,
+  Input,
+} from '@chakra-ui/react'
+
 import { useSelector } from 'react-redux'
 
 const FilterForm = ({
@@ -20,6 +32,9 @@ const FilterForm = ({
   newFreeShipping,
   setNewFreeShipping,
   filterProducts,
+  filterIsOpen,
+  filterOnOpen,
+  filterOnClose,
 }) => {
   const newData = useSelector((state) => state.product.amount)
   const btnRef = useRef()
@@ -140,13 +155,13 @@ const FilterForm = ({
     // </form>
 
     <Drawer
-      isOpen={isOpen}
+      isOpen={filterIsOpen}
       placement="right"
-      onClose={onClose}
+      onClose={filterOnClose}
       finalFocusRef={btnRef}
     >
       <DrawerOverlay />
-      <DrawerContent as="form">
+      <DrawerContent>
         <DrawerCloseButton />
         <DrawerHeader>Create your account</DrawerHeader>
 
@@ -155,7 +170,7 @@ const FilterForm = ({
         </DrawerBody>
 
         <DrawerFooter>
-          <Button variant="outline" mr={3} onClick={onClose}>
+          <Button variant="outline" mr={3} onClick={filterOnClose}>
             Cancel
           </Button>
           <Button colorScheme="blue">Save</Button>
