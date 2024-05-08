@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Register from '../../register/Register.jsx'
 import { useDispatch, useSelector } from 'react-redux'
 import { logOutUser } from '../../../features/user/userSlice'
 import { LogIn } from 'lucide-react'
@@ -15,7 +16,16 @@ import { useDisclosure } from '@chakra-ui/react'
 
 const UtilityBar = () => {
   const { isOpen, onToggle } = useDisclosure()
-  const { isOpen: loginHandler, onOpen, onClose } = useDisclosure()
+  const {
+    isOpen: loginIsOpen,
+    onOpen: loginOnOpen,
+    onClose: loginOnClose,
+  } = useDisclosure()
+  const {
+    isOpen: registerIsOpen,
+    onOpen: registerOnOpen,
+    onClose: registerOnClose,
+  } = useDisclosure()
   const dispatch = useDispatch()
   const token = useSelector((state) => state.user.token)
 
@@ -40,23 +50,30 @@ const UtilityBar = () => {
         ) : (
           <>
             <div
-              onClick={onOpen}
-              className="hover:underline flex flex-col text-center items-center justify-center"
+              onClick={loginOnOpen}
+              className="hover:underline flex flex-col text-center items-center justify-center cursor-pointer"
             >
               <LogIn className="text-[10px] p-0 m-0" />
               <p className="text-[10px] p-0 m-0"> login</p>
-              <LoginPage loginHandler={loginHandler} onClose={onClose} />
+              <LoginPage
+                loginIsOpen={loginIsOpen}
+                loginOnClose={loginOnClose}
+              />
             </div>
-            <Link
-              to="/register"
-              className="hover:underline  flex flex-col text-center items-center justify-center"
+            <div
+              onClick={registerOnOpen}
+              className="hover:underline  flex flex-col text-center items-center justify-center cursor-pointer"
             >
               <FontAwesomeIcon
                 className="text-[25px] p-0 m-0"
                 icon={faPlusSquare}
               />
               <p className="text-[10px] p-0 m-0">register</p>
-            </Link>
+              <Register
+                registerIsOpen={registerIsOpen}
+                registerOnClose={registerOnClose}
+              />
+            </div>
           </>
         )}
 

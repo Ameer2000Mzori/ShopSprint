@@ -20,7 +20,7 @@ import {
   ModalFooter,
 } from '@chakra-ui/react'
 
-const LoginPage = ({ loginHandler: isOpen, onClose }) => {
+const LoginPage = ({ loginIsOpen: isOpen, loginOnClose: onClose }) => {
   const initialRef = useRef(null)
   const finalRef = useRef(null)
   const saveData = useStoreToken()

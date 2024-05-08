@@ -13,7 +13,7 @@ import Cart from './components/pages/cart/Cart.jsx'
 import UtilityBar from './components/pages/navbar/component/UtilityBar.jsx'
 import SelectedProduct from './components/pages/selectedproduct/SelectedProduct.jsx'
 // import LoginPage from './components/pages/login/LoginPage.jsx'
-import Register from './components/pages/register/Register.jsx'
+// import Register from './components/pages/register/Register.jsx'
 import ProfilePage from './components/pages/profilePage/ProfilePage.jsx'
 import AddOrder from './components/addorder/AddOrder.jsx'
 
@@ -33,7 +33,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/product/:id" element={<SelectedProduct />} />
           {/* <Route path="/login" element={<LoginPage />} /> */}
-          <Route path="/register" element={<Register />} />
+          {/* <Route path="/register" element={<Register />} /> */}
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/addorder" element={<AddOrder />} />
         </Routes>
