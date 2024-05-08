@@ -188,7 +188,28 @@ const FilterForm = ({
         <DrawerCloseButton />
         <DrawerHeader>filter items</DrawerHeader>
 
-        <DrawerBody display={'flex'} flexDirection={'column'} gap={'1rem'}>
+        <DrawerBody display={'flex'} flexDirection={'column'} gap={'3rem'}>
+          <FormControl>
+            <FormLabel>company</FormLabel>
+            <Select defaultValue="All">
+              <option value="All">All</option>
+              <option value="Company A">Company A</option>
+              <option value="Company B">Company B</option>
+              <option value="Company C">Company C</option>
+              <option value="Company D">Company D</option>
+            </Select>
+          </FormControl>
+
+          <FormControl>
+            <FormLabel>sort</FormLabel>
+            <Select defaultValue="a-z">
+              <option value="a-z">A-Z</option>
+              <option value="z-a">Z-A</option>
+              <option value="high-low">High-Low</option>
+              <option value="low-high">Low-High</option>
+            </Select>
+          </FormControl>
+
           <Box p={4} pt={6}>
             <Slider
               aria-label="slider-ex-6"
@@ -220,17 +241,6 @@ const FilterForm = ({
               <SliderThumb />
             </Slider>
           </Box>
-
-          <FormControl>
-            <FormLabel>company</FormLabel>
-            <Select defaultValue="All">
-              <option value="All">All</option>
-              <option value="Company A">Company A</option>
-              <option value="Company B">Company B</option>
-              <option value="Company C">Company C</option>
-              <option value="Company D">Company D</option>
-            </Select>
-          </FormControl>
 
           <FormControl as="fieldset">
             <FormLabel as="legend">free shipping?</FormLabel>
