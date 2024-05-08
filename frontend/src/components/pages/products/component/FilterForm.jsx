@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import {
   StyledInputWrap,
   StyledSelectWrap,
@@ -22,122 +22,146 @@ const FilterForm = ({
   filterProducts,
 }) => {
   const newData = useSelector((state) => state.product.amount)
-
+  const btnRef = useRef()
   return (
-    <form className="h-[20vh] flex flex-col  text-center items-center justify-around gap-2  ">
-      <div className="w-[90%] h-[70px] flex flex-row text-center items-center justify-evenly">
-        <StyledSelectWrap>
-          <div className="flex flex-row gap-2">
-            <label htmlFor="price">price</label> <p>{newPrice}</p>
-          </div>
-          <input
-            value={newPrice}
-            onChange={(e) => setNewPrice(e.target.value)}
-            type="range"
-            id="price"
-            name="price"
-            min={15}
-            max={500}
-            step={5}
-          />
-        </StyledSelectWrap>
+    // <form className="h-[20vh] flex flex-col  text-center items-center justify-around gap-2  ">
+    //   <div className="w-[90%] h-[70px] flex flex-row text-center items-center justify-evenly">
+    //     <StyledSelectWrap>
+    //       <div className="flex flex-row gap-2">
+    //         <label htmlFor="price">price</label> <p>{newPrice}</p>
+    //       </div>
+    //       <input
+    //         value={newPrice}
+    //         onChange={(e) => setNewPrice(e.target.value)}
+    //         type="range"
+    //         id="price"
+    //         name="price"
+    //         min={15}
+    //         max={500}
+    //         step={5}
+    //       />
+    //     </StyledSelectWrap>
 
-        <StyledShippingWrap>
-          <label htmlFor="Shipping">free shipping?</label>
-          <input
-            value={newFreeShipping}
-            onChange={() => setNewFreeShipping((prev) => !prev)}
-            type="checkbox"
-            id="Shipping"
-            name="Shipping"
-          />
-        </StyledShippingWrap>
+    //     <StyledShippingWrap>
+    //       <label htmlFor="Shipping">free shipping?</label>
+    //       <input
+    //         value={newFreeShipping}
+    //         onChange={() => setNewFreeShipping((prev) => !prev)}
+    //         type="checkbox"
+    //         id="Shipping"
+    //         name="Shipping"
+    //       />
+    //     </StyledShippingWrap>
 
-        <StyledSelectWrap>
-          <label htmlFor="category">category</label>
-          <select
-            className="w-[50px] h-[25px]"
-            value={newCategory}
-            onChange={(e) => setNewCategory(e.target.value)}
-            id="category"
-            name="category"
-          >
-            <option value="All">All</option>
-            <option value="Clothing">Clothing</option>
-            <option value="Accessories">Accessories</option>
-            <option value="Footwear">Footwear</option>
-          </select>
-        </StyledSelectWrap>
+    //     <StyledSelectWrap>
+    //       <label htmlFor="category">category</label>
+    //       <select
+    //         className="w-[50px] h-[25px]"
+    //         value={newCategory}
+    //         onChange={(e) => setNewCategory(e.target.value)}
+    //         id="category"
+    //         name="category"
+    //       >
+    //         <option value="All">All</option>
+    //         <option value="Clothing">Clothing</option>
+    //         <option value="Accessories">Accessories</option>
+    //         <option value="Footwear">Footwear</option>
+    //       </select>
+    //     </StyledSelectWrap>
 
-        <StyledSelectWrap>
-          <label htmlFor="company">company</label>
-          <select
-            className="w-[50px] h-[25px]"
-            value={newCompany}
-            onChange={(e) => setNewCompany(e.target.value)}
-            id="company"
-            name="company"
-          >
-            <option value="All">All</option>
-            <option value="Company A">Company A</option>
-            <option value="Company B">Company B</option>
-            <option value="Company C">Company C</option>
-            <option value="Company D">Company D</option>
-          </select>
-        </StyledSelectWrap>
+    //     <StyledSelectWrap>
+    //       <label htmlFor="company">company</label>
+    //       <select
+    //         className="w-[50px] h-[25px]"
+    //         value={newCompany}
+    //         onChange={(e) => setNewCompany(e.target.value)}
+    //         id="company"
+    //         name="company"
+    //       >
+    //         <option value="All">All</option>
+    //         <option value="Company A">Company A</option>
+    //         <option value="Company B">Company B</option>
+    //         <option value="Company C">Company C</option>
+    //         <option value="Company D">Company D</option>
+    //       </select>
+    //     </StyledSelectWrap>
 
-        <StyledSelectWrap>
-          <label htmlFor="typeOfSorting">Sorting</label>
-          <select
-            className="w-[50px] h-[25px]"
-            value={newSorting}
-            onChange={(e) => setNewSorting(e.target.value)}
-            id="typeOfSorting"
-            name="typeOfSorting"
-          >
-            <option value="a-z">A-Z</option>
-            <option value="z-a">Z-A</option>
-            <option value="low-high">Low to High</option>
-            <option value="high-low">High to Low</option>
-          </select>
-        </StyledSelectWrap>
-      </div>
+    //     <StyledSelectWrap>
+    //       <label htmlFor="typeOfSorting">Sorting</label>
+    //       <select
+    //         className="w-[50px] h-[25px]"
+    //         value={newSorting}
+    //         onChange={(e) => setNewSorting(e.target.value)}
+    //         id="typeOfSorting"
+    //         name="typeOfSorting"
+    //       >
+    //         <option value="a-z">A-Z</option>
+    //         <option value="z-a">Z-A</option>
+    //         <option value="low-high">Low to High</option>
+    //         <option value="high-low">High to Low</option>
+    //       </select>
+    //     </StyledSelectWrap>
+    //   </div>
 
-      <div className="w-[90%] h-[70px] flex flex-row text-center items-center justify-evenly">
-        <button
-          className=" w-[150px] h-[40px] bg-zinc-400 text-white rounded-lg text-[18px] hover:bg-white hover:text-black hover:scale-105 active:scale-90 transition-all duration-500  	"
-          onClick={(e) => {
-            e.preventDefault()
+    //   <div className="w-[90%] h-[70px] flex flex-row text-center items-center justify-evenly">
+    //     <button
+    //       className=" w-[150px] h-[40px] bg-zinc-400 text-white rounded-lg text-[18px] hover:bg-white hover:text-black hover:scale-105 active:scale-90 transition-all duration-500  	"
+    //       onClick={(e) => {
+    //         e.preventDefault()
 
-            filterProducts(
-              searchTerm,
-              newPrice,
-              newCategory,
-              newCompany,
-              newSorting,
-              newFreeShipping
-            )
-          }}
-        >
-          search
-        </button>
+    //         filterProducts(
+    //           searchTerm,
+    //           newPrice,
+    //           newCategory,
+    //           newCompany,
+    //           newSorting,
+    //           newFreeShipping
+    //         )
+    //       }}
+    //     >
+    //       search
+    //     </button>
 
-        <StyledInputWrap className=" w-[200px]  flex flex-col text-start items-start justify-center">
-          {/* <label htmlFor="searchTerm">search</label> */}
-          <input
-            placeholder="search"
-            className="text-white p-1 bg-transparent active:outline-none focus:outline-none  border-[1px] border-gray-400 rounded-md"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            type="text"
-            id="searchTerm"
-            name="searchTerm"
-          />
-        </StyledInputWrap>
+    //     <StyledInputWrap className=" w-[200px]  flex flex-col text-start items-start justify-center">
+    //       {/* <label htmlFor="searchTerm">search</label> */}
+    //       <input
+    //         placeholder="search"
+    //         className="text-white p-1 bg-transparent active:outline-none focus:outline-none  border-[1px] border-gray-400 rounded-md"
+    //         value={searchTerm}
+    //         onChange={(e) => setSearchTerm(e.target.value)}
+    //         type="text"
+    //         id="searchTerm"
+    //         name="searchTerm"
+    //       />
+    //     </StyledInputWrap>
 
-        <p>items found : {newData ? newData.filteredItems.length : '0'}</p>
-      </div>
-    </form>
+    //     <p>items found : {newData ? newData.filteredItems.length : '0'}</p>
+    //   </div>
+    // </form>
+
+    <Drawer
+      isOpen={isOpen}
+      placement="right"
+      onClose={onClose}
+      finalFocusRef={btnRef}
+    >
+      <DrawerOverlay />
+      <DrawerContent as="form">
+        <DrawerCloseButton />
+        <DrawerHeader>Create your account</DrawerHeader>
+
+        <DrawerBody>
+          <Input placeholder="Type here..." />
+        </DrawerBody>
+
+        <DrawerFooter>
+          <Button variant="outline" mr={3} onClick={onClose}>
+            Cancel
+          </Button>
+          <Button colorScheme="blue">Save</Button>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
   )
 }
 

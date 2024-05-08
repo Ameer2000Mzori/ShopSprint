@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import FilteredProducts from './hooks/FilteredProducts.jsx'
 import FilterForm from './component/FilterForm.jsx'
 import productsImage from '../../../assets/products-img.jpg'
+import { useDisclosure } from '@chakra-ui/react'
+
 const Products = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [newPrice, setNewPrice] = useState('')
@@ -9,6 +11,12 @@ const Products = () => {
   const [newCompany, setNewCompany] = useState('All')
   const [newSorting, setNewSorting] = useState('a-z')
   const [newFreeShipping, setNewFreeShipping] = useState(false)
+
+  const {
+    isOpen: filterIsOpen,
+    onOpen: filterOnOpen,
+    onClose: filterOnClose,
+  } = useDisclosure()
 
   const [newValue, setNewValue] = useState({
     searchTerm: searchTerm,
