@@ -71,7 +71,7 @@ const Products = () => {
       className="flex flex-col text-center items-center justify-start"
     >
       <FormControl
-        width={'80%'}
+        width={'65%'}
         height={'10vh'}
         display={'flex'}
         flexDirection={'row'}
@@ -82,7 +82,23 @@ const Products = () => {
         isRequired
       >
         <Input width={'350px'} placeholder="search" />
-        <Button width={'130px'}>Search</Button>
+        <Button
+          width={'130px'}
+          onClick={(e) => {
+            e.preventDefault()
+
+            filterProducts(
+              searchTerm,
+              newPrice,
+              newCategory,
+              newCompany,
+              newSorting,
+              newFreeShipping
+            )
+          }}
+        >
+          Search
+        </Button>
         <Button
           ref={btnRef}
           width={'130px'}

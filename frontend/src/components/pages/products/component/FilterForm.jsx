@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import {
   StyledInputWrap,
   StyledSelectWrap,
@@ -14,6 +14,19 @@ import {
   DrawerCloseButton,
   Button,
   Input,
+  FormControl,
+  FormLabel,
+  Select,
+  Slider,
+  SliderMark,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb,
+  Box,
+  RadioGroup,
+  HStack,
+  Radio,
+  FormHelperText,
 } from '@chakra-ui/react'
 
 import { useSelector } from 'react-redux'
@@ -38,6 +51,15 @@ const FilterForm = ({
 }) => {
   const newData = useSelector((state) => state.product.amount)
   const btnRef = useRef()
+
+  const [sliderValue, setSliderValue] = useState(50)
+
+  const labelStyles = {
+    mt: '4',
+    ml: '-42.5',
+    fontSize: 'sm',
+  }
+
   return (
     // <form className="h-[20vh] flex flex-col  text-center items-center justify-around gap-2  ">
     //   <div className="w-[90%] h-[70px] flex flex-row text-center items-center justify-evenly">
@@ -159,21 +181,95 @@ const FilterForm = ({
       placement="right"
       onClose={filterOnClose}
       finalFocusRef={btnRef}
+      as="form"
     >
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
-        <DrawerHeader>Create your account</DrawerHeader>
+        <DrawerHeader>filter items</DrawerHeader>
 
-        <DrawerBody>
-          <Input placeholder="Type here..." />
+        <DrawerBody display={'flex'} flexDirection={'column'} gap={'1rem'}>
+          <Box p={4} pt={6}>
+            <Slider
+              aria-label="slider-ex-6"
+              onChange={(val) => setSliderValue(val)}
+            >
+              <SliderMark value={25} {...labelStyles}>
+                25$
+              </SliderMark>
+              <SliderMark value={50} {...labelStyles}>
+                50$
+              </SliderMark>
+              <SliderMark value={75} {...labelStyles}>
+                75$
+              </SliderMark>
+              <SliderMark
+                value={sliderValue}
+                textAlign="center"
+                bg="blue.500"
+                color="white"
+                mt="-10"
+                ml="-5"
+                w="12"
+              >
+                {sliderValue}$
+              </SliderMark>
+              <SliderTrack>
+                <SliderFilledTrack />
+              </SliderTrack>
+              <SliderThumb />
+            </Slider>
+          </Box>
+
+          <FormControl>
+            <FormLabel>company</FormLabel>
+            <Select defaultValue="All">
+              <option value="All">All</option>
+              <option value="Company A">Company A</option>
+              <option value="Company B">Company B</option>
+              <option value="Company C">Company C</option>
+              <option value="Company D">Company D</option>
+            </Select>
+          </FormControl>
+
+          <FormControl as="fieldset">
+            <FormLabel as="legend">free shipping?</FormLabel>
+            <RadioGroup defaultValue="no">
+              <HStack spacing="24px">
+                <Radio value="yes">yes</Radio>
+                <Radio value="no">no</Radio>
+              </HStack>
+            </RadioGroup>
+          </FormControl>
         </DrawerBody>
 
-        <DrawerFooter>
+        <DrawerFooter
+          display={'flex'}
+          flexDirection={'row-reverse'}
+          gap={'1rem'}
+        >
           <Button variant="outline" mr={3} onClick={filterOnClose}>
-            Cancel
+            cancel
           </Button>
-          <Button colorScheme="blue">Save</Button>
+          <Button
+            onClick={(e) => {
+              e.preventDefault()
+
+              filterProducts(
+                searchTerm,
+                newPrice,
+                newCategory,
+                newCompany,
+                newSorting,
+                newFreeShipping
+              )
+
+              filterOnClose()
+            }}
+            colorScheme="blue"
+          >
+            search
+          </Button>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
