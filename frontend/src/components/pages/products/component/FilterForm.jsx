@@ -111,13 +111,17 @@ const FilterForm = ({
               defaultValue={newPrice}
               onChangeCapture={(e) => setNewPrice(e.target.value)}
               max={999}
-              min={10}
+              min={15}
               placeContent={'price'}
             >
               <NumberInputField />
               <NumberInputStepper>
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
+                <NumberIncrementStepper
+                  onClick={() => setNewPrice((prev) => (prev += 1))}
+                />
+                <NumberDecrementStepper
+                  onClick={() => setNewPrice((prev) => (prev -= 1))}
+                />
               </NumberInputStepper>
             </NumberInput>
           </FormControl>
