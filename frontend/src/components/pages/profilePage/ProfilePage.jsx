@@ -48,25 +48,6 @@ const ProfilePage = () => {
       <div className="h-[auto] text-[12px] text-black  flex flex-col text-center items-center justify-center">
         <h1>HISTORY ORDERS</h1>
         {data?.orderList.length > 0 ? (
-          // <div>
-          //   {data?.orderList.map((order, index) => {
-          //     return (
-          //       <div
-          //         key={index}
-          //         className="w-[500px] flex flex-row text-start items-start justify-between pl-2 pr-2 gap-8"
-          //       >
-          //         <p>{order.name}</p>
-          //         <p>{order.id}</p>
-          //         <p>{order.price}</p>
-          //         <p>{order.freeShipping ? 'yes' : 'no'}</p>
-          //         <p>{order.amount}</p>
-          //         <p>{order.color}</p>
-          //         <p>${order.total}</p>
-          //       </div>
-          //     )
-          //   })}
-          // </div>
-
           <TableContainer className=" w-[70%]">
             <Table variant="striped" colorScheme="teal">
               <TableCaption>items you have ordered!</TableCaption>
