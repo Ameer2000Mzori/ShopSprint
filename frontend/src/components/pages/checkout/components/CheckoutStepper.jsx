@@ -1,4 +1,14 @@
-import { Step, StepIndicator, Stepper } from '@chakra-ui/react'
+import {
+  Step,
+  StepIndicator,
+  StepStatus,
+  Stepper,
+  useSteps,
+  Box,
+  StepTitle,
+  StepDescription,
+  StepSeparator,
+} from '@chakra-ui/react'
 
 const steps = [
   { title: 'step 1', description: 'contact Info' },
@@ -13,7 +23,17 @@ const CheckOutStepper = () => {
   })
 
   return (
-    <Stepper size="lg" colorScheme="yellow" index={activeStep}>
+    <Stepper
+      size="lg"
+      colorScheme="yellow"
+      display={'flex'}
+      flexDirection={'row'}
+      textAlign={'center'}
+      alignItems={'center'}
+      justifyContent={'center'}
+      width={'100%'}
+      index={activeStep}
+    >
       {steps.map((step, index) => (
         <Step key={index}>
           <StepIndicator>

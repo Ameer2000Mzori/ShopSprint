@@ -92,7 +92,7 @@ const Cart = () => {
           </div>
           {token ? (
             <Link
-              to="/addorder"
+              to="/checkout"
               className="flex flex-col text-center items-center justify-center w-[150px] h-[40px] rounded-lg bg-blue-600 text-white font-bold"
             >
               ADD ORDER
