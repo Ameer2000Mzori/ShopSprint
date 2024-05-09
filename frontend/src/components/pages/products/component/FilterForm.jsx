@@ -27,6 +27,11 @@ import {
   HStack,
   Radio,
   FormHelperText,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
 } from '@chakra-ui/react'
 
 import { useSelector } from 'react-redux'
@@ -210,37 +215,16 @@ const FilterForm = ({
             </Select>
           </FormControl>
 
-          <Box p={4} pt={6}>
-            <Slider
-              aria-label="slider-ex-6"
-              onChange={(val) => setSliderValue(val)}
-            >
-              <SliderMark value={25} {...labelStyles}>
-                25$
-              </SliderMark>
-              <SliderMark value={50} {...labelStyles}>
-                50$
-              </SliderMark>
-              <SliderMark value={75} {...labelStyles}>
-                75$
-              </SliderMark>
-              <SliderMark
-                value={sliderValue}
-                textAlign="center"
-                bg="blue.500"
-                color="white"
-                mt="-10"
-                ml="-5"
-                w="12"
-              >
-                {sliderValue}$
-              </SliderMark>
-              <SliderTrack>
-                <SliderFilledTrack />
-              </SliderTrack>
-              <SliderThumb />
-            </Slider>
-          </Box>
+          <FormControl>
+            <FormLabel>Amount</FormLabel>
+            <NumberInput max={999} min={10} placeContent={''}>
+              <NumberInputField />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
+          </FormControl>
 
           <FormControl as="fieldset">
             <FormLabel as="legend">free shipping?</FormLabel>
