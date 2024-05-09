@@ -116,15 +116,17 @@ const FilterForm = ({
             </NumberInput>
           </FormControl>
 
-          <FormLabel as="legend">free shipping?</FormLabel>
-          <Checkbox
-            isChecked={newFreeShipping}
-            onChangeCapture={(e) => setNewFreeShipping(e.target.checked)}
-            size="md"
-            colorScheme="green"
-          >
-            Checkbox
-          </Checkbox>
+          <FormControl>
+            <FormLabel as="legend">free shipping?</FormLabel>
+            <Checkbox
+              isChecked={newFreeShipping}
+              onChangeCapture={(e) => setNewFreeShipping(e.target.checked)}
+              size="md"
+              colorScheme="green"
+            >
+              Checkbox
+            </Checkbox>
+          </FormControl>
         </DrawerBody>
 
         <DrawerFooter
@@ -133,7 +135,7 @@ const FilterForm = ({
           gap={'1rem'}
         >
           <Button variant="outline" mr={3} onClick={filterOnClose}>
-            cancel
+            close
           </Button>
           <Button
             onClick={(e) => {
