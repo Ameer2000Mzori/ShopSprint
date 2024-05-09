@@ -47,14 +47,6 @@ const FilterForm = ({
   const newData = useSelector((state) => state.product.amount)
   const btnRef = useRef()
 
-  const [sliderValue, setSliderValue] = useState(50)
-
-  const labelStyles = {
-    mt: '4',
-    ml: '-42.5',
-    fontSize: 'sm',
-  }
-
   return (
     <Drawer
       isOpen={filterIsOpen}

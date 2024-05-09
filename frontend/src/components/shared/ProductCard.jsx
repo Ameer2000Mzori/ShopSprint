@@ -12,6 +12,11 @@ import {
   Image,
   CardBody,
   CardFooter,
+  Tag,
+  Avatar,
+  TagLabel,
+  HStack,
+  TagCloseButton,
 } from '@chakra-ui/react'
 
 const ProductCard = ({ item }) => {
@@ -32,7 +37,14 @@ const ProductCard = ({ item }) => {
               alt="Green double couch with wooden legs"
               borderRadius="lg"
             />
-            <Stack mt="6" spacing="3">
+            <Stack
+              mt="6"
+              spacing="3"
+              style={{
+                textAlign: 'start',
+                alignItems: 'start',
+              }}
+            >
               <Heading size="md">{item.title}</Heading>
               <Text>
                 This sofa is perfect for modern tropical spaces, baroque
@@ -42,13 +54,51 @@ const ProductCard = ({ item }) => {
               <Text color="blue.600" fontSize="2xl">
                 ${item.price}
               </Text>
-              <Text color="blue.600" className="text-start text-[15px]">
-                free shipping - {item.freeShipping ? 'yes' : 'no'}
-              </Text>
             </Stack>
           </CardBody>
           <Divider />
-          <CardFooter></CardFooter>
+          <CardFooter>
+            <HStack
+              spacing={4}
+              display={'flex'}
+              flexDirection={'row'}
+              gap={'5px'}
+            >
+              <Tag
+                size="sm"
+                borderRadius="full"
+                variant="solid"
+                textAlign={'center'}
+                colorScheme="blue"
+              >
+                <TagLabel>{item.category}</TagLabel>
+              </Tag>
+
+              <Tag
+                size="sm"
+                borderRadius="full"
+                variant="solid"
+                textAlign={'center'}
+                colorScheme="gray"
+              >
+                <TagLabel>{item.company}</TagLabel>
+              </Tag>
+
+              <Text color="blue.600" className="text-start text-[15px]">
+                {item.freeShipping && (
+                  <Tag
+                    size="sm"
+                    borderRadius="full"
+                    variant="solid"
+                    textAlign={'center'}
+                    colorScheme="green"
+                  >
+                    <TagLabel>free shipping</TagLabel>
+                  </Tag>
+                )}
+              </Text>
+            </HStack>
+          </CardFooter>
         </Card>
       </Link>
     </>

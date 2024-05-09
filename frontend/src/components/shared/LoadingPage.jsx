@@ -1,5 +1,5 @@
 import React from 'react'
-import { Spinner, Stack } from '@chakra-ui/react'
+import { Skeleton, Spinner, Stack } from '@chakra-ui/react'
 
 const LoadingPage = () => {
   return (
