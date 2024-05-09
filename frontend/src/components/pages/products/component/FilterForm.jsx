@@ -85,6 +85,20 @@ const FilterForm = ({
           </FormControl>
 
           <FormControl>
+            <FormLabel>category</FormLabel>
+            <Select
+              defaultValue="All"
+              value={newCategory}
+              onChangeCapture={(e) => setNewCategory(e.target.value)}
+            >
+              <option value="All">All</option>
+              <option value="Clothing">Clothing</option>
+              <option value="Accessories">Accessories</option>
+              <option value="Footwear">Footwear</option>
+            </Select>
+          </FormControl>
+
+          <FormControl>
             <FormLabel>sort</FormLabel>
             <Select
               defaultValue="a-z"
@@ -163,6 +177,8 @@ const FilterForm = ({
 }
 
 export default FilterForm
+
+// old form control with old styling and more
 
 // <form className="h-[20vh] flex flex-col  text-center items-center justify-around gap-2  ">
 //   <div className="w-[90%] h-[70px] flex flex-row text-center items-center justify-evenly">
