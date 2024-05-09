@@ -12,7 +12,7 @@ import {
 
 const Products = () => {
   const [searchTerm, setSearchTerm] = useState('')
-  const [newPrice, setNewPrice] = useState('')
+  const [newPrice, setNewPrice] = useState('15')
   const [newCategory, setNewCategory] = useState('All')
   const [newCompany, setNewCompany] = useState('All')
   const [newSorting, setNewSorting] = useState('a-z')
