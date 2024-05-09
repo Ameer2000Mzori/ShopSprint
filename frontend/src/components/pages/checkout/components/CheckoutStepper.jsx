@@ -18,7 +18,7 @@ const steps = [
 
 const CheckOutStepper = () => {
   const { activeStep } = useSteps({
-    index: 1,
+    index: 0,
     count: steps.length,
   })
 
@@ -31,7 +31,7 @@ const CheckOutStepper = () => {
       textAlign={'center'}
       alignItems={'center'}
       justifyContent={'center'}
-      width={'100%'}
+      width={'60%'}
       index={activeStep}
     >
       {steps.map((step, index) => (

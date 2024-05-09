@@ -39,7 +39,7 @@ const CheckOut = () => {
   }
 
   return (
-    <>
+    <div className="h-[auto] w-[100%] flex flex-col text-center items-center justify-center">
       <CheckOutStepper />
       <div className="flex flex-col text-center items-center justify-center">
         <p>do you confirm ordering the items ? {items.length}</p>
@@ -48,7 +48,7 @@ const CheckOut = () => {
 
         <button onClick={addItems}>confirm</button>
       </div>
-    </>
+    </div>
   )
 }
 
