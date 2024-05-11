@@ -145,7 +145,7 @@ const FilterForm = ({
           gap={'1rem'}
         >
           <Button variant="outline" mr={3} onClick={filterOnClose}>
-            close
+            close.
           </Button>
           <Button
             onClick={(e) => {
