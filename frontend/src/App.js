@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import { ChakraProvider } from '@chakra-ui/react'
@@ -17,8 +17,19 @@ import SelectedProduct from './components/pages/selectedproduct/SelectedProduct.
 import ProfilePage from './components/pages/profilePage/ProfilePage.jsx'
 // import AddOrder from './components/addorder/AddOrder.jsx'
 import CheckOut from './components/pages/checkout/CheckOut.jsx'
+import AuthCheck from './components/shared/AuthCheck.jsx'
+import { useSelector } from 'react-redux'
 
 function App() {
+  const userToken = useSelector((state) => state.user.token)
+  const { mutate } = AuthCheck()
+
+  useEffect(() => {
+    mutate({ token: userToken })
+
+    console.log('this is from app checking user auth ')
+  }, [])
+
   return (
     <ChakraProvider>
       <Router>

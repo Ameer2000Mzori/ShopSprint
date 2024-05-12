@@ -13,5 +13,6 @@ userRouter.get('/users', getUsers)
 userRouter.get('/user/:id', guard, getUser)
 userRouter.post('/login', userLogin)
 userRouter.post('/register', createUser)
+userRouter.post('/checkuser', guard)
 
 export default userRouter
