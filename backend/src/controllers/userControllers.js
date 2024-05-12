@@ -3,6 +3,18 @@ import jwt from 'jsonwebtoken'
 import { hashPassword, checkPwd } from '../utils/hashing.js'
 import 'dotenv/config'
 
+// export const checkUser = async (req, res) => {
+//   try {
+//     const user = await User.findById(req.body.id)
+//     if (!user) {
+//       return res.status(404).json({ message: 'User not found.' })
+//     }
+//   } catch (error) {
+//     console.error(error)
+//     return res.status(500).json({ message: 'Server Error' })
+//   }
+// }
+
 export const getUsers = (req, res) => {
   User.find()
     .populate('orderList')
@@ -83,7 +95,7 @@ export const createUser = async (req, res) => {
       },
       process.env.SECRET,
       {
-        expiresIn: 3600, // 1 hour
+        expiresIn: 60, // 1 hour
       }
     )
 
@@ -125,7 +137,7 @@ export const userLogin = async (req, res) => {
       message: 'Username or Password is wrong ',
     })
   const token = jwt.sign({ id: user._id }, process.env.SECRET, {
-    expiresIn: 3600,
+    expiresIn: 60,
   })
   return res.status(200).json({
     message: 'logged in successfully ',

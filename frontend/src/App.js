@@ -21,11 +21,20 @@ import AuthCheck from './components/shared/AuthCheck.jsx'
 import { useSelector } from 'react-redux'
 
 function App() {
-  const userToken = useSelector((state) => state.user.token)
-  const { mutate } = AuthCheck()
+  const user = useSelector((state) => state.user)
+
+  console.log('information', user)
+  const { mutate } = AuthCheck({
+    onSuccess: (data) => {
+      console.log('user is authenticated', data)
+    },
+    onError: (error) => {
+      console.log('there is error', error)
+    },
+  })
 
   useEffect(() => {
-    mutate({ token: userToken })
+    mutate({ token: user.token, id: user.id })
 
     console.log('this is from app checking user auth ')
   }, [])
