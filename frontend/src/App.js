@@ -28,7 +28,6 @@ function App() {
 
   useEffect(() => {
     if (user.token) mutate([{ token: user.token, id: user.id }])
-
     console.log('this is from app checking user auth ')
   }, [])
 

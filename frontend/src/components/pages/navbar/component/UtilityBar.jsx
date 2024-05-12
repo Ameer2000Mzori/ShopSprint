@@ -13,6 +13,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import About from '../../about/About.jsx'
 import { useDisclosure } from '@chakra-ui/react'
+import NotificationCard from '../../../shared/NotificationCard.jsx'
 
 const UtilityBar = () => {
   const { isOpen, onToggle } = useDisclosure()
@@ -31,6 +32,10 @@ const UtilityBar = () => {
 
   const handleLogout = () => {
     dispatch(logOutUser())
+    NotificationCard({
+      option: 'warning',
+      message: `logged out successfully`,
+    })
   }
 
   return (

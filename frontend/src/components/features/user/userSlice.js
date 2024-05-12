@@ -35,10 +35,6 @@ export const userInfo = createSlice({
 
     logOutUser: () => {
       localStorage.removeItem('user')
-      NotificationCard({
-        option: 'warning',
-        message: `logged out successfully`,
-      })
 
       return {
         name: null,

@@ -91,7 +91,7 @@ export const createUser = async (req, res) => {
       },
       process.env.SECRET,
       {
-        expiresIn: 60, // 1 hour
+        expiresIn: 15, // 1 hour
       }
     )
 
@@ -133,7 +133,7 @@ export const userLogin = async (req, res) => {
       message: 'Username or Password is wrong ',
     })
   const token = jwt.sign({ id: user._id }, process.env.SECRET, {
-    expiresIn: 60,
+    expiresIn: 15,
   })
   return res.status(200).json({
     message: 'logged in successfully ',

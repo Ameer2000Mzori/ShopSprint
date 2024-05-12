@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import AuthOperations from '../../shared/AuthOperations'
 
@@ -14,10 +14,17 @@ import {
   TableCaption,
   TableContainer,
 } from '@chakra-ui/react'
+import { logOutUser } from '../../features/user/userSlice'
 
 const ProfilePage = () => {
   const user = useSelector((state) => state.user)
-  const { mutate, isPending, isError, data } = AuthOperations({})
+  const dispatch = useDispatch()
+  const { mutate, isPending, isError, data } = AuthOperations({
+    onError: (error) => {
+      console.log(' error we got ', error)
+      if (error.response.status === 401) dispatch(logOutUser())
+    },
+  })
 
   console.log(user)
   const navigate = useNavigate()
