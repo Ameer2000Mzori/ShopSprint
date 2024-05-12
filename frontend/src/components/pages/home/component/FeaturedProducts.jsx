@@ -35,7 +35,7 @@ const FeaturedProducts = () => {
   ]
 
   return (
-    <div className="h-[40vh] w-[100%]">
+    <div className="h-[60vh] w-[100%]">
       <h1 className="text-[30px] font-bold">FeaturedProducts</h1>
       <div className="w-[100%] h-[1px] rounded-md bg-gray-300"></div>
       <StyledCardWrapper>

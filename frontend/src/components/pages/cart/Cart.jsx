@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { removeFromCart } from '../../features/cart/cartSlice.js'
 import { Link, useNavigate } from 'react-router-dom'
 import { addRedirectRoute } from '../../features/routeRedirect/routeRedirectSlice.js'
-
+import LoginPage from '../login/LoginPage.jsx'
+import { useDisclosure } from '@chakra-ui/react'
 const Cart = () => {
   const [shippingAmount, setShippingAmount] = useState(0)
   const dispatch = useDispatch()
@@ -12,6 +13,7 @@ const Cart = () => {
   const token = useSelector((state) => state.user.token)
   const items = useSelector((state) => state.cart.items)
   const price = useSelector((state) => state.cart.price)
+  const { isOpen: loginIsOpen, onOpen, onClose: loginOnClose } = useDisclosure()
 
   useEffect(() => {
     let totalShippingAmount = 0
@@ -29,7 +31,6 @@ const Cart = () => {
   }
 
   const handleLogin = () => {
-    navigate('/login')
     dispatch(addRedirectRoute('/cart'))
   }
 
@@ -76,7 +77,7 @@ const Cart = () => {
                 </li>
                 <li className="h-[40px] w-[100%] flex flex-row text-center items-center justify-between pr-2 pl-2  border-b-2 border-gray-300">
                   <p>tax 15%</p>
-                  <p>${price ? `${price * 0.15}` : 0}</p>
+                  <p>${price ? `${(price * 0.15).toFixed(2)}` : 0}</p>
                 </li>
                 <li className="h-[40px] w-[100%] flex flex-row text-center items-center justify-between pr-2 pl-2  border-b-2 border-gray-300">
                   <p>shipping fee</p>
@@ -91,19 +92,25 @@ const Cart = () => {
           </div>
           {token ? (
             <Link
-              to="/addorder"
-              className="flex flex-col text-center items-center justify-center w-[150px] h-[40px] rounded-lg bg-blue-600 text-white font-bold"
+              to="/checkout"
+              className="flex flex-col text-center items-center justify-center w-[150px] h-[40px] rounded-lg bg-blue-600 text-white font-bold cursor-pointer"
             >
               ADD ORDER
             </Link>
           ) : (
-            <Link
-              onClick={handleLogin}
-              to="/login"
-              className="flex flex-col text-center items-center justify-center w-[150px] h-[40px] rounded-lg bg-blue-600 text-white font-bold"
+            <div
+              onClick={() => {
+                handleLogin()
+                onOpen()
+              }}
+              className="flex flex-col text-center items-center justify-center w-[150px] h-[40px] rounded-lg bg-blue-600 text-white font-bold cursor-pointer"
             >
               PLEASE LOGIN
-            </Link>
+              <LoginPage
+                loginIsOpen={loginIsOpen}
+                loginOnClose={loginOnClose}
+              />
+            </div>
           )}
         </div>
       </div>
