@@ -3,17 +3,13 @@ import jwt from 'jsonwebtoken'
 import { hashPassword, checkPwd } from '../utils/hashing.js'
 import 'dotenv/config'
 
-// export const checkUser = async (req, res) => {
-//   try {
-//     const user = await User.findById(req.body.id)
-//     if (!user) {
-//       return res.status(404).json({ message: 'User not found.' })
-//     }
-//   } catch (error) {
-//     console.error(error)
-//     return res.status(500).json({ message: 'Server Error' })
-//   }
-// }
+export const checkUser = (req, res) => {
+  const { id } = req.body
+  console.log('this is id backend', id)
+  const user = User.findById(id)
+
+  console.log('user found ', user)
+}
 
 export const getUsers = (req, res) => {
   User.find()

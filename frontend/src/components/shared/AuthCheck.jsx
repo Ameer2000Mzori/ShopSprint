@@ -3,15 +3,15 @@ import { logOutUser } from '../features/user/userSlice'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 
-const AuthCheck = ({ onSuccess, onError }) => {
+const AuthCheck = () => {
   const dispatch = useDispatch()
 
   const { mutate, isError } = useMutation({
     mutationFn: ([{ token, id }]) => {
       return axios
         .request({
-          method: `POST`,
-          url: `/usercheck`,
+          method: `GET`,
+          url: `/checkuser`,
 
           data: {
             id,
@@ -27,18 +27,14 @@ const AuthCheck = ({ onSuccess, onError }) => {
           throw error
         })
     },
-    onSuccess:
-      onSuccess ??
-      (() => {
-        console.log('there is success user will stay logged in')
-      }),
+    onSuccess: () => {
+      console.log('there is success user will stay logged in')
+    },
 
-    onError:
-      onError ??
-      (() => {
-        console.log('there is an error user will be logged out ')
-        dispatch(logOutUser())
-      }),
+    onError: () => {
+      console.log('there is an error user will be logged out ')
+      dispatch(logOutUser())
+    },
   })
 
   console.log('is error', isError)

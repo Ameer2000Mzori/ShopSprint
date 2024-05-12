@@ -24,17 +24,10 @@ function App() {
   const user = useSelector((state) => state.user)
 
   console.log('information', user)
-  const { mutate } = AuthCheck({
-    onSuccess: (data) => {
-      console.log('user is authenticated', data)
-    },
-    onError: (error) => {
-      console.log('there is error', error)
-    },
-  })
+  const { mutate } = AuthCheck()
 
   useEffect(() => {
-    mutate({ token: user.token, id: user.id })
+    if (user.token) mutate([{ token: user.token, id: user.id }])
 
     console.log('this is from app checking user auth ')
   }, [])
