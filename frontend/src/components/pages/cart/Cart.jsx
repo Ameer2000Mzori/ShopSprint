@@ -93,7 +93,7 @@ const Cart = () => {
           {token ? (
             <Link
               to="/checkout"
-              className="flex flex-col text-center items-center justify-center w-[150px] h-[40px] rounded-lg bg-blue-600 text-white font-bold"
+              className="flex flex-col text-center items-center justify-center w-[150px] h-[40px] rounded-lg bg-blue-600 text-white font-bold cursor-pointer"
             >
               ADD ORDER
             </Link>
@@ -103,7 +103,7 @@ const Cart = () => {
                 handleLogin()
                 onOpen()
               }}
-              className="flex flex-col text-center items-center justify-center w-[150px] h-[40px] rounded-lg bg-blue-600 text-white font-bold"
+              className="flex flex-col text-center items-center justify-center w-[150px] h-[40px] rounded-lg bg-blue-600 text-white font-bold cursor-pointer"
             >
               PLEASE LOGIN
               <LoginPage
