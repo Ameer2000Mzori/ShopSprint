@@ -11,10 +11,10 @@ const initialState = {
 }
 
 const contactInfo = createSlice({
-  name: 'check-out-steps',
+  name: 'contactInfo',
   initialState,
   reducers: {
-    updateStep: (state, action) => {
+    updateContactInfo: (state, action) => {
       state.step = action.payload
     },
   },
