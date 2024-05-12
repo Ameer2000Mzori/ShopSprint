@@ -10,6 +10,7 @@ import {
   StepSeparator,
 } from '@chakra-ui/react'
 
+import { CircleCheck, MapPin, Hourglass } from 'lucide-react'
 const steps = [
   { title: 'step 1', description: 'contact Info' },
   { title: 'step 2 ', description: 'date and payment' },
@@ -18,14 +19,14 @@ const steps = [
 
 const CheckOutStepper = () => {
   const { activeStep } = useSteps({
-    index: 0,
+    index: 1,
     count: steps.length,
   })
 
   return (
     <Stepper
       size="lg"
-      colorScheme="yellow"
+      colorScheme="green"
       display={'flex'}
       flexDirection={'row'}
       textAlign={'center'}
@@ -37,10 +38,14 @@ const CheckOutStepper = () => {
       {steps.map((step, index) => (
         <Step key={index}>
           <StepIndicator>
-            <StepStatus complete={`✅`} incomplete={`😅`} active={`📍`} />
+            <StepStatus
+              complete={<CircleCheck />}
+              incomplete={<Hourglass />}
+              active={<MapPin />}
+            />
           </StepIndicator>
 
-          <Box flexShrink="0">
+          <Box flexShrink="0" textAlign={'start'}>
             <StepTitle>{step.title}</StepTitle>
             <StepDescription>{step.description}</StepDescription>
           </Box>
