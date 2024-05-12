@@ -51,7 +51,7 @@ const SelectedProduct = () => {
   console.log('data ', data)
   return (
     <>
-      <ProductNav />
+      <ProductNav data={data} />
       <StyledPageWrapper className="gap-4">
         <div className="h-[80%] w-[25%] flex flex-col text-center items-center justify-center">
           <img

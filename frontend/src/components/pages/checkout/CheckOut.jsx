@@ -1,10 +1,11 @@
 import React from 'react'
+import CheckOutStepper from './components/CheckoutStepper'
 import { useSelector } from 'react-redux'
-import AuthOperations from '../shared/AuthOperations'
+import AuthOperations from '../../shared/AuthOperations'
 import { useNavigate } from 'react-router-dom'
-import NotificationCard from '../shared/NotificationCard'
+import NotificationCard from '../../shared/NotificationCard'
 
-const AddOrder = () => {
+const CheckOut = () => {
   const navigate = useNavigate()
 
   const { mutate, isPending, isError } = AuthOperations({
@@ -38,7 +39,8 @@ const AddOrder = () => {
   }
 
   return (
-    <>
+    <div className="h-[auto] w-[100%] flex flex-col text-center items-center justify-center">
+      <CheckOutStepper />
       <div className="flex flex-col text-center items-center justify-center">
         <p>do you confirm ordering the items ? {items.length}</p>
         {isPending && <div>loading...</div>}
@@ -46,8 +48,8 @@ const AddOrder = () => {
 
         <button onClick={addItems}>confirm</button>
       </div>
-    </>
+    </div>
   )
 }
 
-export default AddOrder
+export default CheckOut

@@ -4,11 +4,7 @@ export const navObj = [
     path: '/home',
     active: true,
   },
-  {
-    name: 'About',
-    path: '/about',
-    active: false,
-  },
+
   {
     name: 'Products',
     path: '/products',

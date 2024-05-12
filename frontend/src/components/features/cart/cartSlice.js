@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import NotificationCard from '../../shared/NotificationCard'
 
 export const cartSlice = createSlice({
   name: 'cart',
@@ -8,9 +9,15 @@ export const cartSlice = createSlice({
   },
   reducers: {
     addToCart: (state, action) => {
+      console.log('before adding ', state, action)
+
       state.items.push(action.payload)
       state.price += action.payload.total
       console.log(state.price)
+      NotificationCard({
+        option: 'success',
+        message: `item added successfully`,
+      })
     },
     removeFromCart: (state, action) => {
       state.price = 0
@@ -18,11 +25,21 @@ export const cartSlice = createSlice({
       for (const item of state.items) {
         state.price += item.price * item.amount
       }
+
+      NotificationCard({
+        option: 'warning',
+        message: `item removed successfully`,
+      })
+
       console.log(state.items)
       console.log(state.price)
     },
     clearCart: (state) => {
       state.items = []
+      NotificationCard({
+        option: 'warning',
+        message: `items removed successfully`,
+      })
     },
   },
 })
