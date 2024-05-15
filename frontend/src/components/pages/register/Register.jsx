@@ -2,14 +2,6 @@ import React, { useEffect, useRef } from 'react'
 import { useFormik } from 'formik'
 
 import {
-  StyledButton,
-  StyledForm,
-  StyledFormWrap,
-  StyledLabelInput,
-  StyledLabelInputWrap,
-} from '../login/component/StyledComponent'
-
-import {
   FormControl,
   FormLabel,
   Input,
@@ -204,86 +196,3 @@ const Register = ({
 }
 
 export default Register
-
-// <StyledFormWrap>
-//   <StyledForm onSubmit={formik.handleSubmit}>
-//     <StyledLabelInputWrap>
-//       <StyledLabelInput htmlFor="name">Name</StyledLabelInput>
-//       <input
-//         type="text"
-//         id="name"
-//         onChange={formik.handleChange}
-//         value={formik.values.name}
-//         onBlur={formik.handleBlur}
-//       />
-//       {formik.touched.name && formik.errors.name ? (
-//         <p className="text-white">{formik.errors.name}</p>
-//       ) : null}
-//     </StyledLabelInputWrap>
-//     <StyledLabelInputWrap>
-//       <StyledLabelInput htmlFor="userName">User Name</StyledLabelInput>
-//       <input
-//         type="text"
-//         id="userName"
-//         onChange={formik.handleChange}
-//         value={formik.values.userName}
-//         onBlur={formik.handleBlur}
-//       />
-//       {formik.touched.userName && formik.errors.userName && (
-//         <p className="text-white">{formik.errors.userName}</p>
-//       )}
-//     </StyledLabelInputWrap>
-//     <StyledLabelInputWrap>
-//       <StyledLabelInput htmlFor="email">Email address</StyledLabelInput>
-//       <input
-//         type="text"
-//         id="email"
-//         onChange={formik.handleChange}
-//         value={formik.values.email}
-//         onBlur={formik.handleBlur}
-//       />
-//       {formik.touched.email && formik.errors.email ? (
-//         <p className="text-white">{formik.errors.email}</p>
-//       ) : null}
-//     </StyledLabelInputWrap>
-//     <StyledLabelInputWrap>
-//       <StyledLabelInput htmlFor="password">Password</StyledLabelInput>
-//       <input
-//         type="password"
-//         id="password"
-//         onChange={formik.handleChange}
-//         value={formik.values.password}
-//         onBlur={formik.handleBlur}
-//       />
-//       {formik.touched.password && formik.errors.password ? (
-//         <p className="text-white">{formik.errors.password}</p>
-//       ) : null}
-//     </StyledLabelInputWrap>
-//     <StyledLabelInputWrap>
-//       <StyledLabelInput htmlFor="confirmPassword">
-//         Confirm Password
-//       </StyledLabelInput>
-//       <input
-//         type="password"
-//         id="confirmPassword"
-//         onChange={formik.handleChange}
-//         value={formik.values.confirmPassword}
-//         onBlur={formik.handleBlur}
-//       />
-//       {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-//         <p className="text-white">{formik.errors.confirmPassword}</p>
-//       )}
-//     </StyledLabelInputWrap>
-//     {isError && (
-//       <p className="text-red-500">
-//         Error: {isError?.response?.data?.message || 'Login failed'}
-//       </p>
-//     )}
-//     <StyledButton type="submit">
-//       {isPending ? 'Loading' : 'Submit'}
-//     </StyledButton>
-//   </StyledForm>
-//   <p>
-//     have account ? <Link to="/login">please login</Link>
-//   </p>
-// </StyledFormWrap>

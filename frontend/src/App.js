@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import { ChakraProvider } from '@chakra-ui/react'
 import 'react-toastify/dist/ReactToastify.css'
-
+import { GoogleOAuthProvider } from '@react-oauth/google'
 import Navbar from './components/pages/navbar/Navbar.jsx'
 import NotFoundPage from './components/pages/notfoundpage/NotFoundPage.jsx'
 import Home from './components/pages/home/Home.jsx'
@@ -20,26 +20,28 @@ import CheckOut from './components/pages/checkout/CheckOut.jsx'
 
 function App() {
   return (
-    <ChakraProvider>
-      <Router>
-        <ToastContainer />
-        <UtilityBar />
-        <Navbar />
-        <Routes>
-          <Route path="*" element={<NotFoundPage />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/product/:id" element={<SelectedProduct />} />
-          {/* <Route path="/login" element={<LoginPage />} /> */}
-          {/* <Route path="/register" element={<Register />} /> */}
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/checkout" element={<CheckOut />} />
-        </Routes>
-      </Router>
-    </ChakraProvider>
+    <GoogleOAuthProvider>
+      <ChakraProvider>
+        <Router>
+          <ToastContainer />
+          <UtilityBar />
+          <Navbar />
+          <Routes>
+            <Route path="*" element={<NotFoundPage />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/product/:id" element={<SelectedProduct />} />
+            {/* <Route path="/login" element={<LoginPage />} /> */}
+            {/* <Route path="/register" element={<Register />} /> */}
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/checkout" element={<CheckOut />} />
+          </Routes>
+        </Router>
+      </ChakraProvider>
+    </GoogleOAuthProvider>
   )
 }
 
