@@ -21,6 +21,9 @@ import {
   Text,
 } from '@chakra-ui/react'
 
+// import { GoogleLogin } from '@react-oauth/google'
+import { useGoogleLogin } from '@react-oauth/google'
+
 const LoginPage = ({ loginIsOpen, loginOnClose }) => {
   const initialRef = useRef(null)
   const finalRef = useRef(null)
@@ -73,6 +76,10 @@ const LoginPage = ({ loginIsOpen, loginOnClose }) => {
 
   console.log('this is isError', isError)
 
+  const login = useGoogleLogin({
+    onSuccess: (tokenResponse) => console.log('this is login', tokenResponse),
+  })
+
   return (
     <Modal
       initialFocusRef={initialRef}
@@ -119,8 +126,8 @@ const LoginPage = ({ loginIsOpen, loginOnClose }) => {
           <Button type="submit" colorScheme="blue" mr={3}>
             {isPending ? 'loading...' : 'Submit'}
           </Button>
-
           <Button onClick={loginOnClose}>Cancel</Button>
+          <button onClick={() => login()}>Sign in with Google 🚀</button>
         </ModalFooter>
       </ModalContent>
     </Modal>

@@ -20,7 +20,7 @@ import CheckOut from './components/pages/checkout/CheckOut.jsx'
 
 function App() {
   return (
-    <GoogleOAuthProvider>
+    <GoogleOAuthProvider clientId="274366002449-pj06cfpd1coate7loeprmqnfmkktev34.apps.googleusercontent.com">
       <ChakraProvider>
         <Router>
           <ToastContainer />
