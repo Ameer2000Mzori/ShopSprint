@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useFormik } from 'formik'
 
 import {
@@ -16,6 +16,9 @@ import {
   Text,
 } from '@chakra-ui/react'
 
+// import { GoogleLogin } from '@react-oauth/google'
+import { useGoogleLogin } from '@react-oauth/google'
+
 import AuthOperations from '../../shared/AuthOperations'
 import useStoreToken from '../../shared/useStoreToken'
 import { Link, useNavigate } from 'react-router-dom'
@@ -32,6 +35,28 @@ const Register = ({
   const navigate = useNavigate()
   const initialRef = useRef(null)
   const finalRef = useRef(null)
+  const [disableBtn, setDisableBtn] = useState(false)
+
+  const login = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        const token = tokenResponse.access_token
+        const response = await fetch(
+          `https://oauth2.googleapis.com/tokeninfo?access_token=${token}`
+        )
+        const data = await response.json()
+
+        if (data.email) {
+          formik.setFieldValue('email', data.email)
+          setDisableBtn(true)
+        } else {
+          console.error('Email not found in user data')
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error)
+      }
+    },
+  })
 
   const token = useSelector((state) => state.user.token)
   const { mutate, isPending, isError } = AuthOperations({
@@ -43,6 +68,7 @@ const Register = ({
           newData?.response?.data?.message || 'account created successfully'
         }`,
       })
+      setDisableBtn(false)
     },
     onError: (error) => {
       NotificationCard({
@@ -184,6 +210,22 @@ const Register = ({
           </p>
         )}
         <ModalFooter>
+          <button
+            style={{ display: disableBtn ? 'none' : '' }}
+            onClick={() => {
+              login()
+            }}
+            class="px-4 py-2 mr-[10px] border flex gap-2 border-slate-200  rounded-lg text-slate-700  hover:border-slate-400  hover:text-slate-900  hover:shadow transition duration-150"
+          >
+            <img
+              class="w-6 h-6"
+              src="https://www.svgrepo.com/show/475656/google-color.svg"
+              loading="lazy"
+              alt="google logo"
+            />
+            <span>Login with Google</span>
+          </button>
+
           <Button type="submit" colorScheme="blue" mr={3}>
             {isPending ? 'loading...' : 'Submit'}
           </Button>

@@ -21,9 +21,6 @@ import {
   Text,
 } from '@chakra-ui/react'
 
-// import { GoogleLogin } from '@react-oauth/google'
-import { useGoogleLogin } from '@react-oauth/google'
-
 const LoginPage = ({ loginIsOpen, loginOnClose }) => {
   const initialRef = useRef(null)
   const finalRef = useRef(null)
@@ -76,23 +73,6 @@ const LoginPage = ({ loginIsOpen, loginOnClose }) => {
 
   console.log('this is isError', isError)
 
-  const login = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      console.log('this is login', tokenResponse)
-      const token = tokenResponse.access_token
-
-      console.log('this is token', token)
-
-      const response = await fetch(
-        `https://oauth2.googleapis.com/tokeninfo?access_token=${token}`
-      )
-
-      const data = await response.json() // Parse the JSON response
-
-      console.log('this is user data after token', data)
-    },
-  })
-
   return (
     <Modal
       initialFocusRef={initialRef}
@@ -140,7 +120,6 @@ const LoginPage = ({ loginIsOpen, loginOnClose }) => {
             {isPending ? 'loading...' : 'Submit'}
           </Button>
           <Button onClick={loginOnClose}>Cancel</Button>
-          <button onClick={login}>Sign in with Google 🚀</button>
         </ModalFooter>
       </ModalContent>
     </Modal>
