@@ -1,13 +1,31 @@
-import { Resend } from 'resend'
+import nodemailer from 'nodemailer'
 import 'dotenv/config'
 
-const resend = new Resend(`${process.env.RESEND_ID}`)
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.EMAIL_PASS,
+  },
+})
 
-export default async function sendVerificationEmail({ userEmail, Text }) {
-  await resend.emails.send({
-    from: '<ameerapex496@gmail.com>',
-    to: [`${userEmail}`],
-    subject: 'account verification',
-    text: `PLEASE CLICK HERE FOR ACCOUNT ${Text} `,
+export default async function sendVerificationEmail(
+  email,
+  sendVerificationEmail
+) {
+  var mailOptions = {
+    from: process.env.EMAIL,
+    to: email,
+    subject: 'Sending Email using Node.js',
+    text: 'That was easy!',
+    html: `<b>That was easy!${sendVerificationEmail}</b>`,
+  }
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error)
+    } else {
+      console.log('Email sent: ' + info.response)
+    }
   })
 }

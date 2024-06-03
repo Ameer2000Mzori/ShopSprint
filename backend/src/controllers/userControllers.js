@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken'
 import { hashPassword, checkPwd } from '../utils/hashing.js'
 import 'dotenv/config'
 import generateVerificationToken from '../utils/generateVerificationToken.js'
+import sendVerificationEmail from '../utils/sendVerificationEmail.js'
 
 export const getUsers = (req, res) => {
   User.find()
@@ -83,7 +84,7 @@ export const createUser = async (req, res) => {
     // Save the new user to the database
     await newAccount.save()
 
-    sendVerificationEmail(newAccount, VerificationToken)
+    sendVerificationEmail(email, VerificationToken)
 
     // Generate JWT token for the new user
     const token = jwt.sign(
