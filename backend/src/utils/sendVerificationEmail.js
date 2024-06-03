@@ -9,16 +9,13 @@ var transporter = nodemailer.createTransport({
   },
 })
 
-export default async function sendVerificationEmail(
-  email,
-  sendVerificationEmail
-) {
+export default async function sendVerificationEmail(email, VerificationToken) {
   var mailOptions = {
     from: process.env.EMAIL,
     to: email,
     subject: 'Sending Email using Node.js',
     text: 'That was easy!',
-    html: `<b>That was easy!${sendVerificationEmail}</b>`,
+    html: `<b>That was easy!${VerificationToken}</b>`,
   }
 
   transporter.sendMail(mailOptions, function (error, info) {
