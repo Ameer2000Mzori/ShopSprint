@@ -2,6 +2,7 @@ import { User } from '../modules/userSchema.js'
 import jwt from 'jsonwebtoken'
 import { hashPassword, checkPwd } from '../utils/hashing.js'
 import 'dotenv/config'
+import generateVerificationToken from '../utils/generateVerificationToken.js'
 
 export const getUsers = (req, res) => {
   User.find()
@@ -43,6 +44,9 @@ export const createUser = async (req, res) => {
 
   let newAccount // Define newAccount using let for better error handling
 
+  const VerificationToken = generateVerificationToken()
+  const tokenExpiry = Date.now() + 3600000 // Token expires in 1 hour
+
   try {
     // Check if user with the same username or email already exists
     const user = await User.findOne({
@@ -71,10 +75,15 @@ export const createUser = async (req, res) => {
       userName: username,
       email,
       password: hashedPassword,
+      isVerified: false,
+      verificationToken: VerificationToken,
+      tokenExpiry: tokenExpiry,
     })
 
     // Save the new user to the database
     await newAccount.save()
+
+    sendVerificationEmail(newAccount, VerificationToken)
 
     // Generate JWT token for the new user
     const token = jwt.sign(
