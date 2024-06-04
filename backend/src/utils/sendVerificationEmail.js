@@ -9,7 +9,7 @@ var transporter = nodemailer.createTransport({
   },
 })
 
-export default async function sendVerificationEmail(email, VerificationToken) {
+export async function sendVerificationEmail(email, VerificationToken) {
   var mailOptions = {
     from: process.env.EMAIL,
     to: email,
@@ -77,7 +77,7 @@ export default async function sendVerificationEmail(email, VerificationToken) {
           <p>To ensure you receive important updates and access all the features we offer, please verify your email address within the next hour.</p>
           <p class="important">This verification link will expire after one hour for security purposes.</p>
           <p>Click the link below to verify your email address:</p>
-          <p><a href="http://localhost:3000/" class="link">Verify Your Email Address</a></p>
+          <p><a href="http://localhost:3000//verify/${VerificationToken}" class="link">Verify Your Email Address</a></p>
           <p>Once you verify your email, you'll unlock the full potential of your ShopSprint account.</p>
           <p>We look forward to being a part of your journey!</p>
           <p>Sincerely,</p>
@@ -87,6 +87,96 @@ export default async function sendVerificationEmail(email, VerificationToken) {
     </body>
     </html>
 
+    
+    `,
+  }
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error)
+    } else {
+      console.log('Email sent: ' + info.response)
+    }
+  })
+}
+
+export async function VerificationConfirm(email) {
+  var mailOptions = {
+    from: process.env.EMAIL,
+    to: email,
+    subject: 'Your Account has been Verified',
+    text: 'Your Account has been Verified',
+    html: `
+    
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Account Verified</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                width: 100%;
+                max-width: 600px;
+                margin: 0 auto;
+                background-color: #ffffff;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+            }
+            .header {
+                text-align: center;
+                padding: 10px 0;
+            }
+            .header img {
+                width: 100px;
+            }
+            .content {
+                margin: 20px 0;
+            }
+            .content p {
+                font-size: 16px;
+                line-height: 1.5;
+                color: #333333;
+            }
+            .footer {
+                text-align: center;
+                padding: 20px 0;
+                font-size: 14px;
+                color: #888888;
+            }
+            .footer a {
+                color: #888888;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <img src="https://your-domain.com/logo.png" alt="Company Logo">
+            </div>
+            <div class="content">
+                <h1>Account Verified</h1>
+                <p>Dear user,</p>
+                <p>Congratulations! Your email has been successfully verified. Welcome to [Your Company Name]. We are excited to have you with us.</p>
+                <p>You can now access all the features and services available on our platform. If you have any questions or need assistance, feel free to reach out to our support team.</p>
+                <p>Thank you for choosing [Your Company Name].</p>
+                <p>Best regards,</p>
+                <p>The [Your Company Name] Team</p>
+            </div>
+            <div class="footer">
+                <p>&copy; 2024 [Your Company Name]. All rights reserved.</p>
+                <p><a href="https://your-domain.com">Visit our website</a> | <a href="mailto:support@your-domain.com">Contact Support</a></p>
+            </div>
+        </div>
+    </body>
+    </html>
     
     `,
   }

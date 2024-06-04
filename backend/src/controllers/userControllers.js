@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 import { hashPassword, checkPwd } from '../utils/hashing.js'
 import 'dotenv/config'
 import generateVerificationToken from '../utils/generateVerificationToken.js'
-import sendVerificationEmail from '../utils/sendVerificationEmail.js'
+import { sendVerificationEmail } from '../utils/sendVerificationEmail.js'
 
 export const getUsers = (req, res) => {
   User.find()
@@ -142,4 +142,41 @@ export const userLogin = async (req, res) => {
     data: user,
     token,
   })
+}
+
+export const verifyAccount = async (req, res) => {
+  const { verifyToken } = req.body
+
+  console.log('Token:', verifyToken)
+  try {
+    // Find the user by the verification token and ensure it hasn't expired
+    const user = await User.findOne({
+      verificationToken: verifyToken,
+      tokenExpiry: { $gt: Date.now() },
+    })
+
+    if (!user) {
+      return res.status(400).send('Invalid or expired token.')
+    }
+
+    if (user) {
+      user.isVerified = true
+      user.verificationToken = undefined
+      user.tokenExpiry = undefined
+      await user.save()
+
+      res.status(200).send({
+        message: 'Account verified successfully',
+        user,
+      })
+
+      VerificationConfirm()
+    }
+    // Verify the user's email and clear the token fields
+  } catch (error) {
+    console.error('Error verifying email:', error)
+    res.status(500).send({
+      message: 'Internal Server Error',
+    })
+  }
 }
