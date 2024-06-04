@@ -84,7 +84,7 @@ export const createUser = async (req, res) => {
     // Save the new user to the database
     await newAccount.save()
 
-    sendVerificationEmail(email, VerificationToken)
+    sendVerificationEmail(name, email, VerificationToken)
 
     // Generate JWT token for the new user
     const token = jwt.sign(

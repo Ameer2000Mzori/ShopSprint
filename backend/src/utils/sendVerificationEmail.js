@@ -22,7 +22,7 @@ export default async function sendVerificationEmail(email, VerificationToken) {
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Welcome to [Your Company Name]!</title>
+      <title>Welcome to ShopSprint!</title>
       <style>
         body {
           font-family: Arial, sans-serif;
@@ -58,28 +58,30 @@ export default async function sendVerificationEmail(email, VerificationToken) {
         .link {
           color: #2e8b57; /* Greenish blue for links */
           text-decoration: none;
+          cursor: pointer;
         }
         .link:hover {
           text-decoration: underline;
+          cursor: pointer;
         }
       </style>
     </head>
     <body>
       <div class="container">
         <div class="header">
-          <h1 class="h1">Welcome to [Your Company Name]!</h1>
+          <h1 class="h1">Welcome to ShopSprint!</h1>
         </div>
         <div class="content">
           <p>Dear [User Name],</p>
-          <p>Thank you for creating an account with [Your Company Name]! We're excited to have you join our growing community.</p>
+          <p>Thank you for creating an account with ShopSprint! We're excited to have you join our growing community.</p>
           <p>To ensure you receive important updates and access all the features we offer, please verify your email address within the next hour.</p>
           <p class="important">This verification link will expire after one hour for security purposes.</p>
           <p>Click the link below to verify your email address:</p>
-          <p><a href="[Your Verification URL]" class="link">Verify Your Email Address</a></p>
-          <p>Once you verify your email, you'll unlock the full potential of your [Your Company Name] account.</p>
+          <p><a href="http://localhost:3000/" class="link">Verify Your Email Address</a></p>
+          <p>Once you verify your email, you'll unlock the full potential of your ShopSprint account.</p>
           <p>We look forward to being a part of your journey!</p>
           <p>Sincerely,</p>
-          <p>The [Your Company Name] Team</p>
+          <p>The ShopSprint Team</p>
         </div>
       </div>
     </body>
