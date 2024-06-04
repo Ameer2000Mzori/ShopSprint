@@ -13,8 +13,8 @@ export async function sendVerificationEmail(name, email, VerificationToken) {
   var mailOptions = {
     from: process.env.EMAIL,
     to: email,
-    subject: 'Sending Email using Node.js',
-    text: 'That was easy!',
+    subject: 'confirm account',
+    text: 'confirm account',
     html: `
     
     <!DOCTYPE html>
@@ -177,15 +177,15 @@ export async function VerificationConfirm(name, email) {
             </div>
             <div class="content">
                 <p>Dear ${name},</p>
-                <p>Congratulations! Your email has been successfully verified. Welcome to [Your Company Name]. We are excited to have you with us.</p>
+                <p>Congratulations! Your email has been successfully verified. Welcome to ShopSprint. We are excited to have you with us.</p>
                 <p>You can now access all the features and services available on our platform. If you have any questions or need assistance, feel free to reach out to our support team.</p>
-                <p>Thank you for choosing [Your Company Name].</p>
+                <p>Thank you for choosing ShopSprint.</p>
             </div>
             <div class="button">
                 <a href="http://localhost:3000/">Go to Home Page</a>
             </div>
             <div class="footer">
-                <p>&copy; 2024 [Your Company Name]. All rights reserved.</p>
+                <p>&copy; 2024 ShopSprint. All rights reserved.</p>
                 <p><a href="http://localhost:3000/">Visit our website</a> | <a href="mailto:support@your-domain.com">Contact Support</a></p>
             </div>
         </div>
