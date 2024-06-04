@@ -9,7 +9,7 @@ var transporter = nodemailer.createTransport({
   },
 })
 
-export async function sendVerificationEmail(email, VerificationToken) {
+export async function sendVerificationEmail(name, email, VerificationToken) {
   var mailOptions = {
     from: process.env.EMAIL,
     to: email,
@@ -72,12 +72,12 @@ export async function sendVerificationEmail(email, VerificationToken) {
           <h1 class="h1">Welcome to ShopSprint!</h1>
         </div>
         <div class="content">
-          <p>Dear [User Name],</p>
+          <p>Dear ${name},</p>
           <p>Thank you for creating an account with ShopSprint! We're excited to have you join our growing community.</p>
           <p>To ensure you receive important updates and access all the features we offer, please verify your email address within the next hour.</p>
           <p class="important">This verification link will expire after one hour for security purposes.</p>
           <p>Click the link below to verify your email address:</p>
-          <p><a href="http://localhost:3000//verify/${VerificationToken}" class="link">Verify Your Email Address</a></p>
+          <p><a href="http://localhost:3000/verify/${VerificationToken}" class="link">Verify Your Email Address</a></p>
           <p>Once you verify your email, you'll unlock the full potential of your ShopSprint account.</p>
           <p>We look forward to being a part of your journey!</p>
           <p>Sincerely,</p>
@@ -100,7 +100,7 @@ export async function sendVerificationEmail(email, VerificationToken) {
   })
 }
 
-export async function VerificationConfirm(email) {
+export async function VerificationConfirm(name, email) {
   var mailOptions = {
     from: process.env.EMAIL,
     to: email,
@@ -131,10 +131,9 @@ export async function VerificationConfirm(email) {
             }
             .header {
                 text-align: center;
-                padding: 10px 0;
-            }
-            .header img {
-                width: 100px;
+                padding: 20px 0;
+                font-size: 24px;
+                font-weight: bold;
             }
             .content {
                 margin: 20px 0;
@@ -143,6 +142,21 @@ export async function VerificationConfirm(email) {
                 font-size: 16px;
                 line-height: 1.5;
                 color: #333333;
+            }
+            .button {
+                text-align: center;
+                margin: 20px 0;
+            }
+            .button a {
+                background-color: #4CAF50;
+                color: white;
+                padding: 15px 25px;
+                text-decoration: none;
+                font-size: 16px;
+                border-radius: 5px;
+            }
+            .button a:hover {
+                background-color: #45a049;
             }
             .footer {
                 text-align: center;
@@ -159,20 +173,20 @@ export async function VerificationConfirm(email) {
     <body>
         <div class="container">
             <div class="header">
-                <img src="https://your-domain.com/logo.png" alt="Company Logo">
+                Account Verified
             </div>
             <div class="content">
-                <h1>Account Verified</h1>
-                <p>Dear user,</p>
+                <p>Dear ${name},</p>
                 <p>Congratulations! Your email has been successfully verified. Welcome to [Your Company Name]. We are excited to have you with us.</p>
                 <p>You can now access all the features and services available on our platform. If you have any questions or need assistance, feel free to reach out to our support team.</p>
                 <p>Thank you for choosing [Your Company Name].</p>
-                <p>Best regards,</p>
-                <p>The [Your Company Name] Team</p>
+            </div>
+            <div class="button">
+                <a href="http://localhost:3000/">Go to Home Page</a>
             </div>
             <div class="footer">
                 <p>&copy; 2024 [Your Company Name]. All rights reserved.</p>
-                <p><a href="https://your-domain.com">Visit our website</a> | <a href="mailto:support@your-domain.com">Contact Support</a></p>
+                <p><a href="http://localhost:3000/">Visit our website</a> | <a href="mailto:support@your-domain.com">Contact Support</a></p>
             </div>
         </div>
     </body>

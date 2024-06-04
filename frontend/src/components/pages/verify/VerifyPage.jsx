@@ -8,7 +8,7 @@ export default function VerifyPage() {
   const { id } = useParams()
 
   console.log('this is id ', id)
-  const { mutate, isPending, isError, data } = AuthOperations({
+  const { mutate, isPending, data } = AuthOperations({
     onSuccess: () => {
       setUserverified(true)
       setTimeout(() => {
@@ -34,7 +34,7 @@ export default function VerifyPage() {
 
   if (isPending) return <div>loading...</div>
 
-  if (isError) return <div>There is an error...</div>
+  if (!userverified) return <div>There is an error...</div>
 
   if (userverified)
     return (
@@ -42,5 +42,4 @@ export default function VerifyPage() {
         User Verified id : {id}
       </div>
     )
-  //   return <div>VerifyPage</div>
 }

@@ -3,7 +3,10 @@ import jwt from 'jsonwebtoken'
 import { hashPassword, checkPwd } from '../utils/hashing.js'
 import 'dotenv/config'
 import generateVerificationToken from '../utils/generateVerificationToken.js'
-import { sendVerificationEmail } from '../utils/sendVerificationEmail.js'
+import {
+  VerificationConfirm,
+  sendVerificationEmail,
+} from '../utils/sendVerificationEmail.js'
 
 export const getUsers = (req, res) => {
   User.find()
@@ -170,7 +173,7 @@ export const verifyAccount = async (req, res) => {
         user,
       })
 
-      VerificationConfirm()
+      VerificationConfirm(user.userName, user.email)
     }
     // Verify the user's email and clear the token fields
   } catch (error) {
