@@ -17,6 +17,7 @@ import SelectedProduct from './components/pages/selectedproduct/SelectedProduct.
 import ProfilePage from './components/pages/profilePage/ProfilePage.jsx'
 // import AddOrder from './components/addorder/AddOrder.jsx'
 import CheckOut from './components/pages/checkout/CheckOut.jsx'
+import VerifyPage from './components/pages/verify/VerifyPage.jsx'
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             {/* <Route path="/register" element={<Register />} /> */}
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/checkout" element={<CheckOut />} />
+            <Route path="/verify/:id" element={<VerifyPage />} />
           </Routes>
         </Router>
       </ChakraProvider>
