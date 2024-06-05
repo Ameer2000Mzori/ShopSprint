@@ -13,7 +13,7 @@ export default function EmailVerification() {
           rel="noopener noreferrer"
           className="mt-6 inline-block bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
         >
-          Go to Gmail
+          Gmail
         </a>
       </div>
     </div>
