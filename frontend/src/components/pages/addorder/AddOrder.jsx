@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import AuthOperations from '../shared/AuthOperations'
+import AuthOperations from '../../shared/AuthOperations'
 import { useNavigate } from 'react-router-dom'
-import NotificationCard from '../shared/NotificationCard'
+import NotificationCard from '../../shared/NotificationCard'
 
 const AddOrder = () => {
   const navigate = useNavigate()

@@ -47,10 +47,6 @@ const LoginPage = ({ loginIsOpen, loginOnClose }) => {
 
   const token = useSelector((state) => state.user.token)
 
-  useEffect(() => {
-    if (token) navigate('/')
-  }, [token])
-
   const formik = useFormik({
     initialValues: {
       email: '',

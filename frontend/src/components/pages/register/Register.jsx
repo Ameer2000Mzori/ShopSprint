@@ -68,6 +68,7 @@ const Register = ({
           newData?.response?.data?.message || 'account created successfully'
         }`,
       })
+      navigate('/emailverification')
       setDisableBtn(false)
     },
     onError: (error) => {
@@ -77,10 +78,6 @@ const Register = ({
       })
     },
   })
-
-  useEffect(() => {
-    if (token) navigate('/')
-  }, [token])
 
   const formik = useFormik({
     initialValues: {

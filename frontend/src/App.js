@@ -18,6 +18,7 @@ import ProfilePage from './components/pages/profilePage/ProfilePage.jsx'
 // import AddOrder from './components/addorder/AddOrder.jsx'
 import CheckOut from './components/pages/checkout/CheckOut.jsx'
 import VerifyPage from './components/pages/verify/VerifyPage.jsx'
+import EmailVerification from './components/pages/emailVerification/EmailVerification.jsx'
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/checkout" element={<CheckOut />} />
             <Route path="/verify/:id" element={<VerifyPage />} />
+            <Route path="/emailverification" element={<EmailVerification />} />
           </Routes>
         </Router>
       </ChakraProvider>
