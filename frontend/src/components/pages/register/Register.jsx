@@ -1,13 +1,5 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { useFormik } from 'formik'
-
-import {
-  StyledButton,
-  StyledForm,
-  StyledFormWrap,
-  StyledLabelInput,
-  StyledLabelInputWrap,
-} from '../login/component/StyledComponent'
 
 import {
   FormControl,
@@ -23,6 +15,9 @@ import {
   ModalFooter,
   Text,
 } from '@chakra-ui/react'
+
+// import { GoogleLogin } from '@react-oauth/google'
+import { useGoogleLogin } from '@react-oauth/google'
 
 import AuthOperations from '../../shared/AuthOperations'
 import useStoreToken from '../../shared/useStoreToken'
@@ -40,17 +35,95 @@ const Register = ({
   const navigate = useNavigate()
   const initialRef = useRef(null)
   const finalRef = useRef(null)
+  const [disableBtn, setDisableBtn] = useState(false)
+
+  // const login = useGoogleLogin({
+  //   onSuccess: async (tokenResponse) => {
+  //     try {
+  //       const token = tokenResponse.access_token
+  //       const response = await fetch(
+  //         `https://oauth2.googleapis.com/tokeninfo?access_token=${token}`
+  //       )
+  //       const data = await response.json()
+
+  //       if (data.email) {
+  //         formik.setFieldValue('email', data.email)
+  //         setDisableBtn(true)
+  //       } else {
+  //         console.error('Email not found in user data')
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching user data:', error)
+  //     }
+  //   },
+  // })
+
+  const login = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        const token = tokenResponse.access_token
+
+        // Fetch basic token information to verify token and get user info
+        const tokenInfoResponse = await fetch(
+          `https://oauth2.googleapis.com/tokeninfo?access_token=${token}`
+        )
+        const tokenInfoData = await tokenInfoResponse.json()
+
+        if (tokenInfoData.email) {
+          formik.setFieldValue('email', tokenInfoData.email)
+          setDisableBtn(true)
+        } else {
+          console.error('Email not found in user data')
+        }
+
+        // Fetch detailed user info from Google People API
+        const userInfoResponse = await fetch(
+          'https://people.googleapis.com/v1/people/me?personFields=names,photos',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        const userInfoData = await userInfoResponse.json()
+
+        console.log(
+          'this is user information data after token and now we are able to take hi image and more',
+          userInfoData
+        )
+
+        const name =
+          userInfoData.names && userInfoData.names[0]
+            ? userInfoData.names[0].displayName
+            : 'Unknown'
+        // const photoUrl = userInfoData.photos && userInfoData.photos[0] ? userInfoData.photos[0].url : 'No Photo'
+
+        console.log('User Name:', name)
+        // console.log('User Photo URL:', photoUrl)
+
+        // Set additional fields if needed
+        formik.setFieldValue('name', name)
+        formik.setFieldValue('userName', name)
+        // formik.setFieldValue('photoUrl', photoUrl)
+      } catch (error) {
+        console.error('Error fetching user data:', error)
+      }
+    },
+  })
 
   const token = useSelector((state) => state.user.token)
   const { mutate, isPending, isError } = AuthOperations({
     onSuccess: (newData) => {
-      saveData({ ...newData?.data, token: newData?.token })
+      console.log('new user data creations', newData)
+      saveData({ ...newData?.User, token: newData?.token })
       NotificationCard({
         option: 'success',
         message: `${
           newData?.response?.data?.message || 'account created successfully'
         }`,
       })
+      navigate('/')
+      setDisableBtn(false)
     },
     onError: (error) => {
       NotificationCard({
@@ -59,10 +132,6 @@ const Register = ({
       })
     },
   })
-
-  useEffect(() => {
-    if (token) navigate('/')
-  }, [token])
 
   const formik = useFormik({
     initialValues: {
@@ -192,6 +261,22 @@ const Register = ({
           </p>
         )}
         <ModalFooter>
+          <button
+            style={{ display: disableBtn ? 'none' : '' }}
+            onClick={() => {
+              login()
+            }}
+            class="px-4 py-2 mr-[10px] border flex gap-2 border-slate-200  rounded-lg text-slate-700  hover:border-slate-400  hover:text-slate-900  hover:shadow transition duration-150"
+          >
+            <img
+              class="w-6 h-6"
+              src="https://www.svgrepo.com/show/475656/google-color.svg"
+              loading="lazy"
+              alt="google logo"
+            />
+            <span>Login with Google</span>
+          </button>
+
           <Button type="submit" colorScheme="blue" mr={3}>
             {isPending ? 'loading...' : 'Submit'}
           </Button>
@@ -204,86 +289,3 @@ const Register = ({
 }
 
 export default Register
-
-// <StyledFormWrap>
-//   <StyledForm onSubmit={formik.handleSubmit}>
-//     <StyledLabelInputWrap>
-//       <StyledLabelInput htmlFor="name">Name</StyledLabelInput>
-//       <input
-//         type="text"
-//         id="name"
-//         onChange={formik.handleChange}
-//         value={formik.values.name}
-//         onBlur={formik.handleBlur}
-//       />
-//       {formik.touched.name && formik.errors.name ? (
-//         <p className="text-white">{formik.errors.name}</p>
-//       ) : null}
-//     </StyledLabelInputWrap>
-//     <StyledLabelInputWrap>
-//       <StyledLabelInput htmlFor="userName">User Name</StyledLabelInput>
-//       <input
-//         type="text"
-//         id="userName"
-//         onChange={formik.handleChange}
-//         value={formik.values.userName}
-//         onBlur={formik.handleBlur}
-//       />
-//       {formik.touched.userName && formik.errors.userName && (
-//         <p className="text-white">{formik.errors.userName}</p>
-//       )}
-//     </StyledLabelInputWrap>
-//     <StyledLabelInputWrap>
-//       <StyledLabelInput htmlFor="email">Email address</StyledLabelInput>
-//       <input
-//         type="text"
-//         id="email"
-//         onChange={formik.handleChange}
-//         value={formik.values.email}
-//         onBlur={formik.handleBlur}
-//       />
-//       {formik.touched.email && formik.errors.email ? (
-//         <p className="text-white">{formik.errors.email}</p>
-//       ) : null}
-//     </StyledLabelInputWrap>
-//     <StyledLabelInputWrap>
-//       <StyledLabelInput htmlFor="password">Password</StyledLabelInput>
-//       <input
-//         type="password"
-//         id="password"
-//         onChange={formik.handleChange}
-//         value={formik.values.password}
-//         onBlur={formik.handleBlur}
-//       />
-//       {formik.touched.password && formik.errors.password ? (
-//         <p className="text-white">{formik.errors.password}</p>
-//       ) : null}
-//     </StyledLabelInputWrap>
-//     <StyledLabelInputWrap>
-//       <StyledLabelInput htmlFor="confirmPassword">
-//         Confirm Password
-//       </StyledLabelInput>
-//       <input
-//         type="password"
-//         id="confirmPassword"
-//         onChange={formik.handleChange}
-//         value={formik.values.confirmPassword}
-//         onBlur={formik.handleBlur}
-//       />
-//       {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-//         <p className="text-white">{formik.errors.confirmPassword}</p>
-//       )}
-//     </StyledLabelInputWrap>
-//     {isError && (
-//       <p className="text-red-500">
-//         Error: {isError?.response?.data?.message || 'Login failed'}
-//       </p>
-//     )}
-//     <StyledButton type="submit">
-//       {isPending ? 'Loading' : 'Submit'}
-//     </StyledButton>
-//   </StyledForm>
-//   <p>
-//     have account ? <Link to="/login">please login</Link>
-//   </p>
-// </StyledFormWrap>

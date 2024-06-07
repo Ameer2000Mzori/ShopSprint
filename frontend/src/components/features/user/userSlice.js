@@ -24,6 +24,9 @@ export const userInfo = createSlice({
         token: action.payload.token,
         id: action.payload._id,
       }
+
+      console.log('this is the user form slice', user)
+
       state.name = user.name
       state.username = user.username
       state.email = user.email

@@ -47,10 +47,6 @@ const LoginPage = ({ loginIsOpen, loginOnClose }) => {
 
   const token = useSelector((state) => state.user.token)
 
-  useEffect(() => {
-    if (token) navigate('/')
-  }, [token])
-
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -119,7 +115,6 @@ const LoginPage = ({ loginIsOpen, loginOnClose }) => {
           <Button type="submit" colorScheme="blue" mr={3}>
             {isPending ? 'loading...' : 'Submit'}
           </Button>
-
           <Button onClick={loginOnClose}>Cancel</Button>
         </ModalFooter>
       </ModalContent>

@@ -19,14 +19,12 @@ const ProfilePage = () => {
   const user = useSelector((state) => state.user)
   const { mutate, isPending, isError, data } = AuthOperations({})
 
-  console.log(user)
+  console.log('user data', user)
   const navigate = useNavigate()
   useEffect(() => {
-    if (!user.token) navigate('/')
-
-    if (user.token) {
-      mutate([{ method: 'GET', url: `/user/${user.id}`, token: user.token }])
-    }
+    user.token
+      ? mutate([{ method: 'GET', url: `/user/${user.id}`, token: user.token }])
+      : navigate('/')
   }, [user.token])
 
   console.log('data', data)

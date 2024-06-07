@@ -12,6 +12,10 @@ const userSchema = new Schema({
       ref: 'Order',
     },
   ],
+
+  isVerified: { type: Boolean, default: false },
+  verificationToken: String,
+  tokenExpiry: Date,
 })
 
 userSchema.post('findOneAndDelete', async function (doc) {

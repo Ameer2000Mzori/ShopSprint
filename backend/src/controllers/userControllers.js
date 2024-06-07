@@ -2,6 +2,11 @@ import { User } from '../modules/userSchema.js'
 import jwt from 'jsonwebtoken'
 import { hashPassword, checkPwd } from '../utils/hashing.js'
 import 'dotenv/config'
+import generateVerificationToken from '../utils/generateVerificationToken.js'
+import {
+  VerificationConfirm,
+  sendVerificationEmail,
+} from '../utils/sendVerificationEmail.js'
 
 export const getUsers = (req, res) => {
   User.find()
@@ -43,6 +48,9 @@ export const createUser = async (req, res) => {
 
   let newAccount // Define newAccount using let for better error handling
 
+  const VerificationToken = generateVerificationToken()
+  const tokenExpiry = Date.now() + 3600000 // Token expires in 1 hour
+
   try {
     // Check if user with the same username or email already exists
     const user = await User.findOne({
@@ -71,10 +79,15 @@ export const createUser = async (req, res) => {
       userName: username,
       email,
       password: hashedPassword,
+      isVerified: false,
+      verificationToken: VerificationToken,
+      tokenExpiry: tokenExpiry,
     })
 
     // Save the new user to the database
     await newAccount.save()
+
+    sendVerificationEmail(name, email, VerificationToken)
 
     // Generate JWT token for the new user
     const token = jwt.sign(
@@ -132,4 +145,41 @@ export const userLogin = async (req, res) => {
     data: user,
     token,
   })
+}
+
+export const verifyAccount = async (req, res) => {
+  const { verifyToken } = req.body
+
+  console.log('Token:', verifyToken)
+  try {
+    // Find the user by the verification token and ensure it hasn't expired
+    const user = await User.findOne({
+      verificationToken: verifyToken,
+      tokenExpiry: { $gt: Date.now() },
+    })
+
+    if (!user) {
+      return res.status(400).send('Invalid or expired token.')
+    }
+
+    if (user) {
+      user.isVerified = true
+      user.verificationToken = undefined
+      user.tokenExpiry = undefined
+      await user.save()
+
+      res.status(200).send({
+        message: 'Account verified successfully',
+        user,
+      })
+
+      VerificationConfirm(user.userName, user.email)
+    }
+    // Verify the user's email and clear the token fields
+  } catch (error) {
+    console.error('Error verifying email:', error)
+    res.status(500).send({
+      message: 'Internal Server Error',
+    })
+  }
 }
