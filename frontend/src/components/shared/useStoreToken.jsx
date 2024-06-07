@@ -18,7 +18,7 @@ const useStoreToken = () => {
         } else {
           navigate('/')
         }
-      }, 500)
+      }, 2000)
     }
   }
   console.log('data saved')
