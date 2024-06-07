@@ -62,7 +62,7 @@ const Register = ({
   const { mutate, isPending, isError } = AuthOperations({
     onSuccess: (newData) => {
       console.log('new user data creations', newData)
-      saveData({ ...newData?.data, token: newData?.token })
+      saveData({ ...newData?.User, token: newData?.token })
       NotificationCard({
         option: 'success',
         message: `${
