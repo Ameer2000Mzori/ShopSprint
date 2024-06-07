@@ -37,21 +37,74 @@ const Register = ({
   const finalRef = useRef(null)
   const [disableBtn, setDisableBtn] = useState(false)
 
+  // const login = useGoogleLogin({
+  //   onSuccess: async (tokenResponse) => {
+  //     try {
+  //       const token = tokenResponse.access_token
+  //       const response = await fetch(
+  //         `https://oauth2.googleapis.com/tokeninfo?access_token=${token}`
+  //       )
+  //       const data = await response.json()
+
+  //       if (data.email) {
+  //         formik.setFieldValue('email', data.email)
+  //         setDisableBtn(true)
+  //       } else {
+  //         console.error('Email not found in user data')
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching user data:', error)
+  //     }
+  //   },
+  // })
+
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       try {
         const token = tokenResponse.access_token
-        const response = await fetch(
+
+        // Fetch basic token information to verify token and get user info
+        const tokenInfoResponse = await fetch(
           `https://oauth2.googleapis.com/tokeninfo?access_token=${token}`
         )
-        const data = await response.json()
+        const tokenInfoData = await tokenInfoResponse.json()
 
-        if (data.email) {
-          formik.setFieldValue('email', data.email)
+        if (tokenInfoData.email) {
+          formik.setFieldValue('email', tokenInfoData.email)
           setDisableBtn(true)
         } else {
           console.error('Email not found in user data')
         }
+
+        // Fetch detailed user info from Google People API
+        const userInfoResponse = await fetch(
+          'https://people.googleapis.com/v1/people/me?personFields=names,photos',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        const userInfoData = await userInfoResponse.json()
+
+        console.log(
+          'this is user information data after token and now we are able to take hi image and more',
+          userInfoData
+        )
+
+        const name =
+          userInfoData.names && userInfoData.names[0]
+            ? userInfoData.names[0].displayName
+            : 'Unknown'
+        // const photoUrl = userInfoData.photos && userInfoData.photos[0] ? userInfoData.photos[0].url : 'No Photo'
+
+        console.log('User Name:', name)
+        // console.log('User Photo URL:', photoUrl)
+
+        // Set additional fields if needed
+        formik.setFieldValue('name', name)
+        formik.setFieldValue('userName', name)
+        // formik.setFieldValue('photoUrl', photoUrl)
       } catch (error) {
         console.error('Error fetching user data:', error)
       }
