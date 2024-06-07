@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useFormik } from 'formik'
 
 import {
@@ -61,6 +61,7 @@ const Register = ({
   const token = useSelector((state) => state.user.token)
   const { mutate, isPending, isError } = AuthOperations({
     onSuccess: (newData) => {
+      console.log('new user data creations', newData)
       saveData({ ...newData?.data, token: newData?.token })
       NotificationCard({
         option: 'success',
@@ -68,7 +69,7 @@ const Register = ({
           newData?.response?.data?.message || 'account created successfully'
         }`,
       })
-      navigate('/emailverification')
+      navigate('/')
       setDisableBtn(false)
     },
     onError: (error) => {
