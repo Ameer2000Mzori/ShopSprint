@@ -8,8 +8,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import LoginPage from '../../login/LoginPage.jsx'
 import {
   faDoorOpen,
+  faPerson,
   faPlusSquare,
   faQuestion,
+  faUserGear,
 } from '@fortawesome/free-solid-svg-icons'
 import About from '../../about/About.jsx'
 import { useDisclosure } from '@chakra-ui/react'
@@ -37,16 +39,29 @@ const UtilityBar = () => {
     <div className="h-[50px] w-[100%] flex flex-col text-center items-center justify-center bg-[rgb(61,61,61)] text-[#FFFFFF]">
       <div className="w-[65%] flex flex-row text-center items-end justify-end gap-4 pr-8">
         {token ? (
-          <div
-            className="hover:underline cursor-pointer flex flex-col  text-center items-center justify-center"
-            onClick={handleLogout}
-          >
-            <FontAwesomeIcon
-              className="text-[25px] p-0 m-0 "
-              icon={faDoorOpen}
-            />
-            <p className="text-[10px] p-0 m-0"> logout</p>
-          </div>
+          <>
+            <div
+              className="hover:underline cursor-pointer flex flex-col  text-center items-center justify-center"
+              onClick={handleLogout}
+            >
+              <FontAwesomeIcon
+                className="text-[25px] p-0 m-0 "
+                icon={faUserGear}
+              />
+              <p className="text-[10px] p-0 m-0"> user</p>
+            </div>
+
+            <div
+              className="hover:underline cursor-pointer flex flex-col  text-center items-center justify-center"
+              onClick={handleLogout}
+            >
+              <FontAwesomeIcon
+                className="text-[25px] p-0 m-0 "
+                icon={faDoorOpen}
+              />
+              <p className="text-[10px] p-0 m-0"> logout</p>
+            </div>
+          </>
         ) : (
           <>
             <div
