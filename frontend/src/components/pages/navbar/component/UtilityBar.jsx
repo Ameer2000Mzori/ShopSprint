@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import LoginPage from '../../login/LoginPage.jsx'
 import {
   faDoorOpen,
-  faPerson,
   faPlusSquare,
   faQuestion,
   faUserGear,
@@ -40,16 +39,16 @@ const UtilityBar = () => {
       <div className="w-[65%] flex flex-row text-center items-end justify-end gap-4 pr-8">
         {token ? (
           <>
-            <div
+            <Link
               className="hover:underline cursor-pointer flex flex-col  text-center items-center justify-center"
-              onClick={handleLogout}
+              to="/userdashboard"
             >
               <FontAwesomeIcon
                 className="text-[25px] p-0 m-0 "
                 icon={faUserGear}
               />
               <p className="text-[10px] p-0 m-0"> user</p>
-            </div>
+            </Link>
 
             <div
               className="hover:underline cursor-pointer flex flex-col  text-center items-center justify-center"

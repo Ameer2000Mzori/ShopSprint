@@ -1,5 +1,10 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import { ChakraProvider } from '@chakra-ui/react'
 import 'react-toastify/dist/ReactToastify.css'
@@ -12,6 +17,7 @@ import Products from './components/pages/products/Products.jsx'
 import Cart from './components/pages/cart/Cart.jsx'
 import UtilityBar from './components/pages/navbar/component/UtilityBar.jsx'
 import SelectedProduct from './components/pages/selectedproduct/SelectedProduct.jsx'
+import userDashBoard from './components/pages/userdashboard/userDashBoard.jsx'
 // import LoginPage from './components/pages/login/LoginPage.jsx'
 // import Register from './components/pages/register/Register.jsx'
 import ProfilePage from './components/pages/profilePage/ProfilePage.jsx'
@@ -19,28 +25,39 @@ import ProfilePage from './components/pages/profilePage/ProfilePage.jsx'
 import CheckOut from './components/pages/checkout/CheckOut.jsx'
 import VerifyPage from './components/pages/verify/VerifyPage.jsx'
 
+function Main() {
+  const location = useLocation()
+
+  return (
+    <>
+      <ToastContainer />
+      <UtilityBar />
+      {location.pathname !== '/userdashboard' && <Navbar />}
+      <Routes>
+        <Route path="*" element={<NotFoundPage />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/product/:id" element={<SelectedProduct />} />
+        {/* <Route path="/login" element={<LoginPage />} /> */}
+        {/* <Route path="/register" element={<Register />} /> */}
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/checkout" element={<CheckOut />} />
+        <Route path="/verify/:id" element={<VerifyPage />} />
+        <Route path="/userdashboard" element={<userDashBoard />} />
+      </Routes>
+    </>
+  )
+}
+
 function App() {
   return (
     <GoogleOAuthProvider clientId="274366002449-pj06cfpd1coate7loeprmqnfmkktev34.apps.googleusercontent.com">
       <ChakraProvider>
         <Router>
-          <ToastContainer />
-          <UtilityBar />
-          <Navbar />
-          <Routes>
-            <Route path="*" element={<NotFoundPage />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/product/:id" element={<SelectedProduct />} />
-            {/* <Route path="/login" element={<LoginPage />} /> */}
-            {/* <Route path="/register" element={<Register />} /> */}
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/checkout" element={<CheckOut />} />
-            <Route path="/verify/:id" element={<VerifyPage />} />
-          </Routes>
+          <Main />
         </Router>
       </ChakraProvider>
     </GoogleOAuthProvider>
