@@ -16,7 +16,7 @@
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 About This Project <a name="about-project"></a>
+# 📖 About This Projects <a name="about-project"></a>
 
 > ShopSprint is one of the major websitess I've developed using the MERN stack, incorporating the latest packages and technologies. Feel free to explore and download the project to see it in action..
 
