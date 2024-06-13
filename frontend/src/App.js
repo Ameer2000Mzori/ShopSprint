@@ -17,7 +17,7 @@ import Products from './components/pages/products/Products.jsx'
 import Cart from './components/pages/cart/Cart.jsx'
 import UtilityBar from './components/pages/navbar/component/UtilityBar.jsx'
 import SelectedProduct from './components/pages/selectedproduct/SelectedProduct.jsx'
-import userDashBoard from './components/pages/userdashboard/userDashBoard.jsx'
+import UserDashBoard from './components/pages/userdashboard/userDashBoard.jsx'
 // import LoginPage from './components/pages/login/LoginPage.jsx'
 // import Register from './components/pages/register/Register.jsx'
 import ProfilePage from './components/pages/profilePage/ProfilePage.jsx'
@@ -46,7 +46,7 @@ function Main() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/checkout" element={<CheckOut />} />
         <Route path="/verify/:id" element={<VerifyPage />} />
-        <Route path="/userdashboard" element={<userDashBoard />} />
+        <Route path="/userdashboard" element={<UserDashBoard />} />
       </Routes>
     </>
   )
