@@ -41,7 +41,7 @@ const UtilityBar = () => {
           <>
             <Link
               className="hover:underline cursor-pointer flex flex-col  text-center items-center justify-center"
-              to="/userdashboard"
+              to="/userdashboard/profile"
             >
               <FontAwesomeIcon
                 className="text-[25px] p-0 m-0 "

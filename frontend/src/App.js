@@ -17,10 +17,10 @@ import Products from './components/pages/products/Products.jsx'
 import Cart from './components/pages/cart/Cart.jsx'
 import UtilityBar from './components/pages/navbar/component/UtilityBar.jsx'
 import SelectedProduct from './components/pages/selectedproduct/SelectedProduct.jsx'
-import UserDashBoard from './components/pages/userdashboard/userDashBoard.jsx'
+// import UserDashBoard from './components/pages/userdashboard/components/userDashBoard.jsx'
 // import LoginPage from './components/pages/login/LoginPage.jsx'
 // import Register from './components/pages/register/Register.jsx'
-import ProfilePage from './components/pages/profilePage/ProfilePage.jsx'
+import ProfilePage from './components/pages/userdashboard/uesrProfile.jsx'
 // import AddOrder from './components/addorder/AddOrder.jsx'
 import CheckOut from './components/pages/checkout/CheckOut.jsx'
 import VerifyPage from './components/pages/verify/VerifyPage.jsx'
@@ -28,11 +28,18 @@ import VerifyPage from './components/pages/verify/VerifyPage.jsx'
 function Main() {
   const location = useLocation()
 
+  const shouldRenderNavbar =
+    location.pathname !== '/userdashboard/profile' &&
+    location.pathname !== '/userdashboard/orders' &&
+    location.pathname !== '/userdashboard/settings' &&
+    location.pathname !== '/user/admin'
+
   return (
     <>
       <ToastContainer />
       <UtilityBar />
-      {location.pathname !== '/userdashboard' && <Navbar />}
+      {shouldRenderNavbar && <Navbar />}
+
       <Routes>
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/" element={<Home />} />
@@ -43,10 +50,10 @@ function Main() {
         <Route path="/product/:id" element={<SelectedProduct />} />
         {/* <Route path="/login" element={<LoginPage />} /> */}
         {/* <Route path="/register" element={<Register />} /> */}
-        <Route path="/profile" element={<ProfilePage />} />
+        {/* <Route path="/profile" element={<ProfilePage />} /> */}
         <Route path="/checkout" element={<CheckOut />} />
         <Route path="/verify/:id" element={<VerifyPage />} />
-        <Route path="/userdashboard" element={<UserDashBoard />} />
+        <Route path="/userdashboard/profile" element={<ProfilePage />} />
       </Routes>
     </>
   )
