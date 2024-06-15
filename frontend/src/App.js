@@ -24,6 +24,7 @@ import ProfilePage from './components/pages/userdashboard/uesrProfile.jsx'
 // import AddOrder from './components/addorder/AddOrder.jsx'
 import CheckOut from './components/pages/checkout/CheckOut.jsx'
 import VerifyPage from './components/pages/verify/VerifyPage.jsx'
+import UserOrders from './components/pages/userdashboard/userOrders.jsx'
 
 function Main() {
   const location = useLocation()
@@ -54,6 +55,7 @@ function Main() {
         <Route path="/checkout" element={<CheckOut />} />
         <Route path="/verify/:id" element={<VerifyPage />} />
         <Route path="/userdashboard/profile" element={<ProfilePage />} />
+        <Route path="/userdashboard/orders" element={<UserOrders />} />
       </Routes>
     </>
   )
