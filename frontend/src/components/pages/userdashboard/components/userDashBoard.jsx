@@ -1,4 +1,5 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faBox,
@@ -9,8 +10,15 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react'
+import { logOutUser } from '../../../features/user/userSlice'
 
 export default function UserDashBoard() {
+  const dispatch = useDispatch()
+
+  const handleLogout = () => {
+    dispatch(logOutUser())
+  }
+
   return (
     <div className="flex flex-col text-start items-start justify-start w-[20%] h-[100%] pl-[1rem] sticky top-[5px] ">
       <Breadcrumb className="h-[5vh] ml-[5rem] mt-[5px]">
@@ -46,6 +54,8 @@ export default function UserDashBoard() {
             <div>settings</div>
           </Link>
           <Link
+            to="/"
+            onClick={handleLogout}
             to="/"
             className="flex flex-row text-start justify-start gap-[5px] text-[17px]  leading-[25px] w-[100%] border-b font-semibold"
           >
