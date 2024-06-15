@@ -56,7 +56,6 @@ export default function UserDashBoard() {
           <Link
             to="/"
             onClick={handleLogout}
-            to="/"
             className="flex flex-row text-start justify-start gap-[5px] text-[17px]  leading-[25px] w-[100%] border-b font-semibold"
           >
             <FontAwesomeIcon icon={faDoorOpen} />

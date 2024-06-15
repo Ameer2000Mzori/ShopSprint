@@ -17,11 +17,7 @@ import Products from './components/pages/products/Products.jsx'
 import Cart from './components/pages/cart/Cart.jsx'
 import UtilityBar from './components/pages/navbar/component/UtilityBar.jsx'
 import SelectedProduct from './components/pages/selectedproduct/SelectedProduct.jsx'
-// import UserDashBoard from './components/pages/userdashboard/components/userDashBoard.jsx'
-// import LoginPage from './components/pages/login/LoginPage.jsx'
-// import Register from './components/pages/register/Register.jsx'
 import ProfilePage from './components/pages/userdashboard/uesrProfile.jsx'
-// import AddOrder from './components/addorder/AddOrder.jsx'
 import CheckOut from './components/pages/checkout/CheckOut.jsx'
 import VerifyPage from './components/pages/verify/VerifyPage.jsx'
 import UserOrders from './components/pages/userdashboard/userOrders.jsx'
@@ -50,9 +46,6 @@ function Main() {
         <Route path="/products" element={<Products />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/product/:id" element={<SelectedProduct />} />
-        {/* <Route path="/login" element={<LoginPage />} /> */}
-        {/* <Route path="/register" element={<Register />} /> */}
-        {/* <Route path="/profile" element={<ProfilePage />} /> */}
         <Route path="/checkout" element={<CheckOut />} />
         <Route path="/verify/:id" element={<VerifyPage />} />
         <Route path="/userdashboard/profile" element={<ProfilePage />} />
