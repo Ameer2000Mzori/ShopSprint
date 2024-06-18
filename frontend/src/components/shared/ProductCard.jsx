@@ -13,10 +13,8 @@ import {
   CardBody,
   CardFooter,
   Tag,
-  Avatar,
   TagLabel,
   HStack,
-  TagCloseButton,
 } from '@chakra-ui/react'
 
 const ProductCard = ({ item }) => {

@@ -11,6 +11,9 @@ module.exports = {
         xl: '1280px',
       },
     },
+    fontFamily: {
+      Roboto: ['Roboto'],
+    },
   },
   plugins: [],
 }

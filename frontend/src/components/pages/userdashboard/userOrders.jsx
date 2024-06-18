@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import AuthOperations from '../../shared/AuthOperations'
-
 import {
   Table,
   Thead,
@@ -14,8 +13,9 @@ import {
   TableCaption,
   TableContainer,
 } from '@chakra-ui/react'
+import UserDashBoard from './components/userDashBoard'
 
-const ProfilePage = () => {
+export default function UserOrders() {
   const user = useSelector((state) => state.user)
   const { mutate, isPending, isError, data } = AuthOperations({})
 
@@ -30,20 +30,10 @@ const ProfilePage = () => {
   console.log('data', data)
 
   return (
-    <>
-      <div className="h-[20vh] flex flex-col text-center items-center justify-center">
-        <h1 className="text-[20px] font-bold text-gray-400 w-[750px]">
-          name: {data?.Name}
-        </h1>
+    <div className="flex flex-row text-center items-start justify-start pt-[5rem]">
+      <UserDashBoard />
 
-        <h1 className="text-[20px] font-bold text-gray-400 w-[750px]">
-          user name : {data?.userName}
-        </h1>
-        <h1 className="text-[20px] font-bold text-gray-400 w-[750px]">
-          email : {data?.email}
-        </h1>
-      </div>
-      <div className="h-[auto] text-[12px] text-black  flex flex-col text-center items-center justify-center">
+      <div className="h-[auto] w-[95%] text-[12px] text-black  flex flex-col text-center items-center justify-center">
         <h1>HISTORY ORDERS</h1>
         {data?.orderList.length > 0 ? (
           <TableContainer className=" w-[70%]">
@@ -90,8 +80,6 @@ const ProfilePage = () => {
         {isError && <div>there is error....</div>}
         {isPending && <div> isLoading....</div>}
       </div>
-    </>
+    </div>
   )
 }
-
-export default ProfilePage
